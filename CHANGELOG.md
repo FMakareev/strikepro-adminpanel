@@ -58,7 +58,7 @@ It's important to use the same instance of the `react-router-dom v5` library wit
      ```  
     
      ```html
-     <AppBreadcrumb appRoutes={routes} router={router}/>
+     <AppBreadcrumb appRoutes={UIKitRoutes} router={router}/>
      ```
 </del>
 ---
@@ -85,9 +85,9 @@ It's important to use the same instance of the `react-router-dom v5` library wit
 
 ##### `v2.1.6`
 - fix(App): remove redundant react-loadable - thanks @sergeyt
-- fix(routes) remove circular dependency - thanks @sergeyt
+- fix(UIKitRoutes) remove circular dependency - thanks @sergeyt
 - refactor(App): change to render in Route
-- fix(routes): add Home to routes - breadcrumb issue
+- fix(UIKitRoutes): add Home to UIKitRoutes - breadcrumb issue
 - refactor(DefaultHeader): move to ReactRouter `NavLink`
 - refactor(Forms): move to `InputGroupButtonDropdown` where applicable 
 
@@ -156,8 +156,8 @@ It's important to use the same instance of the `react-router-dom v5` library wit
 
 ##### `v2.1.1`
 - refactor(App.js): code splitting with `react-loadable` (waiting for release of `react-router-dom`) 
-- refactor(routes.js): code splitting with `React.lazy`, remove `react-loadable`
-- refactor(DefaultLayout): code splitting with `React.lazy` Aside, Footer, Header, routes 
+- refactor(UIKitRoutes.jses.js): code splitting with `React.lazy`, remove `react-loadable`
+- refactor(DefaultLayout): code splitting with `React.lazy` Aside, Footer, Header, UIKitRoutes 
 - refactor(Dashboard): tweak lazy and Suspense for Widget03 
 - refactor(Login): add router link to `Register` button 
 - refactor(Register): add margins to social-media buttons  
@@ -173,7 +173,7 @@ It's important to use the same instance of the `react-router-dom v5` library wit
   - valid attributes: `rel`, `target`, `hidden`, `disabled`, etc...  
   - starting with `@coreui/coreui`, `@coreui/react` version `2.1.0` and up
   - closes #106 
-  - item example(`./src/_nav.js`):
+  - item example(`./src/UIKitNavigation.js`):
   ```js
   [
     {
@@ -243,13 +243,13 @@ fixes some issues with `rtl`, `ie11`, `sidebar-minimized` behaviour and `aside` 
   - chore: add `eslintConfig` in `package.json` 
   - chore: add `browserslist` in `package.json` 
   - chore: update `manifest.json`
-  - refactor(index.js): add `react-app-polyfill` for `ie9-11` support
-  - refactor(index.js): migration to `serviceWorker.js`
+  - refactor(BlogPostResource.js): add `react-app-polyfill` for `ie9-11` support
+  - refactor(BlogPostResource.js): migration to `serviceWorker.js`
 
 ###### Migrating from CRA 1.x to 2.x:
 affected files: 
 - `package.json` -> dependencies update  
-- `src/index.js` -> move to `serviceWorker`, add `react-app-polyfill` for `ie9-11` support when needed
+- `src/BlogPostResource.js` -> move to `serviceWorker`, add `react-app-polyfill` for `ie9-11` support when needed
 
 In most cases bumping the `react-scripts` version in `package.json` and running `npm install` in this folder should be enough, but it’s good to consult the [changelog](https://github.com/facebook/create-react-app/blob/master/CHANGELOG.md#migrating-from-1x-to-203) for potential breaking changes.  
 
@@ -311,7 +311,7 @@ In most cases bumping the `react-scripts` version in `package.json` and running 
 
 ##### `v2.0.3`
 - refactor: disable `ServiceWorker` by default
-- fix(routes): mismatched `SimpleLineIcons` dynamic import
+- fix(UIKitRoutes): mismatched `SimpleLineIcons` dynamic import
 - refactor: CoreUI Icons `v0.2.0`
 - chore: update`babel-jest` to `v22.4.4`
 
@@ -427,9 +427,9 @@ In most cases bumping the `react-scripts` version in `package.json` and running 
 
 ###### `v1.0.0`
 - Sidebar component:
-	- item with optional class (_nav.js)
-	- nav link with optional variant (_nav.js)
-	- external urls allowed (_nav.js)
+	- item with optional class (UIKitNavigation.js)
+	- nav link with optional variant (UIKitNavigation.js)
+	- external urls allowed (UIKitNavigation.js)
 	- optional SidebarFooter, SidebarHeader, SidebarForm components
 - SidebarMinimizer component
 - .brand-minimized
@@ -450,11 +450,11 @@ In most cases bumping the `react-scripts` version in `package.json` and running 
 
 ###### `2017.08.01`
 - Sidebar component: 
-	- title item with optional wrapper and class (_nav.js)
+	- title item with optional wrapper and class (UIKitNavigation.js)
 	- nav link item with optional badge
 	- code refactoring
 
 ###### `2017.07.31`
 - moved to [reactstrap](https://reactstrap.github.io/)
 - moved to [webpack](https://webpack.js.org/) (dropping gulp)
-- data driven Sidebar component (_nav.js)
+- data driven Sidebar component (UIKitNavigation.js)
