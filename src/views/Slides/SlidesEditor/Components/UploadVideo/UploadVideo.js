@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import UploadFile from "../UploadFile/UploadFile";
+import UploadFileButton from "../UploadFileButton/UploadFileButton";
 import config from "../../../../../config";
 
 
@@ -111,7 +111,7 @@ export class UploadVideo extends Component {
   render() {
     const {isLoading, errorSubmit} = this.state;
     console.log(this.state);
-    return (<UploadFile
+    return (<UploadFileButton
       label={'Загрузка видео'}
       isLoading={isLoading}
       errorSubmit={errorSubmit}

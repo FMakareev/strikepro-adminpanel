@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, FormFeedback, FormGroup} from "reactstrap";
 
-export const UploadFile = ({
+export const UploadFileButton = ({
                              isLoading,
                              uploadFile,
                              accept,
@@ -52,11 +52,11 @@ export const UploadFile = ({
 </FormGroup>);
 
 
-UploadFile.defaultProps = {
+UploadFileButton.defaultProps = {
   label: 'Загрузить',
   isLoading: false,
   errorSubmit: null,
   accept: '',
 };
 
-export default UploadFile;
+export default UploadFileButton;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import UploadFile from "../UploadFile/UploadFile";
+import UploadFileButton from "../UploadFileButton/UploadFileButton";
 import config from "../../../../../config";
 
 
@@ -39,11 +39,9 @@ export class UploadImage extends Component {
       })
       .then(response => {
         console.log('response: ', response);
-        return response.text();
+        return response.json();
       })
-      .then(response => {
-        console.log('response: ', response);
-        response = JSON.parse(response);
+      .then((response) => {
         if (response.status === 'ok') {
           onChange(response.url);
           this.setState({
@@ -70,7 +68,7 @@ export class UploadImage extends Component {
   render() {
     const {isLoading, errorSubmit} = this.state;
 
-    return (<UploadFile
+    return (<UploadFileButton
       label={'Загрузка изображений'}
       isLoading={isLoading}
       errorSubmit={errorSubmit}
