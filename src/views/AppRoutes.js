@@ -2,6 +2,7 @@ import {BlogRoutes} from "./Blog/routes";
 import {NomenclatureRoutes} from "./Nomenclature/routes";
 import {SlidesRoutes} from "./Slides/routes";
 import {TileRoutes} from "./Tile/routes";
+import {StaticPageRoutes} from "./StaticPage/routes";
 import React from "react";
 
 const Page404 = React.lazy(() => import('./Pages/Page404'));
@@ -12,6 +13,7 @@ export const AppRoutes = [
   ...NomenclatureRoutes,
   ...SlidesRoutes,
   ...TileRoutes,
+  ...StaticPageRoutes,
   {
     path: '/500',
     exact: true,
