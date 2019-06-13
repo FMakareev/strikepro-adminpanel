@@ -1,5 +1,26 @@
+
+
+let base = '';
+
+switch (window.location.hostname) {
+  case ('localhost'):{
+    base = 'https://dev.strikepro.ru';
+    break;
+  }
+  case ('admin.strikepro.ru'):{
+    base = 'https://strikepro.ru';
+    break;
+  }
+  case ('strike.localhost'):{
+    base = 'http://strike.localhost';
+    break;
+  }
+}
+
+
+
 export default {
-  base: window.location.hostname === 'localhost' ? 'https://dev.strikepro.ru' : '',
+  base,
   api: {
     login: '/dashboard/auth/login',
     logout: '/dashboard/auth/logout',
