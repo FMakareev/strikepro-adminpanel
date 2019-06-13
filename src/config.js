@@ -1,5 +1,6 @@
 export default {
-  base: window.location.hostname === 'localhost' ? 'https://dev.strikepro.ru' : '',
+  //base: window.location.hostname === 'localhost' ? 'https://dev.strikepro.ru' : '',
+  base: 'https://dev.strikepro.ru',
   api: {
     login: '/dashboard/auth/login',
     logout: '/dashboard/auth/logout',
