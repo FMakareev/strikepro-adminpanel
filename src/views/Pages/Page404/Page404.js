@@ -12,10 +12,22 @@ class Page404 extends Component {
               <div className="clearfix">
                 <h1 className="float-left display-3 mr-4">404</h1>
                 <h4 className="pt-3">Oops! You're lost.</h4>
+<<<<<<< HEAD
                 <p className="text-muted float-left">Страница, которую вы ищете, не найдена.</p>
                 <Link to={'/'}>
                   <Button color="info">На главную</Button>
                 </Link>
+=======
+                <p className="text-muted float-left">
+                  Страница, которую вы ищете, не найдена.
+                  <br/>
+                  <br/>
+                  <Link to={'/'}>
+                    <Button color="info">На главную</Button>
+                  </Link>
+                </p>
+
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
               </div>
             </Col>
           </Row>

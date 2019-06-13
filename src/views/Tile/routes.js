@@ -1,7 +1,12 @@
 import React from 'react';
 
+<<<<<<< HEAD
 const TileList = React.lazy(() => import('./TileList/index'));
 const TileEditor = React.lazy(() => import('./TileEditor'));
+=======
+const TileList = React.lazy(() => import('./View/TileList/index'));
+const TileEditor = React.lazy(() => import('./View/TileEditor'));
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
 
 
 export const TileRoutes = [
