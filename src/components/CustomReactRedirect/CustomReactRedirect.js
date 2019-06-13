@@ -2,6 +2,7 @@ import BrowserHistory from "../../history";
 import {Redirect, withRouter} from "react-router-dom";
 import React, {Component} from "react";
 
+/** DEPRECATED */
 export class CustomReactRedirect extends Component {
   state = {
     pathname: null,
@@ -10,9 +11,7 @@ export class CustomReactRedirect extends Component {
 
   componentDidMount() {
     const unlisten = BrowserHistory.listen(location => {
-      if (location.pathname) {
-        this.setState({pathname: location.pathname});
-      }
+      const {pathname} = this.state;
     });
     this.setState({
       unlisten: unlisten,

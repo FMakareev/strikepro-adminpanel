@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch} from 'react-router-dom';
 import { setDefaultLocale, registerLocale }  from "react-datepicker";
 import ru from 'date-fns/locale/ru';
+import history from "./history";
 
 import './App.scss';
 import UIKitRoutes from "./views/UIKit/UIKitRoutes";
@@ -25,11 +26,15 @@ registerLocale('ru', ru);
 setDefaultLocale('ru');
 
 
+history.listen(location => {
+
+});
+
 class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <React.Suspense fallback={loading()}>
           <Switch>
             <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>}/>
@@ -50,7 +55,7 @@ class App extends Component {
             />
           </Switch>
         </React.Suspense>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
