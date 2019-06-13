@@ -4,7 +4,79 @@ import {Badge, Nav, NavItem} from 'reactstrap';
 import classNames from 'classnames';
 import nav from './_nav'
 
+
+const BadgeCustom = (props) => (<Badge
+  className={classNames(props.class)}
+  color={props.variant}>
+  {props.text}
+</Badge>);
+
+const NavItemCustom = ({item, index}) => (
+  <NavItem key={`NavItemCustom-${index}`}>
+    <NavLink to={item.url} className={classNames("nav-link", item.class)} activeClassName="active">
+      {item.icon && <i className={item.icon}/>}{item.name} <BadgeCustom {...item.badge}/>
+    </NavLink>
+  </NavItem>
+);
+
+const Wrapper = ({wrapper, name,}) => (!wrapper ?
+  <span>{name}</span> :
+  (React.createElement(wrapper.element, wrapper.attributes, name)));
+
+const Title = ({title, index,...rest}) => (<li
+  key={`Title-${index}`}
+  className={classNames("nav-title", title && title.class)}>
+  <Wrapper {...title} {...rest}/>
+</li>);
+
+const Divider = ({index}) => (<li key={`Divider-${index}`} className="divider"/>);
+
+const NavDropdown = ({item, index, activeRoute, handleClick}) => (
+  <li
+    key={`NavDropdown-${key}`}
+    className={activeRoute(item.url, props)}
+  >
+    <a
+      className={"nav-link nav-dropdown-toggle"}
+      href={"#"}
+      onClick={handleClick.bind(this)}
+    >
+      {item.icon && <i className={item.icon}/>}
+      {item.name}
+    </a>
+    <ul
+      className={'nav-dropdown-items'}
+    >
+      <NavList items={item.children}/>
+    </ul>
+  </li>);
+
+const NavLinkCustom = (props) =>
+  props.item.title ? <Title {...props} {...props.item}/> :
+    props.item.divider ? <Divider {...props} {...props.item}/> :
+      props.item.children ? <NavDropdown {...props} {...props.item}/>
+        : <NavItemCustom {...props} {...props.item}/>;
+
+
+const NavList = ({items, ...rest}) => (<div>
+  {
+    items.map((item, index) => (<NavLinkCustom
+      {...rest}
+      item={item}
+      index={index}
+      key={`NavLinkCustom-${index}`}
+    />))
+  }
+</div>);
+
 class Sidebar extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+    this.activeRoute = this.activeRoute.bind(this);
+  }
 
   handleClick(e) {
     e.preventDefault();
@@ -24,72 +96,11 @@ class Sidebar extends Component {
 
 
   render() {
-
-    const props = this.props;
-    const activeRoute = this.activeRoute;
-    const handleClick = this.handleClick;
-
-    // badge addon to NavItem
-    const badge = (badge) => {
-      if (badge) {
-        const classes = classNames( badge.class );
-        return (<Badge className={ classes } color={ badge.variant }>{ badge.text }</Badge>)
-      }
-    };
-
-    // simple wrapper for nav-title item
-    const wrapper = item => { return (!item.wrapper ? item.name : (React.createElement(item.wrapper.element, item.wrapper.attributes, item.name))) };
-
-    // nav list section title
-    const title =  (title, key) => {
-      const classes = classNames( "nav-title", title.class);
-      return (<li key={key} className={ classes }>{wrapper(title)} </li>);
-    };
-
-    // nav list divider
-    const divider = (divider, key) => (<li key={key} className="divider"></li>);
-
-    // nav item with nav link
-    const navItem = (item, key) => {
-      const classes = classNames( "nav-link", item.class);
-      return (
-        <NavItem key={key}>
-          <NavLink to={item.url} className={ classes } activeClassName="active">
-            <i className={item.icon}></i>{item.name}{badge(item.badge)}
-          </NavLink>
-        </NavItem>
-      )
-    };
-
-    // nav dropdown
-    const navDropdown = (item, key) => {
-      return (
-        <li key={key} className={activeRoute(item.url, props)}>
-          <a className="nav-link nav-dropdown-toggle" href="#" onClick={handleClick.bind(this)}><i className={item.icon}></i> {item.name}</a>
-          <ul className="nav-dropdown-items">
-            {navList(item.children)}
-          </ul>
-        </li>)
-    };
-
-    // nav link
-    const navLink = (item, idx) =>
-      item.title ? title(item, idx) :
-      item.divider ? divider(item, idx) :
-      item.children ? navDropdown(item, idx)
-                    : navItem(item, idx) ;
-
-    // nav list
-    const navList = (items) => {
-      return items.map( (item, index) => navLink(item, index) );
-    };
-
-    // sidebar-nav root
     return (
       <div className="sidebar">
         <nav className="sidebar-nav">
           <Nav>
-            {navList(nav.items)}
+            <NavList items={nav.items} activeRoute={this.activeRoute} handleClick={this.handleClick}/>
           </Nav>
         </nav>
       </div>

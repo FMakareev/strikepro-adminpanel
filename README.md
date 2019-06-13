@@ -1,1 +1,2 @@
-# [CoreUI React Version](https://github.com/mrholek/CoreUI-React)
+https://github.com/mgcrea/redux-rest-resource
+https://github.com/lexich/redux-api
