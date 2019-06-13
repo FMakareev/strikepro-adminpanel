@@ -55,9 +55,14 @@ class DefaultLayout extends Component {
             <AppSidebarHeader/>
             <AppSidebarForm/>
             <Suspense>
-              <AppSidebarNav baseRoute={baseRoute} navConfig={{
-                items: this.combineBaseRouteWithRoutes(navigation.items, baseRoute),
-              }} {...this.props} router={router}/>
+              <AppSidebarNav
+                baseRoute={baseRoute}
+                navConfig={{
+                  items: this.combineBaseRouteWithRoutes(navigation.items, baseRoute),
+                }}
+                {...this.props}
+                router={router}
+              />
             </Suspense>
             <AppSidebarFooter/>
             <AppSidebarMinimizer/>
