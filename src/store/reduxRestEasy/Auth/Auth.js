@@ -13,8 +13,8 @@ export const AuthResource = createResource('authResource',)({
     networkHelpers: {
       handleStatusCode: (props) => {
         if (props.status === 200) {
-          window.location.reload();
           BrowserHistory.push('/');
+          window.location.reload();
         }
       },
       requestPOST: requestPOST,
