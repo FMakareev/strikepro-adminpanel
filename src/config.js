@@ -23,5 +23,7 @@ export default {
     nomenclatureCharacteristic: '/dashboard/nomenclature/characteristic',
     typesOfNomenclature: '/dashboard/nomenclature/characteristic',
     fileupload: '/dashboard/fileupload',
+
+    static_pages: '/dashboard/pages',
   }
 }

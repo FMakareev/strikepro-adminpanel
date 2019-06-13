@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Posts = React.lazy(() => import('./Posts'));
-const PostEdit = React.lazy(() => import('./PostEdit'));
+const Posts = React.lazy(() => import('./View/Posts'));
+const PostEdit = React.lazy(() => import('./View/PostEdit'));
 
-const Categories = React.lazy(() => import('./Categories'));
-const CategoryEdit = React.lazy(() => import('./CategoryEdit'));
+const Categories = React.lazy(() => import('./View/Categories'));
+const CategoryEdit = React.lazy(() => import('./View/CategoryEdit'));
 
 
 export const BlogRoutes = [

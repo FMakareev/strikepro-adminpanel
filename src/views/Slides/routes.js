@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Slides = React.lazy(() => import('./Slides'));
-const SlidesEditor = React.lazy(() => import('./SlidesEditor'));
+const Slides = React.lazy(() => import('./View/Slides'));
+const SlidesEditor = React.lazy(() => import('./View/SlidesEditor'));
 
 
 export const SlidesRoutes = [

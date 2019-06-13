@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import React from "react";
 
 
-export const BlogItem = ({title, excerpt, id, status, onDelete}) => (<Card>
+export const StaticPageItem = ({title, excerpt, id, status, onDelete}) => (<Card>
   <CardBody>
     <CardTitle>
       {title}
@@ -12,11 +12,11 @@ export const BlogItem = ({title, excerpt, id, status, onDelete}) => (<Card>
   </CardBody>
   <CardFooter className="text-muted">
     <Button color="warning">
-      <Link to={`/post-editor/${id}`}>Изменить</Link>
+      <Link to={`/static-page-editor/${id}`}>Изменить</Link>
     </Button>
     <Button color="danger" onClick={()=>onDelete(id)}>Удалить</Button>
     <Badge color="success" className="float-right">{status}</Badge>
   </CardFooter>
 </Card>);
 
-export default BlogItem;
+export default StaticPageItem;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const URLAliasList = React.lazy(() => import('./URLAliasList'));
-const URLAliasEditor = React.lazy(() => import('./URLAliasEditor'));
+const URLAliasList = React.lazy(() => import('./View/URLAliasList'));
+const URLAliasEditor = React.lazy(() => import('./View/URLAliasEditor'));
 
 
 export const StaticPageRoutes = [

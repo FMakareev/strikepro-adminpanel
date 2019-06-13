@@ -1,7 +1,7 @@
 import React from 'react';
 
-const StaticPageList = React.lazy(() => import('./StaticPageList'));
-const StaticPageEditor = React.lazy(() => import('./StaticPageEditor'));
+const StaticPageList = React.lazy(() => import('./View/StaticPageList'));
+const StaticPageEditor = React.lazy(() => import('./View/StaticPageEditor'));
 
 
 export const StaticPageRoutes = [

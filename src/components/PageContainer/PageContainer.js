@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardBlock, CardHeader, Col, Row, CardFooter} from "reactstrap";
+import {Card, CardBody, CardHeader, Col, Row, CardFooter} from "reactstrap";
 export const PageContainer =({header, children, footer})=>(<div className="animated fadeIn">
   <Row>
     <Col xs="12">
@@ -12,9 +12,9 @@ export const PageContainer =({header, children, footer})=>(<div className="anima
             </strong>
           </CardHeader>
         }
-        <CardBlock className={'card-body'}>
+        <CardBody className={'card-body'}>
           {children}
-        </CardBlock>
+        </CardBody>
         {
           footer &&
           <CardFooter className={'card-footer'}>
