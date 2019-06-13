@@ -23,6 +23,7 @@
     "classnames": "^2.2.6",
     "connected-react-router": "^6.4.0",
     "core-js": "^2.6.5",
+    "cyrillic-to-translit-js": "^2.2.0",
     "date-fns": "^2.0.0-alpha.31",
     "dayjs": "^1.8.14",
     "enzyme": "^3.9.0",

@@ -58,7 +58,26 @@ export class FormStaticPage extends Component {
     const {handleSubmit, error} = this.props;
     return (<Form onSubmit={handleSubmit(this.onSubmit)}>
       <Row>
-        <Col xs="12" md="6" lg="4">
+        <Col xs="12">
+          <Field
+            name="title"
+            component={TextField}
+            label="Заголовок страницы"
+            type="text"
+            validate={[required]}
+          />
+        </Col>
+        <Col xs="12">
+          <Field
+            name="excerpt"
+            component={TextField}
+            label="Водный текст страницы"
+            type="text"
+            validate={[required]}
+          />
+        </Col>
+
+        <Col xs="12" md="6">
           <Field
             name="status"
             component={FormSelect}
@@ -78,7 +97,17 @@ export class FormStaticPage extends Component {
           />
         </Col>
 
-        <Col xs="12" md="6" lg="4">
+        <Col xs="12" md="6">
+          <Field
+            name="image"
+            component={TextField}
+            label="Ссылка на превью изображение страницы"
+            description={'(используется в плитках)'}
+            type="text"
+            validate={[required]}
+          />
+        </Col>
+        <Col xs="12" md="6">
           <Field
             name="parent_id"
             component={TextField}
@@ -88,37 +117,9 @@ export class FormStaticPage extends Component {
         </Col>
         <Col xs="12">
           <Field
-            name="title"
-            component={TextField}
-            label="Заголовок страницы"
-            type="text"
-            validate={[required]}
-          />
-        </Col>
-        <Col xs="12">
-          <Field
-            name="excerpt"
-            component={TextField}
-            label="Водный текст страницы"
-            type="text"
-            validate={[required]}
-          />
-        </Col>
-        <Col xs="12">
-          <Field
             name="body"
             component={FormCKEditor}
             label="HTML содержимое страницы"
-            type="text"
-            validate={[required]}
-          />
-        </Col>
-        <Col xs="12" md="6" lg="4">
-          <Field
-            name="image"
-            component={TextField}
-            label="Ссылка на превью изображение страницы"
-            description={'(используется в плитках)'}
             type="text"
             validate={[required]}
           />

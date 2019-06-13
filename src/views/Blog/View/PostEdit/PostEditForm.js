@@ -16,6 +16,8 @@ import {
 import {withRouter} from "react-router-dom";
 import {normalizeSubmissionError} from "../../../../helpers/normalizeSubmissionError";
 import {required} from "../../../../validation/required";
+import MetaFields from "./Components/MetaFields/MetaFields";
+import OGMetaFields from "./Components/OGMetaFields/OGMetaFields";
 
 
 export class PostEditForm extends Component {
@@ -73,7 +75,45 @@ export class PostEditForm extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Row>
-          <Col xs="12" md="6" lg="4">
+          <Col xs="12">
+            <Field
+              name="title"
+              component={TextField}
+              label="Заголовок"
+              validate={[required]}
+              type="text"
+            />
+          </Col>
+          <Col xs="12" md="12" lg="12">
+            <Field
+              name="excerpt"
+              component={TextField}
+              label="Вводный текст статьи"
+              validate={[required]}
+              type="textarea"
+            />
+          </Col>
+          <Col xs="12" md="6" >
+            <Field
+              name="alias_url"
+              component={TextField}
+              label="URL псевдоним статьи"
+              type="text"
+              validate={[required]}
+            />
+          </Col>
+          <Col xs="12" md="6" >
+            <Field
+              name="category_id"
+              component={FormSelect}
+              label="Категория"
+              validate={[required]}
+              type="select"
+              defaultValue={''}
+              data={categories}
+            />
+          </Col>
+          <Col xs="12" md="6" >
             <Field
               name="status"
               component={FormSelect}
@@ -95,49 +135,11 @@ export class PostEditForm extends Component {
               ]}
             />
           </Col>
-          <Col xs="12" md="6" lg="4">
-            <Field
-              name="category_id"
-              component={FormSelect}
-              label="Категория"
-              validate={[required]}
-              type="select"
-              defaultValue={''}
-              data={categories}
-            />
-          </Col>
-          <Col xs="12" md="6" lg="4">
+          <Col xs="12" md="6" >
             <Field
               name="public_at"
               component={FormDateTimePicker}
               label="Время публикации"
-            />
-          </Col>
-          <Col xs="12" md="6" lg="4">
-            <Field
-              name="alias_url"
-              component={TextField}
-              label="URL псевдоним статьи"
-              type="text"
-              validate={[required]}
-            />
-          </Col>
-          <Col xs="12" md="6" lg="4">
-            <Field
-              name="title"
-              component={TextField}
-              label="Заголовок"
-              validate={[required]}
-              type="text"
-            />
-          </Col>
-          <Col xs="12" md="12" lg="12">
-            <Field
-              name="excerpt"
-              component={TextField}
-              label="Вводный текст статьи"
-              validate={[required]}
-              type="textarea"
             />
           </Col>
           <Col xs="12">
@@ -158,69 +160,11 @@ export class PostEditForm extends Component {
               label="Тэги"
             />
           </Col>
-          <Col xs="12">
-            <h4>
-              META информация
-            </h4>
-          </Col>
-          <Col xs="12">
-            <Field
-              name="meta_keywords"
-              component={FormTagInput}
-              label="Ключевые слова"
-              validate={[required]}
-            />
-          </Col>
-          <Col xs="12">
-            <Field
-              name="meta_description"
-              component={TextField}
-              label="Описание"
-              validate={[required]}
-              type="textarea"
-            />
-          </Col>
-          <Col xs="12">
-            <h4>
-              OG META (Open Graph)
-            </h4>
-          </Col>
-          <Col xs="12" md="6" lg="4">
-            <Field
-              name="og_title"
-              component={TextField}
-              label="Заголовок"
-              validate={[required]}
-              type="text"
-            />
-          </Col>
-          <Col xs="12" md="6" lg="4">
-            <Field
-              name="og_type"
-              component={TextField}
-              label="Тип"
-              validate={[required]}
-              type="text"
-            />
-          </Col>
-          <Col xs="12" md="6" lg="4">
-            <Field
-              name="og_image"
-              component={TextField}
-              validate={[required]}
-              label="Изображение"
-              type="text"
-            />
-          </Col>
-          <Col xs="12" md="6" lg="4">
-            <Field
-              name="og_url"
-              component={TextField}
-              validate={[required]}
-              label="Адрес"
-              type="text"
-            />
-          </Col>
+
+          <MetaFields/>
+
+          <OGMetaFields/>
+
         </Row>
 
         {

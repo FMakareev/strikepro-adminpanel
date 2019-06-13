@@ -24,15 +24,6 @@ export const MetaFields = () => (<Fragment>
   </Col>
   <Col xs="12" md="6" lg="4">
     <Field
-      name="meta_title"
-      component={TextField}
-      label="meta_title"
-      type="text"
-      validate={[maxLength255]}
-    />
-  </Col>
-  <Col xs="12" md="6" lg="4">
-    <Field
       name="meta_keywords"
       component={FormTagInput}
       label="meta_keywords"
