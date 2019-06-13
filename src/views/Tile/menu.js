@@ -1,6 +1,7 @@
 export const MenuTile = [
   {
     name: 'Список плиток',
+    icon: 'd-none',
     children: [
       {
         name: 'Список плиток',

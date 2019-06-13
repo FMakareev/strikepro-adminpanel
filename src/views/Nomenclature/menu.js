@@ -1,6 +1,7 @@
 export const MenuNomenclature = [
   {
     name: 'Номенклатура',
+    icon: 'd-none',
     children: [
       {
         name: 'Номенклатура',

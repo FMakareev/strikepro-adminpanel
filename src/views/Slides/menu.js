@@ -1,6 +1,7 @@
 export const MenuSlides= [
   {
     name: 'Слайдер',
+    icon: 'd-none',
     children: [
       {
         name: 'Список слайдов',

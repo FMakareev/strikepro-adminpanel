@@ -2,6 +2,7 @@ import React from 'react';
 export const MenuBlog = [
   {
     name: 'Блог',
+    icon: 'd-none',
     children: [
       {
         name: 'Посты',
