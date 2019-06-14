@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Field, Form, reduxForm, SubmissionError} from "redux-form";
+import {Field, Form, getFormValues, reduxForm, SubmissionError} from "redux-form";
 import {Alert, Button, Col, FormGroup, Row} from "reactstrap";
 import {connect as connectRestEasy} from "@brigad/redux-rest-easy";
 import {withRouter} from "react-router-dom";
@@ -16,6 +16,9 @@ import {OGMetaFields} from "../OGMetaFields/OGMetaFields";
 import {MetaFields} from "../MetaFields/MetaFields";
 import FormSelect from "../../../../../../components/Form/FormSelect";
 import FormCKEditor from "../../../../../../components/Form/form_ckeditor";
+import {URLAliasField} from "../../../../../../components/URLAliaseField/URLAliaseField";
+import {URIValidation} from "../../../../../../validation/URIValidation";
+import {connect} from "react-redux";
 
 
 export class FormStaticPage extends Component {
@@ -55,7 +58,7 @@ export class FormStaticPage extends Component {
   };
 
   render() {
-    const {handleSubmit, error} = this.props;
+    const {handleSubmit,values, error} = this.props;
     return (<Form onSubmit={handleSubmit(this.onSubmit)}>
       <Row>
         <Col xs="12">
@@ -72,11 +75,23 @@ export class FormStaticPage extends Component {
             name="excerpt"
             component={TextField}
             label="Водный текст страницы"
-            type="text"
+            type="textarea"
             validate={[required]}
           />
         </Col>
-
+        <Col xs="12">
+          <Field
+            /** если есть id в состоянии формы значит мы редактируем статью, в таком случае автогенерация отключается */
+            isAutoGenTransliteration={!(values && values.id)}
+            name="alias_url"
+            component={URLAliasField}
+            label="URL псевдоним статьи"
+            type="text"
+            subscribeField={'title'}
+            formValues={values}
+            validate={[URIValidation]}
+          />
+        </Col>
         <Col xs="12" md="6">
           <Field
             name="status"
@@ -155,6 +170,11 @@ export class FormStaticPage extends Component {
     </Form>);
   }
 }
+
+
+FormStaticPage = connect(state => ({
+  values: getFormValues('FormStaticPage')(state),
+}))(FormStaticPage);
 
 FormStaticPage = reduxForm({
   form: 'FormStaticPage'
