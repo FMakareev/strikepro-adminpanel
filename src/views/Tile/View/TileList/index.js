@@ -62,15 +62,6 @@ export class TileList extends Component {
   }
 }
 
-TileList = connectRestEasy(
-  (state, ownProps) => ({
-    tiles: GetTiles(state, ownProps),
-    isRetrievingGetTiles: isRetrievingGetTiles(state, ownProps),
-  }),
-  dispatch => ({
-    GetTilesAction: (options) => dispatch(GetTilesAction(options)),
-    DeleteTileAction: (options) => dispatch(DeleteTileAction(options)),
-  })
-)(TileList);
+
 
 export default TileList;
