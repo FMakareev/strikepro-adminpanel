@@ -8,7 +8,7 @@ switch (window.location.hostname) {
     break;
   }
   case ('admin.strikepro.ru'):{
-    base = 'https://strikepro.ru';
+    base = 'https://dev.strikepro.ru';
     break;
   }
   case ('strike.localhost'):{
