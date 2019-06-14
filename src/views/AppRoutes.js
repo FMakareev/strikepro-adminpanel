@@ -3,6 +3,7 @@ import {NomenclatureRoutes} from "./Nomenclature/routes";
 import {SlidesRoutes} from "./Slides/routes";
 import {TileRoutes} from "./Tile/routes";
 import {StaticPageRoutes} from "./StaticPage/routes";
+import {UrlAliasRoutes} from "./URLAlias/routes";
 import React from "react";
 
 const Page404 = React.lazy(() => import('./Pages/Page404'));
@@ -14,6 +15,7 @@ export const AppRoutes = [
   ...SlidesRoutes,
   ...TileRoutes,
   ...StaticPageRoutes,
+  ...UrlAliasRoutes,
   {
     path: '/500',
     exact: true,
