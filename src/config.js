@@ -46,5 +46,6 @@ export default {
     fileupload: '/dashboard/fileupload',
 
     static_pages: '/dashboard/pages',
+    url_alias: '/dashboard/url_alias',
   }
 }
