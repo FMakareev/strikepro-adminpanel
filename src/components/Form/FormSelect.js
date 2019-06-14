@@ -9,6 +9,18 @@ export class FormSelect extends Component {
     labelKey: 'name',
   };
 
+  componentDidMount() {
+    const {
+      input,
+      defaultValue,
+    } = this.props;
+
+    if(!input.value && defaultValue){
+      input.onChange(defaultValue);
+    }
+
+  }
+
   render() {
     const {
       input,
