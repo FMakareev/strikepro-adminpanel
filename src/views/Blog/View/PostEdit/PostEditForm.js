@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, Button, Col, FormGroup, Row} from "reactstrap";
-import {Field, reduxForm, SubmissionError} from "redux-form";
-
+import {Field, getFormValues, reduxForm, SubmissionError} from "redux-form";
+import PropTypes from 'prop-types';
 import FormSelect from "../../../../components/Form/FormSelect";
 import FormDateTimePicker from "../../../../components/FormDateTimePicker/FormDateTimePicker";
 import FormCKEditor from "../../../../components/Form/form_ckeditor";
@@ -18,9 +18,25 @@ import {normalizeSubmissionError} from "../../../../helpers/normalizeSubmissionE
 import {required} from "../../../../validation/required";
 import MetaFields from "./Components/MetaFields/MetaFields";
 import OGMetaFields from "./Components/OGMetaFields/OGMetaFields";
+import {URLAliasField} from "../../../../components/URLAliaseField/URLAliaseField";
+import {connect} from "react-redux";
+import {URIValidation} from "../../../../validation/URIValidation";
+import {CreateUrlAliasAction, UpdateUrlAliasAction} from "../../../../store/reduxRestEasy/UrlAlias/UrlAliasResource";
 
 
 export class PostEditForm extends Component {
+
+  static propTypes = {
+    CreatePostAction: PropTypes.func,
+    UpdatePostAction: PropTypes.func,
+    CreateUrlAliasAction: PropTypes.func,
+    UpdateUrlAliasAction: PropTypes.func,
+    URLAlias: PropTypes.shape({
+      id: PropTypes.number,
+      url: PropTypes.string,
+      alias_url: PropTypes.string,
+    })
+  }
 
   constructor(props) {
     super(props);
@@ -32,45 +48,95 @@ export class PostEditForm extends Component {
   }
 
 
-  onSubmit = (values) => {
+  /**
+   * @param {object} values
+   * */
+  updateUrlAlias = async (values) => {
+
+  };
+
+
+  createPost = async (values) => {
+    const {CreateUrlAliasAction, UpdateUrlAliasAction, CreatePostAction} = this.props;
+
+    /** STEP 1 */
+    const CreateURLAliasData = await CreateUrlAliasAction({
+      body: {
+        "url": "blog/128",
+        "alias_url": "path/to/the/resource-name"
+      }
+    });
+    if (CreateURLAliasData && CreateURLAliasData.errors) {
+      throw new SubmissionError(CreateURLAliasData);
+    }
+
+    /** STEP 2 */
+    const newPost = await CreatePostAction({
+      body: values,
+    });
+    if (newPost && newPost.errors) {
+      throw new SubmissionError(newPost);
+    }
+
+    /** STEP 3 */
+    const UpdateURLAliasData = await UpdateUrlAliasAction({
+      body: {
+        // TODO: придумать как url формируется
+        "url": `blog/${newPost.id}`,
+      }
+    });
+    if (UpdateURLAliasData && UpdateURLAliasData.errors) {
+      throw new SubmissionError(UpdateURLAliasData);
+    }
+
+  };
+
+  updatePost = async (values) => {
+    const {URLAlias, initialValues, UpdateUrlAliasAction, UpdatePostAction} = this.props;
+
+    /** STEP 1 */
+    if (values.alias_url !== initialValues.alias_url) {
+      const UpdateURLAliasData = await UpdateUrlAliasAction({
+        body: {
+          ...URLAlias,
+          "alias_url": values.alias_url
+        }
+      });
+      if (UpdateURLAliasData && UpdateURLAliasData.errors) {
+        throw new SubmissionError(UpdateURLAliasData);
+      }
+    }
+
+    /** STEP 2 */
+    const updatePost = await UpdatePostAction({
+      body: values,
+      urlParams: {
+        id: values.id,
+      }
+    });
+
+    if (updatePost && updatePost.errors) {
+      throw new SubmissionError(updatePost);
+    }
+
+  };
+
+
+  onSubmit = async (values) => {
     console.log('values: ', values);
     const {history} = this.props;
     if (values.hasOwnProperty('id')) {
-      return this.props.UpdatePostAction({
-        body: values,
-        urlParams: {
-          id: values.id,
-        }
-      })
-        .then(({normalizedPayload}) => {
-          if (normalizedPayload && normalizedPayload.errors) {
-            throw normalizedPayload;
-          }
-          history.push('/posts');
-        })
-        .catch(error => {
-          throw new SubmissionError(normalizeSubmissionError(error));
-        })
+      await this.updatePost(values);
     } else {
-      return this.props.CreatePostAction({
-        body: values,
-      })
-        .then(({normalizedPayload}) => {
-          if (normalizedPayload && normalizedPayload.errors) {
-            throw normalizedPayload;
-          }
-          history.push('/posts');
-        })
-        .catch(error => {
-          throw new SubmissionError(normalizeSubmissionError(error));
-        })
+      await this.createPost(values)
     }
+    history.push('/posts');
   };
 
 
   render() {
-    const {error, handleSubmit, categories} = this.props;
-
+    const {error, handleSubmit, categories, values} = this.props;
+    console.log(this.props);
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -84,25 +150,29 @@ export class PostEditForm extends Component {
               type="text"
             />
           </Col>
-          <Col xs="12" md="12" lg="12">
+          <Col xs="12">
             <Field
               name="excerpt"
               component={TextField}
               label="Вводный текст статьи"
-              validate={[required]}
+              // validate={[required]}
               type="textarea"
             />
           </Col>
-          <Col xs="12" md="6" >
+          <Col xs="12">
             <Field
+              /** если есть id в состоянии формы значит мы редактируем статью, в таком случае автогенерация отключается */
+              isAutoGenTransliteration={!(values && values.id)}
               name="alias_url"
-              component={TextField}
+              component={URLAliasField}
               label="URL псевдоним статьи"
               type="text"
-              validate={[required]}
+              subscribeField={'title'}
+              formValues={values}
+              validate={[URIValidation]}
             />
           </Col>
-          <Col xs="12" md="6" >
+          <Col xs="12" md="6">
             <Field
               name="category_id"
               component={FormSelect}
@@ -113,7 +183,7 @@ export class PostEditForm extends Component {
               data={categories}
             />
           </Col>
-          <Col xs="12" md="6" >
+          <Col xs="12" md="6">
             <Field
               name="status"
               component={FormSelect}
@@ -135,7 +205,7 @@ export class PostEditForm extends Component {
               ]}
             />
           </Col>
-          <Col xs="12" md="6" >
+          <Col xs="12" md="6">
             <Field
               name="public_at"
               component={FormDateTimePicker}
@@ -156,7 +226,6 @@ export class PostEditForm extends Component {
             <Field
               name="tags"
               component={FormTagInput}
-              validate={[required]}
               label="Тэги"
             />
           </Col>
@@ -199,6 +268,9 @@ export class PostEditForm extends Component {
   }
 }
 
+PostEditForm = connect(state => ({
+  values: getFormValues('PostEditForm')(state),
+}))(PostEditForm);
 
 PostEditForm = reduxForm({
   form: 'PostEditForm'
@@ -207,12 +279,15 @@ PostEditForm = reduxForm({
 
 PostEditForm = connectRestEasy(
   (state, ownProps) => ({
-    isRetrievingGetPost: isRetrievingGetPost(state, ownProps),
     isRetrievingCreatePost: isRetrievingCreatePost(state, ownProps),
   }),
   dispatch => ({
     CreatePostAction: (options) => dispatch(CreatePostAction(options)),
     UpdatePostAction: (options) => dispatch(UpdatePostAction(options)),
+
+    CreateUrlAliasAction: (options) => dispatch(CreateUrlAliasAction(options)),
+    UpdateUrlAliasAction: (options) => dispatch(UpdateUrlAliasAction(options)),
+
   })
 )(PostEditForm);
 
