@@ -24,19 +24,19 @@ export class SlideEditor extends Component {
   }
 
   componentWillMount() {
-    const {match: {params}} = this.props;
-    if (params && params.id) {
+    const {match} = this.props;
+    if (match && match.params && match.params.id) {
       this.props.GetSlideAction({
         urlParams: {
-          id: params.id,
+          id: match.params.id,
         }
       });
     }
   }
 
   createInitialValues = () => {
-    const {GetSlideById, match: {params}} = this.props;
-    const slide = params && params.id && GetSlideById(params.id);
+    const {GetSlideById, match} = this.props;
+    const slide = match && match.params && match.params.id && GetSlideById(match.params.id);
     let initialValues = {
       backgroundType: BG_SLIDER_TYPE_IMAGE,
       position: 'middle-middle',
@@ -75,7 +75,7 @@ export class SlideEditor extends Component {
 SlideEditor = connectRestEasy(
   (state, ownProps) => ({
     GetSlideById: (id) => {
-      const data = GetSlideById(state, 'slides', id);
+      const data = GetSlideById(state, 'slides', id, ownProps);
       if (data) {
         return data[id];
       }
