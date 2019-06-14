@@ -4,25 +4,25 @@ const URLAliasList = React.lazy(() => import('./View/URLAliasList'));
 const URLAliasEditor = React.lazy(() => import('./View/URLAliasEditor'));
 
 
-export const StaticPageRoutes = [
+export const UrlAliasRoutes = [
   {
     path: '/url-alias-list',
     exact: true,
-    name: 'Список url alias',
+    name: 'Список URL псевдонимов',
     component: URLAliasList,
   },
   {
     path: '/url-alias-editor/:id',
     exact: false,
-    name: 'Редактировать url alias',
+    name: 'Редактировать URL псевдонима',
     component: URLAliasEditor,
   },
   {
     path: '/url-alias-editor',
     exact: true,
-    name: 'Создать url alias',
+    name: 'Редактор URL псевдонима',
     component: URLAliasEditor,
   },
 ];
 
-export default StaticPageRoutes;
+export default UrlAliasRoutes;
