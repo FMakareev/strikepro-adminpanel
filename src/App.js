@@ -26,9 +26,6 @@ registerLocale('ru', ru);
 setDefaultLocale('ru');
 
 
-history.listen(location => {
-
-});
 
 class App extends Component {
 
