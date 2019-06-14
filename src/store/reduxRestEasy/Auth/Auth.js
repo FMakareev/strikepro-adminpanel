@@ -14,7 +14,10 @@ export const AuthResource = createResource('authResource',)({
       handleStatusCode: (props) => {
         if (props.status === 200) {
           BrowserHistory.push('/');
+<<<<<<< HEAD
+=======
           window.location.reload();
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
         }
       },
       requestPOST: requestPOST,

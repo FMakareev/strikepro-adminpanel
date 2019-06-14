@@ -2,6 +2,16 @@ import React from 'react';
 
 
 
+<<<<<<< HEAD
+const NomenclatureEditor = React.lazy(() => import('./Nomenclature/Editor'));
+const NomenclatureList = React.lazy(() => import('./Nomenclature/List'));
+
+const TypeOfNomenclatureList = React.lazy(() => import('./TypesOfNomenclature/List'));
+const TypeOfNomenclatureEditor = React.lazy(() => import('./TypesOfNomenclature/Editor'));
+
+const NomenclatureCharacteristicsList = React.lazy(() => import('./NomenclatureCharacteristics/List'));
+const NomenclatureCharacteristicsEditor = React.lazy(() => import('./NomenclatureCharacteristics/Editor'));
+=======
 const NomenclatureEditor = React.lazy(() => import('./View/Nomenclature/Editor'));
 const NomenclatureList = React.lazy(() => import('./View/Nomenclature/List'));
 
@@ -10,6 +20,7 @@ const TypeOfNomenclatureEditor = React.lazy(() => import('./View/TypesOfNomencla
 
 const NomenclatureCharacteristicsList = React.lazy(() => import('./View/NomenclatureCharacteristics/List'));
 const NomenclatureCharacteristicsEditor = React.lazy(() => import('./View/NomenclatureCharacteristics/Editor'));
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
 
 
 

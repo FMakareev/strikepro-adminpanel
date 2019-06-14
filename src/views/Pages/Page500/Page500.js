@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+=======
 import {Button, Col, Container, Row} from 'reactstrap';
 import {Link} from "react-router-dom";
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
 
 class Page500 extends Component {
   render() {
@@ -21,6 +25,20 @@ class Page500 extends Component {
                   </Link>
                 </p>
               </span>
+<<<<<<< HEAD
+              <InputGroup className="input-prepend">
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="fa fa-search"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                <Input size="16" type="text" placeholder="What are you looking for?" />
+                <InputGroupAddon addonType="append">
+                  <Button color="info">Search</Button>
+                </InputGroupAddon>
+              </InputGroup>
+=======
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
             </Col>
           </Row>
         </Container>

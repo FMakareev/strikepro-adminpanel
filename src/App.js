@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
+<<<<<<< HEAD
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { setDefaultLocale, registerLocale }  from "react-datepicker";
+import ru from 'date-fns/locale/ru';
+=======
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import { setDefaultLocale, registerLocale }  from "react-datepicker";
 import ru from 'date-fns/locale/ru';
 import history from "./history";
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
 
 import './App.scss';
 import UIKitRoutes from "./views/UIKit/UIKitRoutes";
@@ -26,15 +32,22 @@ registerLocale('ru', ru);
 setDefaultLocale('ru');
 
 
+<<<<<<< HEAD
+=======
 history.listen(location => {
 
 });
 
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
 class App extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
+      <BrowserRouter>
+=======
       <HashRouter>
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
         <React.Suspense fallback={loading()}>
           <Switch>
             <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>}/>
@@ -55,7 +68,11 @@ class App extends Component {
             />
           </Switch>
         </React.Suspense>
+<<<<<<< HEAD
+      </BrowserRouter>
+=======
       </HashRouter>
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
     );
   }
 }

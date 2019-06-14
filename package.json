@@ -21,9 +21,13 @@
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "classnames": "^2.2.6",
+<<<<<<< HEAD
+    "core-js": "^2.6.5",
+=======
     "connected-react-router": "^6.4.0",
     "core-js": "^2.6.5",
     "cyrillic-to-translit-js": "^2.2.0",
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
     "date-fns": "^2.0.0-alpha.31",
     "dayjs": "^1.8.14",
     "enzyme": "^3.9.0",
@@ -42,7 +46,11 @@
     "react-datepicker": "^2.6.0",
     "react-dom": "^16.8.6",
     "react-html-parser": "^2.0.2",
+<<<<<<< HEAD
+    "react-redux": "^7.0.3",
+=======
     "react-redux": "^7.1.0",
+>>>>>>> a3180f5da718ac899fb9f404f73e60e692dcadbe
     "react-router": "^5.0.0",
     "react-router-config": "^5.0.0",
     "react-router-dom": "^5.0.0",
