@@ -55,7 +55,7 @@ export class PostEditForm extends Component {
       body: values,
     });
     if (newPost && newPost.errors) {
-      throw new SubmissionError(newPost);
+      throw new SubmissionError(normalizeSubmissionError(newPost));
     }
   };
 
@@ -70,7 +70,7 @@ export class PostEditForm extends Component {
     });
 
     if (updatePost && updatePost.errors) {
-      throw new SubmissionError(updatePost);
+      throw new SubmissionError(normalizeSubmissionError(updatePost));
     }
 
   };
