@@ -2,6 +2,7 @@ import React from 'react';
 import {Badge, Button, Card, CardBlock, CardFooter, CardText} from "reactstrap";
 import ReactHtmlParser from "react-html-parser";
 import {Link} from "react-router-dom";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 
 export const SlideItem = ({body, id, onDelete, status}) => (<Card>
@@ -20,14 +21,8 @@ export const SlideItem = ({body, id, onDelete, status}) => (<Card>
         Изменить
       </Link>
     </Button>
-    <Button
-      color="danger"
-      onClick={() => {
-        onDelete && onDelete(id)
-      }}
-    >
-      Удалить
-    </Button>
+
+    <DeleteButton onDelete={()=>onDelete(id)}/>
     <Badge
       color="success"
       className="float-right"

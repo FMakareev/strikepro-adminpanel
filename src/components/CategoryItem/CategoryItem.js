@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from "reactstrap";
 import {Link} from "react-router-dom";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 
 export const CategoryItem = ({
@@ -23,14 +24,7 @@ export const CategoryItem = ({
       </Link>
     </Button>
     {' '}
-    <Button
-      color="danger"
-      onClick={() => {
-        onDelete(id)
-      }}
-    >
-      Удалить
-    </Button>
+    <DeleteButton onDelete={()=>onDelete(id)}/>
   </td>
 </tr>);
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from "reactstrap";
 import {Link} from "react-router-dom";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 const invertColor = (hexTripletColor) => {
   let color = hexTripletColor;
@@ -50,15 +51,7 @@ export const TileItem = ({
         </Link>
       </Button>
       {' '}
-      <Button
-        color="danger"
-        onClick={() => {
-          onDelete && onDelete(id)
-        }}
-        size="sm"
-      >
-        Удалить
-      </Button>
+      <DeleteButton onDelete={()=>onDelete(id)}/>
     </td>
   </tr>
 );

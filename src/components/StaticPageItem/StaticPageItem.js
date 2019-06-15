@@ -1,6 +1,7 @@
 import {Badge, Button, Card, CardBody, CardFooter, CardText, CardTitle} from "reactstrap";
 import {Link} from "react-router-dom";
 import React from "react";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 
 export const StaticPageItem = ({title, excerpt, id, status, onDelete}) => (<Card>
@@ -14,7 +15,7 @@ export const StaticPageItem = ({title, excerpt, id, status, onDelete}) => (<Card
     <Button color="warning">
       <Link to={`/static-page-editor/${id}`}>Изменить</Link>
     </Button>
-    <Button color="danger" onClick={()=>onDelete(id)}>Удалить</Button>
+    <DeleteButton onDelete={()=>onDelete(id)}/>
     <Badge color="success" className="float-right">{status}</Badge>
   </CardFooter>
 </Card>);

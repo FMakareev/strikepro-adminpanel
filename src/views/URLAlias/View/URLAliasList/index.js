@@ -9,6 +9,7 @@ import {
   GetUrlAliasesAction,
   isRetrievingGetUrlAliases,
 } from "../../../../store/reduxRestEasy/UrlAlias/UrlAliasResource";
+import DeleteButton from "../../../../components/DeleteButton/DeleteButton";
 
 export class URLAliasList extends Component {
   render() {
@@ -27,6 +28,7 @@ export class URLAliasList extends Component {
             <th>alias_url</th>
             <th>created_at</th>
             <th>updated_at</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -48,15 +50,7 @@ export class URLAliasList extends Component {
                       </Link>
                     </Button>
                     {' '}
-                    <Button
-                      color="danger"
-                      onClick={() => {
-                        onDelete && onDelete(item.id)
-                      }}
-                      size="sm"
-                    >
-                      Удалить
-                    </Button>
+                    <DeleteButton onDelete={()=>onDelete(item.id)}/>
                   </td>
                 </tr>
               )
