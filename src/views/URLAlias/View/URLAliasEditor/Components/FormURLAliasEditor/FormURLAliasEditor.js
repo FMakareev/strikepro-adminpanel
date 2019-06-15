@@ -14,48 +14,27 @@ import {
 } from "../../../../../../store/reduxRestEasy/UrlAlias/UrlAliasResource";
 import {URIValidation} from "../../../../../../validation/URIValidation";
 import PageContainer from "../../../../../../components/PageContainer/PageContainer";
+import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
+import {createSubmitHandler} from "../../../../../../helpers/createSubmitHandler";
 
 
 export class FormURLAliasEditor extends Component {
 
-
-  createUrlAlias = async (values) => {
-    const {CreateUrlAliasAction} = this.props;
-
-    const {normalizedPayload} = await CreateUrlAliasAction({
-      body: values,
-    });
-    if (normalizedPayload && normalizedPayload.errors) {
-      throw new SubmissionError(normalizeSubmissionError(normalizedPayload));
-    }
-  };
-
-  updateUrlAlias = async (values) => {
-    const {UpdateUrlAliasAction} = this.props;
-    const {normalizedPayload} = await UpdateUrlAliasAction({
-      body: values,
-      urlParams: {
-        id: values.id,
-      }
-    });
-
-    if (normalizedPayload && normalizedPayload.errors) {
-      throw new SubmissionError(normalizeSubmissionError(normalizedPayload));
-    }
-  };
-
-
   onSubmit = async (values) => {
-    const {history} = this.props;
-    if (values.hasOwnProperty('id')) {
-      await this.updateUrlAlias(values);
+    console.log('values: ', values);
+    const {history, UpdateUrlAliasAction, CreateUrlAliasAction} = this.props;
+    if (hasOwnProperty(values, 'id')) {
+      await createSubmitHandler(UpdateUrlAliasAction)({
+        body: values,
+        urlParams: {
+          id: values.id,
+        }
+      })
     } else {
-      await this.createUrlAlias(values);
+      await createSubmitHandler(CreateUrlAliasAction)({body: values})
     }
-
     history.push('/url-alias-list');
   };
-
 
   render() {
     const {error, handleSubmit, pristine, reset, submitting} = this.props;

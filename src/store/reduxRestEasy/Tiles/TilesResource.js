@@ -4,6 +4,7 @@ import config from "../../../config";
 import {handleStatusCode} from "../.helpers/handleStatusCode";
 import {requestDELETE, requestGET, requestPOST, requestPUT} from "../.helpers/networkHelpers";
 import {DeleteNormalizer} from "../.helpers/normalizerHelpers";
+import {hasOwnProperty} from "../../../helpers/hasOwnProperty";
 
 
 export const TILES_RESOURCE_NAME = 'tiles';
@@ -24,7 +25,7 @@ export const TilesResource = createResource(TILES_RESOURCE_NAME)({
         return Normalizer.normalizeError(payload);
       }
 
-      if (resources.hasOwnProperty(TILES_RESOURCE_NAME)) {
+      if (hasOwnProperty(resources,TILES_RESOURCE_NAME)) {
         return Normalizer.mergeResourceAndPayload(resources, [payload])
       } else {
         return Normalizer.payloadToResource([payload]);

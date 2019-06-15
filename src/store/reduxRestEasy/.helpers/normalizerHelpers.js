@@ -1,3 +1,4 @@
+import {hasOwnProperty} from "../../../helpers/hasOwnProperty";
 
 
 export const DeleteNormalizer = (Normalizer)=> (payload, resources, urlParams,) => {
@@ -19,7 +20,7 @@ export const CreateNormalizer = (Normalizer) => (payload, resources, urlParams) 
     return Normalizer.normalizeError(payload);
   }
 
-  if (resources.hasOwnProperty(Normalizer.resourceName)) {
+  if (hasOwnProperty(resources,Normalizer.resourceName)) {
     return Normalizer.mergeResourceAndPayload(resources, [payload])
   } else {
     return Normalizer.payloadToResource([payload]);

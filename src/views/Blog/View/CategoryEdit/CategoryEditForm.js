@@ -15,6 +15,8 @@ import {
   isRetrievingUpdateCategory,
 } from "../../../../store/reduxRestEasy/Blog/BlogCategoryResource";
 import {normalizeSubmissionError} from "../../../../helpers/normalizeSubmissionError";
+import {createSubmitHandler} from "../../../../helpers/createSubmitHandler";
+import {hasOwnProperty} from "../../../../helpers/hasOwnProperty";
 
 
 const required = value => (value ? undefined : 'Обязательно для заполнения');
@@ -31,43 +33,26 @@ export class CategoryEditForm extends Component {
     return {}
   }
 
-  onSubmit = (values) => {
-    const {history} = this.props;
-    if (values.hasOwnProperty('id')) {
-      return this.props.UpdateCategoryAction({
+  onSubmit = async (values) => {
+    console.log('values: ', values);
+    const {history, UpdateCategoryAction, CreateCategoryAction} = this.props;
+    if (hasOwnProperty(values, 'id')) {
+      await createSubmitHandler(UpdateCategoryAction)({
         body: values,
         urlParams: {
           id: values.id,
         }
       })
-        .then(({normalizedPayload}) => {
-          if (normalizedPayload && normalizedPayload.errors) {
-            throw normalizedPayload;
-          }
-          history.push('/categories');
-        })
-        .catch(error => {
-          throw new SubmissionError(normalizeSubmissionError(error));
-        })
     } else {
-      return this.props.CreateCategoryAction({
-        body: values,
-      })
-        .then(({normalizedPayload}) => {
-          if (normalizedPayload && normalizedPayload.errors) {
-            throw normalizedPayload;
-          }
-          history.push('/categories');
-        })
-        .catch(error => {
-          throw new SubmissionError(normalizeSubmissionError(error));
-        })
+      await createSubmitHandler(CreateCategoryAction)({body: values})
     }
+    history.push('/categories');
   };
 
-  render() {
-    const {error, handleSubmit, pristine, reset, submitting} = this.props;
 
+  render() {
+    const {error, handleSubmit, pristine, reset, submitting,isRetrievingCreateCategory} = this.props;
+    console.log('isRetrievingCreateCategory: ', isRetrievingCreateCategory);
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Row>

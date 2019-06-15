@@ -19,13 +19,14 @@ import FormCKEditor from "../../../../../../components/Form/form_ckeditor";
 import {URLAliasField} from "../../../../../../components/URLAliaseField/URLAliaseField";
 import {URIValidation} from "../../../../../../validation/URIValidation";
 import {connect} from "react-redux";
+import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
 
 
 export class FormStaticPage extends Component {
 
   onSubmit = (values) => {
     const {history} = this.props;
-    if (values.hasOwnProperty('id')) {
+    if (hasOwnProperty(values,'id')) {
       return this.props.UpdateAction({
         body: values,
         urlParams: {

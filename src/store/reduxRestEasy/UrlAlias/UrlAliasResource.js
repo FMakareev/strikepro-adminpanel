@@ -4,6 +4,7 @@ import {handleStatusCode} from "../.helpers/handleStatusCode";
 import {requestDELETE, requestGET, requestPOST, requestPUT} from "../.helpers/networkHelpers";
 import {NormalizationPayload} from "../.helpers/ResourceHelper";
 import {DeleteNormalizer} from "../.helpers/normalizerHelpers";
+import {hasOwnProperty} from "../../../helpers/hasOwnProperty";
 
 export const URL_ALIAS_RESOURCE_NAME = 'UrlAlias';
 
@@ -24,7 +25,7 @@ export const UrlAliasResource = createResource(URL_ALIAS_RESOURCE_NAME)({
         return Normalizer.normalizeError(payload);
       }
 
-      if (resources.hasOwnProperty(URL_ALIAS_RESOURCE_NAME)) {
+      if (hasOwnProperty(resources,URL_ALIAS_RESOURCE_NAME)) {
         return Normalizer.mergeResourceAndPayload(resources, [payload])
       } else {
         return Normalizer.payloadToResource([payload]);

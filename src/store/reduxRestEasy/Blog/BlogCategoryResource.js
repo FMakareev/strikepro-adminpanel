@@ -6,6 +6,7 @@ import {
   NormalizationPayload,
 } from "../.helpers/ResourceHelper";
 import {DeleteNormalizer} from "../.helpers/normalizerHelpers";
+import {hasOwnProperty} from "../../../helpers/hasOwnProperty";
 
 const RESOURCE_NAME = 'categories';
 
@@ -19,7 +20,7 @@ export const BlogCategoryResource = createResource(RESOURCE_NAME)({
       if (!payload && payload.error) {
         return null;
       }
-      if (resources.hasOwnProperty(RESOURCE_NAME)) {
+      if (hasOwnProperty(resources,RESOURCE_NAME)) {
         return Normalizer.mergeResourceAndPayload(resources, [payload])
       } else {
         return Normalizer.payloadToResource([payload]);

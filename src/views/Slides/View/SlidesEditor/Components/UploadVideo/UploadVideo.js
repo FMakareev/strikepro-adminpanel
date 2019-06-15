@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import UploadFileButton from "../UploadFileButton/UploadFileButton";
 import config from "../../../../../../config";
+import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
 
 
 const fakeUploadFileServer = (formData) => {
@@ -24,7 +25,7 @@ export class UploadVideo extends Component {
 
   setNewVideoInStore = (response, fileType, folder) => {
     const {value, onChange} = this.props.input;
-    if (value.hasOwnProperty(fileType)) {
+    if (hasOwnProperty(value,fileType)) {
       if (value[fileType] !== response.url) {
         onChange({
           [fileType]: {

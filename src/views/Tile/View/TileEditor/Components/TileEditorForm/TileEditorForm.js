@@ -15,46 +15,32 @@ import {
 import {normalizeSubmissionError} from "../../../../../../helpers/normalizeSubmissionError";
 import {withRouter} from "react-router-dom";
 import {required} from "../../../../../../validation/required";
+import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
+import {createSubmitHandler} from "../../../../../../helpers/createSubmitHandler";
 
 
 export class TileEditorForm extends Component {
 
-  onSubmit = (values) => {
-    const {history} = this.props;
-    if (values.hasOwnProperty('id')) {
-      return this.props.UpdateTileAction({
+
+  onSubmit = async (values) => {
+    console.log('values: ', values);
+    const {history, UpdateTileAction, CreateTileAction} = this.props;
+    if (hasOwnProperty(values, 'id')) {
+      await createSubmitHandler(UpdateTileAction)({
         body: values,
         urlParams: {
           id: values.id,
         }
       })
-        .then(({normalizedPayload}) => {
-          if (normalizedPayload && normalizedPayload.errors) {
-            throw normalizedPayload;
-          }
-          history.push('/tile-list');
-        })
-        .catch(error => {
-          throw new SubmissionError(normalizeSubmissionError(error));
-        })
     } else {
-      return this.props.CreateTileAction({
-        body: values,
-      })
-        .then(({normalizedPayload}) => {
-          if (normalizedPayload && normalizedPayload.errors) {
-            throw normalizedPayload;
-          }
-          history.push('/tile-list');
-        })
-        .catch(error => {
-          throw new SubmissionError(normalizeSubmissionError(error));
-        })
+      await createSubmitHandler(CreateTileAction)({body: values})
     }
+    history.push('/tile-list');
   };
 
+
   render() {
-    const {error, handleSubmit, tileTypes} = this.props;
+    const {error, handleSubmit, tileTypes, pristine, submitting} = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -126,7 +112,7 @@ export class TileEditorForm extends Component {
                   color="primary"
                   type="submit"
                   className="px-4"
-                  // disabled={pristine || submitting}
+                  disabled={pristine || submitting}
                 >Сохранить</Button>
               </FormGroup>
             </div>

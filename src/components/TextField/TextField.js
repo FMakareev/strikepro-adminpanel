@@ -25,7 +25,8 @@ export const TextField = ({input, label, type, placeholder, required, icon, meta
         required={required}/>
       <FormFeedback
         valid={touched ? !error : false}
-        className="help-block">
+        className="help-block"
+      >
         {error}
       </FormFeedback>
     </InputGroup>

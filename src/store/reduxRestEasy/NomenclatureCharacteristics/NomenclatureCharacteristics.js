@@ -4,6 +4,7 @@ import {handleStatusCode} from "../.helpers/handleStatusCode";
 import {requestDELETE, requestGET, requestPOST, requestPUT} from "../.helpers/networkHelpers";
 import {NormalizationPayload} from "../.helpers/ResourceHelper";
 import {DeleteNormalizer} from "../.helpers/normalizerHelpers";
+import {hasOwnProperty} from "../../../helpers/hasOwnProperty";
 
 const RESOURCE_NAME = 'nomenclatureCharacteristic';
 
@@ -24,7 +25,7 @@ export const NomenclatureCharacteristicResource = createResource(RESOURCE_NAME)(
         return Normalizer.normalizeError(payload);
       }
 
-      if (resources.hasOwnProperty(RESOURCE_NAME)) {
+      if (hasOwnProperty(resources,RESOURCE_NAME)) {
         return Normalizer.mergeResourceAndPayload(resources, [payload])
       } else {
         return Normalizer.payloadToResource([payload]);

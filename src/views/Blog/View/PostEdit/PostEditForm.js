@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, Button, Col, FormGroup, Row} from "reactstrap";
-import {Field, getFormValues, reduxForm, SubmissionError} from "redux-form";
+import {Field, getFormValues, reduxForm} from "redux-form";
 import PropTypes from 'prop-types';
 import FormSelect from "../../../../components/Form/FormSelect";
 import FormDateTimePicker from "../../../../components/FormDateTimePicker/FormDateTimePicker";
@@ -15,7 +15,6 @@ import {
   UpdatePostAction,
 } from "../../../../store/reduxRestEasy/Blog/BlogPostResource";
 import {withRouter} from "react-router-dom";
-import {normalizeSubmissionError} from "../../../../helpers/normalizeSubmissionError";
 import {required} from "../../../../validation/required";
 import MetaFields from "./Components/MetaFields/MetaFields";
 import OGMetaFields from "./Components/OGMetaFields/OGMetaFields";
@@ -23,6 +22,8 @@ import {URLAliasField} from "../../../../components/URLAliaseField/URLAliaseFiel
 import {connect} from "react-redux";
 import {URIValidation} from "../../../../validation/URIValidation";
 import {CreateUrlAliasAction, UpdateUrlAliasAction} from "../../../../store/reduxRestEasy/UrlAlias/UrlAliasResource";
+import {createSubmitHandler} from "../../../../helpers/createSubmitHandler";
+import {hasOwnProperty} from "../../../../helpers/hasOwnProperty";
 
 
 export class PostEditForm extends Component {
@@ -37,7 +38,7 @@ export class PostEditForm extends Component {
       url: PropTypes.string,
       alias_url: PropTypes.string,
     })
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -49,47 +50,25 @@ export class PostEditForm extends Component {
   }
 
 
-  createPost = async (values) => {
-    const {CreatePostAction} = this.props;
-    const newPost = await CreatePostAction({
-      body: values,
-    });
-    if (newPost && newPost.errors) {
-      throw new SubmissionError(normalizeSubmissionError(newPost));
-    }
-  };
-
-  updatePost = async (values) => {
-    const {UpdatePostAction} = this.props;
-
-    const updatePost = await UpdatePostAction({
-      body: values,
-      urlParams: {
-        id: values.id,
-      }
-    });
-
-    if (updatePost && updatePost.errors) {
-      throw new SubmissionError(normalizeSubmissionError(updatePost));
-    }
-
-  };
-
-
   onSubmit = async (values) => {
     console.log('values: ', values);
-    const {history} = this.props;
-    if (values.hasOwnProperty('id')) {
-      await this.updatePost(values);
+    const {history, UpdatePostAction, CreatePostAction} = this.props;
+    if (hasOwnProperty(values, 'id')) {
+      await createSubmitHandler(UpdatePostAction)({
+        body: values,
+        urlParams: {
+          id: values.id,
+        }
+      })
     } else {
-      await this.createPost(values)
+      await createSubmitHandler(CreatePostAction)({body: values})
     }
     history.push('/posts');
   };
 
 
   render() {
-    const {error, handleSubmit, categories, values} = this.props;
+    const {error, handleSubmit, categories, values, pristine, submitting} = this.props;
     console.log(this.props);
 
     return (
@@ -210,8 +189,10 @@ export class PostEditForm extends Component {
                   color="primary"
                   type="submit"
                   className="px-4"
-                  // disabled={pristine || submitting}
-                >Сохранить</Button>
+                  disabled={pristine || submitting}
+                >
+                  Сохранить
+                </Button>
               </FormGroup>
             </div>
           </Col>

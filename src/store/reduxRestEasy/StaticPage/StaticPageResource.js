@@ -4,6 +4,7 @@ import config from "../../../config";
 import {handleStatusCode} from "../.helpers/handleStatusCode";
 import {requestDELETE, requestGET, requestPOST, requestPUT} from "../.helpers/networkHelpers";
 import {DeleteNormalizer} from "../.helpers/normalizerHelpers";
+import {hasOwnProperty} from "../../../helpers/hasOwnProperty";
 
 
 export const STATIC_PAGE_RESOURCE_NAME = 'staticPage';
@@ -23,7 +24,7 @@ export const StaticPageResource = createResource(STATIC_PAGE_RESOURCE_NAME)({
         return Normalizer.normalizeError(payload);
       }
 
-      if (resources.hasOwnProperty(STATIC_PAGE_RESOURCE_NAME)) {
+      if (hasOwnProperty(resources, STATIC_PAGE_RESOURCE_NAME)) {
         return Normalizer.mergeResourceAndPayload(resources, [payload])
       } else {
         return Normalizer.payloadToResource([payload]);

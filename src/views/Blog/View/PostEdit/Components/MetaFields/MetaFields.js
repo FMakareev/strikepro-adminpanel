@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Col, Row} from "reactstrap";
+import {Col} from "reactstrap";
 import {Field} from "redux-form";
 import {TextField} from "../../../../../../components/TextField/TextField";
 import {maxLength} from "../../../../../../validation/maxLength";
@@ -13,7 +13,7 @@ export const MetaFields = () => (<Fragment>
       META информация
     </h4>
   </Col>
-  <Col xs="12" md="6" lg="4">
+  <Col xs="12">
     <Field
       name="meta_description"
       component={TextField}
@@ -22,7 +22,7 @@ export const MetaFields = () => (<Fragment>
       validate={[maxLength255]}
     />
   </Col>
-  <Col xs="12" md="6" lg="4">
+  <Col xs="12">
     <Field
       name="meta_keywords"
       component={FormTagInput}

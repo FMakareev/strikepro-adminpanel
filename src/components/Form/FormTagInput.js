@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import TagsInput from 'react-tagsinput'
+import {FormFeedback, FormGroup, InputGroup, Label} from "reactstrap";
+import TagsInput from 'react-tagsinput';
 
-import 'react-tagsinput/react-tagsinput.css'
-import {Alert, FormGroup, Label} from "reactstrap";
+import 'react-tagsinput/react-tagsinput.css';
 
 export class FormTagInput extends Component {
 
@@ -34,19 +34,24 @@ export class FormTagInput extends Component {
 
   render() {
     const {input: {value}, label, meta: {touched, error}} = this.props;
-    return (
-      <div className="controls">
-        <FormGroup>
-          <Label>{label}</Label>
-          <TagsInput value={value ? value.split(', ') : []} onChange={this.handleChange}/>
-        </FormGroup>
+    return (<FormGroup className={touched ? error ? '' : 'was-validated' : ''}>
+      <Label>{label}</Label>
+      <InputGroup className="mb-3">
+
+        <TagsInput
+          className={`react-tagsinput form-control ${touched && error ? 'form-control-warning is-invalid' : ''}`}
+          value={value ? value.split(', ') : []}
+          onChange={this.handleChange}
+        />
         {
           touched && error &&
-          <Alert color="danger">
+          <FormFeedback
+            valid={touched ? !error : false}
+            className="help-block">
             {error}
-          </Alert>
+          </FormFeedback>
         }
-      </div>
-    )
+      </InputGroup>
+    </FormGroup>)
   }
 }

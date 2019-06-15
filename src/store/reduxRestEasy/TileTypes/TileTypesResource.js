@@ -4,6 +4,7 @@ import config from "../../../config";
 import {handleStatusCode} from "../.helpers/handleStatusCode";
 import {requestDELETE, requestGET, requestPOST, requestPUT} from "../.helpers/networkHelpers";
 import {DeleteNormalizer} from "../.helpers/normalizerHelpers";
+import {hasOwnProperty} from "../../../helpers/hasOwnProperty";
 
 
 export const TILE_TYPES_RESOURCE_NAME = 'tileTypes';
@@ -15,7 +16,7 @@ export const TileTypesResource = createResource(TILE_TYPES_RESOURCE_NAME)({
   createTileType: {
     method: 'POST',
     url: `${config.base}${config.api.tile_types}`,
-    normalizer: (payload, resources, urlParams) => {
+    normalizer: (payload, resources) => {
       if (!payload) {
         return null
       }
@@ -23,7 +24,7 @@ export const TileTypesResource = createResource(TILE_TYPES_RESOURCE_NAME)({
         return Normalizer.normalizeError(payload);
       }
 
-      if (resources.hasOwnProperty(TILE_TYPES_RESOURCE_NAME)) {
+      if (hasOwnProperty(resources,TILE_TYPES_RESOURCE_NAME)) {
         return Normalizer.mergeResourceAndPayload(resources, [payload])
       } else {
         return Normalizer.payloadToResource([payload]);

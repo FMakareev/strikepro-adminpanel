@@ -22,6 +22,8 @@ import UploadImage from "../UploadImage/UploadImage";
 import {BG_SLIDER_TYPE_IMAGE, BG_SLIDER_TYPE_VIDEO} from "../../../../../../shared/constants";
 import SlideBodyVideo from "../SlideBodyVideo/SlideBodyVideo";
 import SlideBodyImage from "../SlideBodyImage/SlideBodyImage";
+import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
+import {createSubmitHandler} from "../../../../../../helpers/createSubmitHandler";
 
 
 export class FormSlidesEditor extends Component {
@@ -40,45 +42,31 @@ export class FormSlidesEditor extends Component {
     }
   };
 
-  onSubmit = (values) => {
-    const {history} = this.props;
+  onSubmit = async (values) => {
+    console.log('values: ', values);
     const body = this.getSlideBody(values);
-    console.log(body);
-    if (values.hasOwnProperty('id')) {
-      return this.props.UpdateSlideAction({
+
+    const {history, UpdateSlideAction, CreateSlideAction} = this.props;
+    if (hasOwnProperty(values, 'id')) {
+      await createSubmitHandler(UpdateSlideAction)({
         body: {
+          ...values,
           body: body,
         },
         urlParams: {
           id: values.id,
         }
       })
-        .then(({normalizedPayload}) => {
-          if (normalizedPayload && normalizedPayload.errors) {
-            throw normalizedPayload;
-          }
-          history.push('/slides');
-        })
-        .catch(error => {
-          throw new SubmissionError(normalizeSubmissionError(error));
-        })
     } else {
-      return this.props.CreateSlideAction({
+      await createSubmitHandler(CreateSlideAction)({
         body: {
           body: body,
         },
       })
-        .then(({normalizedPayload}) => {
-          if (normalizedPayload && normalizedPayload.errors) {
-            throw normalizedPayload;
-          }
-          history.push('/slides');
-        })
-        .catch(error => {
-          throw new SubmissionError(normalizeSubmissionError(error));
-        })
     }
+    history.push('/slides');
   };
+
 
   render() {
     const {handleSubmit, pristine, submitting, error, values} = this.props;
@@ -233,7 +221,7 @@ export class FormSlidesEditor extends Component {
               <Button
                 color="primary"
                 type="submit"
-                // disabled={pristine || submitting}
+                disabled={pristine || submitting}
               >
                 Сохранить
               </Button>
