@@ -9,7 +9,8 @@ import {FormTagInput} from "../../../../components/Form/FormTagInput";
 import {TextField} from "../../../../components/TextField/TextField";
 import {connect as connectRestEasy} from "@brigad/redux-rest-easy";
 import {
-  CreatePostAction, isRetrievingCreatePost,
+  CreatePostAction,
+  isRetrievingCreatePost,
   isRetrievingGetPost,
   UpdatePostAction,
 } from "../../../../store/reduxRestEasy/Blog/BlogPostResource";
@@ -48,66 +49,19 @@ export class PostEditForm extends Component {
   }
 
 
-  /**
-   * @param {object} values
-   * */
-  updateUrlAlias = async (values) => {
-
-  };
-
-
   createPost = async (values) => {
-    const {CreateUrlAliasAction, UpdateUrlAliasAction, CreatePostAction} = this.props;
-
-    /** STEP 1 */
-    const CreateURLAliasData = await CreateUrlAliasAction({
-      body: {
-        "url": "blog/128",
-        "alias_url": "path/to/the/resource-name"
-      }
-    });
-    if (CreateURLAliasData && CreateURLAliasData.errors) {
-      throw new SubmissionError(CreateURLAliasData);
-    }
-
-    /** STEP 2 */
+    const {CreatePostAction} = this.props;
     const newPost = await CreatePostAction({
       body: values,
     });
     if (newPost && newPost.errors) {
       throw new SubmissionError(newPost);
     }
-
-    /** STEP 3 */
-    const UpdateURLAliasData = await UpdateUrlAliasAction({
-      body: {
-        // TODO: придумать как url формируется
-        "url": `blog/${newPost.id}`,
-      }
-    });
-    if (UpdateURLAliasData && UpdateURLAliasData.errors) {
-      throw new SubmissionError(UpdateURLAliasData);
-    }
-
   };
 
   updatePost = async (values) => {
-    const {URLAlias, initialValues, UpdateUrlAliasAction, UpdatePostAction} = this.props;
+    const {UpdatePostAction} = this.props;
 
-    /** STEP 1 */
-    if (values.alias_url !== initialValues.alias_url) {
-      const UpdateURLAliasData = await UpdateUrlAliasAction({
-        body: {
-          ...URLAlias,
-          "alias_url": values.alias_url
-        }
-      });
-      if (UpdateURLAliasData && UpdateURLAliasData.errors) {
-        throw new SubmissionError(UpdateURLAliasData);
-      }
-    }
-
-    /** STEP 2 */
     const updatePost = await UpdatePostAction({
       body: values,
       urlParams: {
