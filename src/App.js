@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import { setDefaultLocale, registerLocale }  from "react-datepicker";
 import ru from 'date-fns/locale/ru';
-import history from "./history";
 
 import './App.scss';
 import UIKitRoutes from "./views/UIKit/UIKitRoutes";
