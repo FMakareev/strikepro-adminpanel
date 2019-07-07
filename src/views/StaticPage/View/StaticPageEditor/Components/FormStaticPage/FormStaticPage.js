@@ -120,7 +120,6 @@ export class FormStaticPage extends Component {
             label="Ссылка на превью изображение страницы"
             description={'(используется в плитках)'}
             type="text"
-            validate={[required]}
           />
         </Col>
         <Col xs="12" md="6">
