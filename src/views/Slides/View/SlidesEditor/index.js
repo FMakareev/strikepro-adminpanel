@@ -10,6 +10,7 @@ import {
 import {SlideParseBody} from "./Components/SlideParseBody/SlideParseBody";
 import {BG_SLIDER_TYPE_IMAGE} from "../../../../shared/constants";
 import PageContainer from "../../../../components/PageContainer/PageContainer";
+import {dateToFormat} from "../../../../helpers/dateToFormat";
 
 
 export class SlideEditor extends Component {
@@ -38,6 +39,7 @@ export class SlideEditor extends Component {
     const {GetSlideById, match} = this.props;
     const slide = match && match.params && match.params.id && GetSlideById(match.params.id);
     let initialValues = {
+      public_at: dateToFormat(new Date()),
       backgroundType: BG_SLIDER_TYPE_IMAGE,
       position: 'middle-middle',
       backDrop: false,
@@ -48,6 +50,7 @@ export class SlideEditor extends Component {
     };
     if (slide) {
       initialValues = {
+
         ...slide,
         ...SlideParseBody(slide.body),
       };
