@@ -1,2 +1,14 @@
-https://github.com/mgcrea/redux-rest-resource
-https://github.com/lexich/redux-api
+
+
+
+
+- [x] Blog
+- [x] Blog category
+- [x] Slides
+- [ ] Nomenclature
+- [x] Pages
+- [x] Tiles
+- [x] URL alias
+- [ ] Feedback
+
+
