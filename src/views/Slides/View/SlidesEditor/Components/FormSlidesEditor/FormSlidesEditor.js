@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Field, getFormValues, reduxForm, SubmissionError} from "redux-form";
-import { renderToString } from 'react-dom/server'
+import {Field, getFormValues, reduxForm} from "redux-form";
+import {renderToString} from 'react-dom/server'
 import {connect} from "react-redux";
 import {connect as connectRestEasy} from "@brigad/redux-rest-easy";
 import {withRouter} from "react-router-dom";
@@ -15,7 +15,6 @@ import {
   isRetrievingCreateSlide, isRetrievingUpdateSlide,
   UpdateSlideAction
 } from "../../../../../../store/reduxRestEasy/Slides/SlidesResource";
-import {normalizeSubmissionError} from "../../../../../../helpers/normalizeSubmissionError";
 import {SlidePreview} from "../SlidePreview/SlidePreview";
 import UploadVideo from "../UploadVideo/UploadVideo";
 import UploadImage from "../UploadImage/UploadImage";
@@ -24,16 +23,17 @@ import SlideBodyVideo from "../SlideBodyVideo/SlideBodyVideo";
 import SlideBodyImage from "../SlideBodyImage/SlideBodyImage";
 import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
 import {createSubmitHandler} from "../../../../../../helpers/createSubmitHandler";
+import FormDateTimePicker from "../../../../../../components/FormDateTimePicker/FormDateTimePicker";
 
 
 export class FormSlidesEditor extends Component {
 
   getSlideBody = (values) => {
     try {
-      if(values.backgroundType === BG_SLIDER_TYPE_IMAGE){
+      if (values.backgroundType === BG_SLIDER_TYPE_IMAGE) {
         return renderToString(<SlideBodyImage {...values}/>);
       }
-      if(values.backgroundType === BG_SLIDER_TYPE_VIDEO){
+      if (values.backgroundType === BG_SLIDER_TYPE_VIDEO) {
         return renderToString(<SlideBodyVideo {...values}/>);
       }
     } catch (e) {
@@ -72,161 +72,170 @@ export class FormSlidesEditor extends Component {
     const {handleSubmit, pristine, submitting, error, values} = this.props;
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-          <SlidePreview
-            values={values}
-          />
-          <Row>
-            <Col xs="6">
-              {
-                values && values.backgroundType === BG_SLIDER_TYPE_IMAGE &&
-                <Field
-                  name={"image"}
-                  component={UploadImage}
-                  type={"file"}
-                />
-              }
-
-              {
-                values && values.backgroundType === BG_SLIDER_TYPE_VIDEO &&
-                <Field
-                  name={"image"}
-                  component={UploadVideo}
-                  type={"file"}
-                />
-              }
-            </Col>
-
-            <Col xs="6">
-            </Col>
-            <Col xs="6">
+        <Row>
+          <Col xs="6">
+            {
+              values && values.backgroundType === BG_SLIDER_TYPE_IMAGE &&
               <Field
-                name="backgroundType"
-                component={FormSelect}
-                label={"Тип фона"}
-                type="select"
-                data={[
-                  {
-                    name: 'Изображение',
-                    id: BG_SLIDER_TYPE_IMAGE,
-                  },
-                  {
-                    name: 'Видео',
-                    id: BG_SLIDER_TYPE_VIDEO,
-                  },
-                ]}
+                name={"image"}
+                component={UploadImage}
+                type={"file"}
               />
-            </Col>
-            <Col xs="6">
-              <Field
-                name="position"
-                component={FormSelect}
-                label={"Позиционирование контента"}
-                type="select"
-                data={[
-                  {
-                    name: 'Свурху слева',
-                    id: 'top-left',
-                  },
-                  {
-                    name: 'Сверху по центру',
-                    id: 'top-middle',
-                  },
-                  {
-                    name: 'Сверху справа',
-                    id: 'top-right',
-                  },
+            }
 
-                  {
-                    name: 'Посередине слева',
-                    id: 'middle-left',
-                  },
-                  {
-                    name: 'Посередине',
-                    id: 'middle-center',
-                  },
-                  {
-                    name: 'Посередине справа',
-                    id: 'middle-right',
-                  },
-                  {
-                    name: 'Снизу слева',
-                    id: 'bottom-left',
-                  },
-                  {
-                    name: 'Снизу по середине',
-                    id: 'bottom-center',
-                  },
-                  {
-                    name: 'Снизу справа',
-                    id: 'bottom-right',
-                  },
-                ]}
-              />
-            </Col>
-            <Col xs="7">
+            {
+              values && values.backgroundType === BG_SLIDER_TYPE_VIDEO &&
               <Field
-                name="backDrop"
-                component={Checkbox}
-                label={"Включить фон для контента?"}
-                type="checkbox"
-                value={true}
+                name={"image"}
+                component={UploadVideo}
+                type={"file"}
               />
-            </Col>
-            <Col xs="6">
-              <Field
-                name="buttonLabel"
-                component={TextField}
-                label={"Текст кнопки"}
-                type="text"
-              />
-            </Col>
-            <Col xs="6">
-              <Field
-                name="buttonLink"
-                component={TextField}
-                label={"Ссылка кнопки"}
-                type="text"
-              />
-            </Col>
-            <Col xs={12}>
-              <Field
-                name={"body"}
-                component={FormCKEditor}
-                label={"Контент"}
-                type={"text"}
-                ref={"CKEDITOR"}
+            }
+          </Col>
 
-                config={{
-                  toolbarGroups: [
-                    {name: 'basicstyles', groups: ['basicstyles']},
-                    '/',
-                    {name: 'styles'},
-                    {name: 'colors'},
-                    {name: 'tools'},
-                  ]
-                }}
+          <Col xs="6">
+          </Col>
+          <Col xs="6">
+            <Field
+              name="backgroundType"
+              component={FormSelect}
+              label={"Тип фона"}
+              type="select"
+              data={[
+                {
+                  name: 'Изображение',
+                  id: BG_SLIDER_TYPE_IMAGE,
+                },
+                {
+                  name: 'Видео',
+                  id: BG_SLIDER_TYPE_VIDEO,
+                },
+              ]}
+            />
+          </Col>
+          <Col xs="6">
+            <Field
+              name="position"
+              component={FormSelect}
+              label={"Позиционирование контента"}
+              type="select"
+              data={[
+                {
+                  name: 'Свурху слева',
+                  id: 'top-left',
+                },
+                {
+                  name: 'Сверху по центру',
+                  id: 'top-middle',
+                },
+                {
+                  name: 'Сверху справа',
+                  id: 'top-right',
+                },
 
-              />
-            </Col>
-          </Row>
+                {
+                  name: 'Посередине слева',
+                  id: 'middle-left',
+                },
+                {
+                  name: 'Посередине',
+                  id: 'middle-center',
+                },
+                {
+                  name: 'Посередине справа',
+                  id: 'middle-right',
+                },
+                {
+                  name: 'Снизу слева',
+                  id: 'bottom-left',
+                },
+                {
+                  name: 'Снизу по середине',
+                  id: 'bottom-center',
+                },
+                {
+                  name: 'Снизу справа',
+                  id: 'bottom-right',
+                },
+              ]}
+            />
+          </Col>
+          <Col xs="7">
+            <Field
+              name="backDrop"
+              component={Checkbox}
+              label={"Включить фон для контента?"}
+              type="checkbox"
+              value={true}
+            />
+          </Col>
+          <Col xs="6">
+            <Field
+              name="buttonLabel"
+              component={TextField}
+              label={"Текст кнопки"}
+              type="text"
+            />
+          </Col>
+          <Col xs="6">
+            <Field
+              name="buttonLink"
+              component={TextField}
+              label={"Ссылка кнопки"}
+              type="text"
+            />
+          </Col>
+          <Col xs="6">
+            <Field
+              name="public_at"
+              component={FormDateTimePicker}
+              label="Время публикации"
+              type="text"
+            />
+          </Col>
+          <Col xs={12}>
+            <Field
+              name={"body"}
+              component={FormCKEditor}
+              label={"Контент"}
+              type={"text"}
+              ref={"CKEDITOR"}
 
-          {
-            error && <Alert className={'pb-3'} color="danger">
-              {error}
-            </Alert>
-          }
+              config={{
+                toolbarGroups: [
+                  {name: 'basicstyles', groups: ['basicstyles']},
+                  '/',
+                  {name: 'styles'},
+                  {name: 'colors'},
+                  {name: 'tools'},
+                ]
+              }}
 
-          <Row className={'pb-3'}>
-            <Col xs="12" md="6" lg="4">
-              <Button
-                color="primary"
-                type="submit"
-                disabled={pristine || submitting}
-              >
-                Сохранить
-              </Button>
-            </Col>
-          </Row>
+            />
+          </Col>
+        </Row>
+
+        <SlidePreview
+          values={values}
+        />
+
+        {
+          error && <Alert className={'pb-3'} color="danger">
+            {error}
+          </Alert>
+        }
+
+        <Row className={'pb-3'}>
+          <Col xs="12" md="6" lg="4">
+            <Button
+              color="primary"
+              type="submit"
+              disabled={pristine || submitting}
+            >
+              Сохранить
+            </Button>
+          </Col>
+        </Row>
       </form>)
   }
 }
