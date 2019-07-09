@@ -1,18 +1,20 @@
-import {MenuNomenclature} from "./Nomenclature/menu";
+// import {MenuNomenclature} from "./Nomenclature/menu";
 import {MenuBlog} from "./Blog/menu";
 import {MenuSlides} from "./Slides/menu";
 import {MenuTile} from "./Tile/menu";
 import {StaticPageMenu} from "./StaticPage/menu";
 import {URLAliasMenu} from "./URLAlias/menu";
+import {FeedbackMenu} from "./Feedback/menu";
 
 export const AppNavigation = {
   items: [
     ...MenuBlog,
-    ...MenuNomenclature,
+    // ...MenuNomenclature,
     ...MenuSlides,
     ...MenuTile,
     ...StaticPageMenu,
     ...URLAliasMenu,
+    ...FeedbackMenu,
     {
       title: true,
       name: '',

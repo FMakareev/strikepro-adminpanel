@@ -1,21 +1,24 @@
+import React from "react";
+
 import {BlogRoutes} from "./Blog/routes";
-import {NomenclatureRoutes} from "./Nomenclature/routes";
+// import {NomenclatureRoutes} from "./Nomenclature/routes";
 import {SlidesRoutes} from "./Slides/routes";
 import {TileRoutes} from "./Tile/routes";
 import {StaticPageRoutes} from "./StaticPage/routes";
 import {UrlAliasRoutes} from "./URLAlias/routes";
-import React from "react";
+import {FeedbackRoutes} from "./Feedback/routes";
 
 const Page404 = React.lazy(() => import('./Pages/Page404'));
 const Page500 = React.lazy(() => import('./Pages/Page500'));
 
 export const AppRoutes = [
   ...BlogRoutes,
-  ...NomenclatureRoutes,
+  // ...NomenclatureRoutes,
   ...SlidesRoutes,
   ...TileRoutes,
   ...StaticPageRoutes,
   ...UrlAliasRoutes,
+  ...FeedbackRoutes,
   {
     path: '/500',
     exact: true,

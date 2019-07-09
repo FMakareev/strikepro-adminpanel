@@ -47,5 +47,6 @@ export default {
 
     static_pages: '/dashboard/pages',
     url_alias: '/dashboard/url_alias',
+    feedback: '/dashboard/feedback',
   }
 }
