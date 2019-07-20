@@ -11,9 +11,11 @@
   "auth.login.subtitle": "Войдите в свой аккаунт",
 
   "blog.post.list.title": "Список постов",
-  "blog.post.editor.title": "Редактирование поста",
-  "blog.category.list.title": "Список категорий постов",
+  "blog.post.editor.title": "Редактирование ",
+  "blog.post.create.title": "Создать поста",
+  "blog.category.list.title": "Список категорий",
   "blog.category.editor.title": "Редактирование категории поста",
+  "blog.category.create.title": "Создать категорию поста",
   "blog.category.table.name": "Имя",
 
   "slides.list.title": "Список слайдов",
@@ -66,6 +68,10 @@
   "publishStatus.PENDING": "Отложен",
   "publishStatus.INACTIVE": "Не активен",
   "publishStatus.ACTIVE": "Активен",
+
+
+  "validation.required": "Обязательно для заполнения",
+  "validation.URIValidation": "",
 
   "form.label.title": "Заголовок",
   "form.label.introductory": "Вводный текст",
