@@ -1,19 +1,31 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { getLocales, getMessages } from '../../store/reducers/intl/actions';
+import {connect} from 'react-redux';
+import {getLocales, getMessages} from '../../store/reducers/intl/actions';
+import {CardBody, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 
 
-class LocaleToggle extends Component {
-  render() {
-    const { currentLocale, locales, getMessages } = this.props;
-    return (
-      <select value={currentLocale} onChange={e => getMessages(e.target.value)}>
-        {Object.keys(locales).map((locale) => (
-          <option key={locale}>{locale}</option>
-        ))}
-      </select>
-    );
-  }
+const LocaleToggle = (props) => {
+  const {currentLocale, locales, getMessages} = props;
+  const [state, setState] = React.useState(false);
+  return (
+    <div className={'lang-switch__wrapper'}>
+      <Dropdown  size="sm"  isOpen={state} toggle={() => {
+        setState(!state)
+      }}>
+        <DropdownToggle caret>
+          {currentLocale}
+        </DropdownToggle>
+        <DropdownMenu>
+          {Object.keys(locales).map((locale) => (
+            <DropdownItem
+              onClick={() => getMessages(locale)}
+              active={locale === currentLocale}
+              key={locale}>{locale}</DropdownItem>
+          ))}
+        </DropdownMenu>
+      </Dropdown>
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => ({

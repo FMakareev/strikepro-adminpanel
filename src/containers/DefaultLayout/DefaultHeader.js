@@ -24,10 +24,11 @@ class DefaultHeader extends Component {
           minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
-        <LocaleToggle/>
         <Nav className="d-md-down-none" navbar>
         </Nav>
         <Nav className="ml-auto" navbar>
+          <LocaleToggle/>
+
         </Nav>
       </React.Fragment>
     );

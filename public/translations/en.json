@@ -1,6 +1,7 @@
 {
   "module.name.blog": "Blog",
   "module.name.slides": "Slides",
+  "module.name.tile": "Tiles",
   "module.name.feedback": "Feedback",
   "module.name.staticPage": "Static pages",
   "module.name.urlAlias": "URL alias",
