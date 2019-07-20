@@ -10,6 +10,7 @@ import {
   GetTypesOfNomenclatures,
   GetTypesOfNomenclaturesAction, isRetrievingGetTypesOfNomenclatures
 } from "../../../../../store/reduxRestEasy/TypesOfNomenclature/TypesOfNomenclatureResource";
+import Preloader from "../../../../../components/Preloader/Preloader";
 
 
 export class NomenclatureEditor extends Component {
@@ -40,7 +41,7 @@ export class NomenclatureEditor extends Component {
       !typesOfNomenclatures &&
       !isRetrievingGetTypesOfNomenclatures
     ) {
-      return <div>Loading...</div>
+      return (<Preloader/>)
     }
 
     if (!typesOfNomenclatures.length) {

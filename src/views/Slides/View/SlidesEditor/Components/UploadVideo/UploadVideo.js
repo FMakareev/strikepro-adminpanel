@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import UploadFileButton from "../UploadFileButton/UploadFileButton";
 import config from "../../../../../../config";
 import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
+import {FormattedMessage} from "react-intl";
 
 
 const fakeUploadFileServer = (formData) => {
@@ -113,7 +114,10 @@ export class UploadVideo extends Component {
     const {isLoading, errorSubmit} = this.state;
     console.log(this.state);
     return (<UploadFileButton
-      label={'Загрузка видео'}
+      label={<FormattedMessage
+        id='button.loadingVideo'
+        defaultMessage='button.loadingVideo'
+      />}
       isLoading={isLoading}
       errorSubmit={errorSubmit}
       uploadFile={this.uploadFile}

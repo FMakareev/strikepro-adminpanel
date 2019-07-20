@@ -11,6 +11,8 @@ import {SlideParseBody} from "./Components/SlideParseBody/SlideParseBody";
 import {BG_SLIDER_TYPE_IMAGE} from "../../../../shared/constants";
 import PageContainer from "../../../../components/PageContainer/PageContainer";
 import {dateToFormat} from "../../../../helpers/dateToFormat";
+import {FormattedMessage} from "react-intl";
+import Preloader from "../../../../components/Preloader/Preloader";
 
 
 export class SlideEditor extends Component {
@@ -61,12 +63,15 @@ export class SlideEditor extends Component {
   render() {
     const {isRetrievingGetSlide} = this.props;
     if (isRetrievingGetSlide) {
-      return <div>Loading....</div>
+      return (<Preloader/>)
     }
 
     return (
       <PageContainer
-        header={'Создать слайд'}
+        header={<FormattedMessage
+          id='slides.editor.title'
+          defaultMessage='slides.editor.title'
+        />}
       >
         <FormSlidesEditor
           initialValues={this.createInitialValues()}

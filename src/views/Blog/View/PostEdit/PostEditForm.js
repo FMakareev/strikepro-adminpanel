@@ -24,6 +24,7 @@ import {URIValidation} from "../../../../validation/URIValidation";
 import {CreateUrlAliasAction, UpdateUrlAliasAction} from "../../../../store/reduxRestEasy/UrlAlias/UrlAliasResource";
 import {createSubmitHandler} from "../../../../helpers/createSubmitHandler";
 import {hasOwnProperty} from "../../../../helpers/hasOwnProperty";
+import {FormattedMessage, injectIntl} from "react-intl";
 
 
 export class PostEditForm extends Component {
@@ -68,8 +69,7 @@ export class PostEditForm extends Component {
 
 
   render() {
-    const {error, handleSubmit, categories, values, pristine, submitting} = this.props;
-    console.log(this.props);
+    const {error, handleSubmit, categories, values, pristine, intl, submitting} = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -78,7 +78,11 @@ export class PostEditForm extends Component {
             <Field
               name="title"
               component={TextField}
-              label="Заголовок"
+              placeholder={intl && intl.messages["form.label.title"]}
+              label={<FormattedMessage
+                id="form.label.title"
+                defaultMessage="form.label.title"
+              />}
               validate={[required]}
               type="text"
             />
@@ -87,8 +91,11 @@ export class PostEditForm extends Component {
             <Field
               name="excerpt"
               component={TextField}
-              label="Вводный текст статьи"
-              // validate={[required]}
+              placeholder={intl && intl.messages["form.label.introductory"]}
+              label={<FormattedMessage
+                id="form.label.introductory"
+                defaultMessage="form.label.description"
+              />}
               type="textarea"
             />
           </Col>
@@ -98,7 +105,11 @@ export class PostEditForm extends Component {
               isAutoGenTransliteration={!(values && values.id)}
               name="alias_url"
               component={URLAliasField}
-              label="URL псевдоним статьи"
+              placeholder={intl && intl.messages["form.label.urlAlias"]}
+              label={<FormattedMessage
+                id="form.label.urlAlias"
+                defaultMessage="form.label.urlAlias"
+              />}
               type="text"
               subscribeField={'title'}
               formValues={values}
@@ -109,7 +120,11 @@ export class PostEditForm extends Component {
             <Field
               name="category_id"
               component={FormSelect}
-              label="Категория"
+              placeholder={intl && intl.messages["form.label.category"]}
+              label={<FormattedMessage
+                id="form.label.category"
+                defaultMessage="form.label.category"
+              />}
               validate={[required]}
               type="select"
               defaultValue={''}
@@ -120,20 +135,24 @@ export class PostEditForm extends Component {
             <Field
               name="status"
               component={FormSelect}
-              label="Статус публикации"
+              placeholder={intl && intl.messages["form.label.publishStatus"]}
+              label={<FormattedMessage
+                id="form.label.publishStatus"
+                defaultMessage="form.label.publishStatus"
+              />}
               type="select"
               defaultValue={'DRAFT'}
               validate={[required]}
               data={[
                 {
                   id: "PUBLISHED",
-                  name: "Опубликован"
+                  name: intl && intl.messages[`publishStatus.PUBLISHED`]
                 }, {
                   id: "DRAFT",
-                  name: "Черновик"
+                  name: intl && intl.messages[`publishStatus.DRAFT`]
                 }, {
                   id: "PENDING",
-                  name: "Ожидает публикации"
+                  name: intl && intl.messages[`publishStatus.PENDING`]
                 }
               ]}
             />
@@ -142,14 +161,22 @@ export class PostEditForm extends Component {
             <Field
               name="public_at"
               component={FormDateTimePicker}
-              label="Время публикации"
+              placeholder={intl && intl.messages["form.label.publishStatus"]}
+              label={<FormattedMessage
+                id="form.label.publishStatus"
+                defaultMessage="form.label.publishTime"
+              />}
             />
           </Col>
           <Col xs="12">
             <Field
               name="body"
               component={FormCKEditor}
-              label="Контент"
+              placeholder={intl && intl.messages["form.label.content"]}
+              label={<FormattedMessage
+                id="form.label.content"
+                defaultMessage="form.label.content"
+              />}
               validate={[required]}
               type="text"
               ref="CKEDITOR"
@@ -159,7 +186,11 @@ export class PostEditForm extends Component {
             <Field
               name="tags"
               component={FormTagInput}
-              label="Тэги"
+              placeholder={intl && intl.messages["form.placeholder.tags"]}
+              label={<FormattedMessage
+                id="form.label.tags"
+                defaultMessage="form.label.tags"
+              />}
             />
           </Col>
 
@@ -191,7 +222,10 @@ export class PostEditForm extends Component {
                   className="px-4"
                   disabled={pristine || submitting}
                 >
-                  Сохранить
+                  <FormattedMessage
+                    id="button.save"
+                    defaultMessage="button.save"
+                  />
                 </Button>
               </FormGroup>
             </div>
@@ -227,5 +261,6 @@ PostEditForm = connectRestEasy(
 )(PostEditForm);
 
 PostEditForm = withRouter(PostEditForm);
+PostEditForm = injectIntl(PostEditForm);
 
 export default PostEditForm;

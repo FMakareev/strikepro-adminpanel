@@ -20,13 +20,14 @@ import {URLAliasField} from "../../../../../../components/URLAliaseField/URLAlia
 import {URIValidation} from "../../../../../../validation/URIValidation";
 import {connect} from "react-redux";
 import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
+import {FormattedMessage} from "react-intl";
 
 
 export class FormStaticPage extends Component {
 
   onSubmit = (values) => {
     const {history} = this.props;
-    if (hasOwnProperty(values,'id')) {
+    if (hasOwnProperty(values, 'id')) {
       return this.props.UpdateAction({
         body: values,
         urlParams: {
@@ -59,14 +60,17 @@ export class FormStaticPage extends Component {
   };
 
   render() {
-    const {handleSubmit,values, error} = this.props;
+    const {handleSubmit, values, error, intl} = this.props;
     return (<Form onSubmit={handleSubmit(this.onSubmit)}>
       <Row>
         <Col xs="12">
           <Field
             name="title"
             component={TextField}
-            label="Заголовок страницы"
+            label={<FormattedMessage
+              id="form.label.title"
+              defaultMessage="form.label.title"
+            />}
             type="text"
             validate={[required]}
           />
@@ -75,7 +79,10 @@ export class FormStaticPage extends Component {
           <Field
             name="excerpt"
             component={TextField}
-            label="Водный текст страницы"
+            label={<FormattedMessage
+              id="form.label.introductory"
+              defaultMessage="form.label.introductory"
+            />}
             type="textarea"
             validate={[required]}
           />
@@ -86,7 +93,9 @@ export class FormStaticPage extends Component {
             isAutoGenTransliteration={!(values && values.id)}
             name="alias_url"
             component={URLAliasField}
-            label="URL псевдоним статьи"
+            label={<FormattedMessage
+              id="form.label.urlAlias"
+            />}
             type="text"
             subscribeField={'title'}
             formValues={values}
@@ -97,17 +106,19 @@ export class FormStaticPage extends Component {
           <Field
             name="status"
             component={FormSelect}
-            label="Статус"
+            label={<FormattedMessage
+              id="form.label.publishStatus"
+            />}
             type="select"
             defaultValue={'INACTIVE'}
             validate={[required]}
             data={[
               {
                 id: "INACTIVE",
-                name: "Не активна"
+                name: intl && intl.messages[`publishStatus.INACTIVE`]
               }, {
-                id: "ACTIVE ",
-                name: "Активна"
+                id: "ACTIVE",
+                name: intl && intl.messages[`publishStatus.ACTIVE`]
               }
             ]}
           />
@@ -117,8 +128,12 @@ export class FormStaticPage extends Component {
           <Field
             name="image"
             component={TextField}
-            label="Ссылка на превью изображение страницы"
-            description={'(используется в плитках)'}
+            label={<FormattedMessage
+              id="form.label.linkPreviewImage"
+            />}
+            description={<FormattedMessage
+              id="form.description.linkPreviewImage"
+            />}
             type="text"
           />
         </Col>
@@ -126,7 +141,9 @@ export class FormStaticPage extends Component {
           <Field
             name="parent_id"
             component={TextField}
-            label="ID страницы предка"
+            label={<FormattedMessage
+              id="form.label.parentID"
+            />}
             type="text"
           />
         </Col>
@@ -134,7 +151,9 @@ export class FormStaticPage extends Component {
           <Field
             name="body"
             component={FormCKEditor}
-            label="HTML содержимое страницы"
+            label={<FormattedMessage
+              id="form.label.HTMLContent"
+            />}
             type="text"
             validate={[required]}
           />
@@ -161,8 +180,11 @@ export class FormStaticPage extends Component {
                 color="primary"
                 type="submit"
                 className="px-4"
-                // disabled={pristine || submitting}
-              >Сохранить</Button>
+              >
+                <FormattedMessage
+                  id="button.save"
+                />
+              </Button>
             </FormGroup>
           </div>
         </Col>

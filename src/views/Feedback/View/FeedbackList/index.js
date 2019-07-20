@@ -9,6 +9,7 @@ import {
   GetFeedbackListAction,
   isRetrievingGetFeedbackList
 } from "../../../../store/reduxRestEasy/Feedback/FeedbackResource";
+import {FormattedMessage} from "react-intl";
 
 export class FeedbackList extends Component {
 
@@ -21,7 +22,9 @@ export class FeedbackList extends Component {
 
   render() {
     return (<ItemListTemplate
-      header={'Список сообщений от пользователей'}
+      header={<FormattedMessage
+        id="feedback.list.title"
+      />}
       DeleteAction={DeleteFeedbackAction}
       GetAction={GetFeedbackListAction}
       GetList={GetFeedbackList}
@@ -30,13 +33,42 @@ export class FeedbackList extends Component {
         return (<Table hover bordered striped responsive size="sm">
           <thead>
           <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>email</th>
-            <th>telephone</th>
-            <th>message</th>
-            <th>status</th>
-            <th>created_at</th>
+            <th>
+              <FormattedMessage
+                id="tile.table.id"
+              />
+
+            </th>
+            <th>
+              <FormattedMessage
+                id="feedback.table.username"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="feedback.table.email"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="feedback.table.phone"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="feedback.table.message"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="feedback.table.status"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="tile.table.create_at"
+              />
+            </th>
             {/*<th></th>*/}
           </tr>
           </thead>

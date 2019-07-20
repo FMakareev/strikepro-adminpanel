@@ -8,12 +8,16 @@ import {
 } from "../../../../store/reduxRestEasy/StaticPage/StaticPageResource";
 import {Col, Row} from "reactstrap";
 import StaticPageItem from "../../../../components/StaticPageItem/StaticPageItem";
+import {FormattedMessage} from "react-intl";
 
 
 export class StaticPageList extends Component {
   render() {
     return (<ItemListTemplate
-      header={'Список статических страниц'}
+      header={<FormattedMessage
+        id='staticPages.list.title'
+        defaultMessage='staticPages.list.title'
+      />}
       GetList={GetStaticPages}
       isRetrieving={isRetrievingGetStaticPages}
       DeleteAction={DeleteStaticPageAction}

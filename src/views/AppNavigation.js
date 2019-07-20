@@ -5,6 +5,8 @@ import {MenuTile} from "./Tile/menu";
 import {StaticPageMenu} from "./StaticPage/menu";
 import {URLAliasMenu} from "./URLAlias/menu";
 import {FeedbackMenu} from "./Feedback/menu";
+import {FormattedMessage} from "react-intl";
+import React from "react";
 
 export const AppNavigation = {
   items: [
@@ -26,7 +28,9 @@ export const AppNavigation = {
     },
 
     {
-      name: 'Выход',
+      name: (<FormattedMessage
+        id='button.logout'
+      />),
       url: '/login',
       icon: 'icon-logout'
     },

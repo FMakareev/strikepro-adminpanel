@@ -10,6 +10,7 @@ import {
 } from "../../../../store/reduxRestEasy/Blog/BlogCategoryResource";
 import CategoryItem from "../../../../components/CategoryItem/CategoryItem";
 import ItemListTemplate from "../../../../components/ItemListTemplate/ItemListTemplate";
+import {FormattedMessage} from "react-intl";
 
 
 export class CategoryList extends Component {
@@ -18,7 +19,9 @@ export class CategoryList extends Component {
 
     return (
       <ItemListTemplate
-        header={'Список категорий в блога'}
+        header={<FormattedMessage
+          id='blog.category.list.title'
+        />}
         GetList={GetCategories}
         isRetrieving={isRetrievingCategories}
         GetAction={GetCategoriesAction}
@@ -27,10 +30,27 @@ export class CategoryList extends Component {
           return (<Table hover bordered striped responsive size="sm">
             <thead>
             <tr>
-              <th>id</th>
-              <th>Имя</th>
-              <th>Дата создания</th>
-              <th>Дата обновления</th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.id'
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id='blog.category.table.name'
+                />
+                Имя
+              </th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.create_at'
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.update_at'
+                />
+              </th>
               <th/>
             </tr>
             </thead>

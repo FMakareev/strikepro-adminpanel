@@ -1,16 +1,25 @@
+import {FormattedMessage} from "react-intl";
+import React from "react";
+
 export const URLAliasMenu = [
   {
-    name: 'URLAlias',
+    name: (<FormattedMessage
+      id='module.name.urlAlias'
+    />),
     icon: 'd-none',
     children: [
       {
-        name: 'Список URL Alias',
-        url: '/url-alias-list',
+        name: (<FormattedMessage
+          id='urlAlias.list.title'
+        />),
+        url: '/url-alias/list',
         icon: 'fa fa-list fa-lg'
       },
       {
-        name: 'Создать URL Alias',
-        url: '/url-alias-editor',
+        name: (<FormattedMessage
+          id='urlAlias.editor.title'
+        />),
+        url: '/url-alias/editor',
         icon: 'fa fa-edit fa-lg'
       },
     ]

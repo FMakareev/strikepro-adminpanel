@@ -10,6 +10,7 @@ import {
   isRetrievingGetNomenclatures
 } from "../../../../../store/reduxRestEasy/Nomenclature/NomenclatureResource";
 import RestPagination from "../../../../Blog/View/Posts";
+import Preloader from "../../../../../components/Preloader/Preloader";
 
 
 export class NomenclatureList extends Component {
@@ -36,7 +37,7 @@ export class NomenclatureList extends Component {
 
     const {nomenclatures, isRetrievingGetNomenclatures} = this.props;
     if (isRetrievingGetNomenclatures && !nomenclatures) {
-      return (<div>Loading...</div>);
+      return (<Preloader/>)
     }
     if (!nomenclatures.length) {
       return null;

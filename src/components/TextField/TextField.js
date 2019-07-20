@@ -21,7 +21,7 @@ export const TextField = ({input, label, type, placeholder, required, icon, meta
         type={type}
         valid={touched ? !error : false}
         className={touched ? error ? 'form-control-warning is-invalid' : '' : ''}
-        placeholder={placeholder || label}
+        placeholder={placeholder}
         required={required}/>
       <FormFeedback
         valid={touched ? !error : false}

@@ -6,21 +6,27 @@ const URLAliasEditor = React.lazy(() => import('./View/URLAliasEditor'));
 
 export const UrlAliasRoutes = [
   {
-    path: '/url-alias-list',
+    path: '/url-alias',
     exact: true,
-    name: 'Список URL псевдонимов',
+    name: 'module.name.urlAlias',
     component: URLAliasList,
   },
   {
-    path: '/url-alias-editor/:id',
+    path: '/url-alias/list',
+    exact: true,
+    name: 'urlAlias.list.title',
+    component: URLAliasList,
+  },
+  {
+    path: '/url-alias/editor/:id',
     exact: false,
-    name: 'Редактировать URL псевдонима',
+    name: 'urlAlias.editor.title',
     component: URLAliasEditor,
   },
   {
-    path: '/url-alias-editor',
+    path: '/url-alias/editor',
     exact: true,
-    name: 'Редактор URL псевдонима',
+    name: 'urlAlias.editor.title',
     component: URLAliasEditor,
   },
 ];

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Container, Row, Col, CardGroup, Card, CardBlock} from "reactstrap";
 import LoginForm from "./LoginForm";
 import CustomReactRedirect from "../../../components/CustomReactRedirect/CustomReactRedirect";
+import {FormattedMessage} from "react-intl";
 
 export class Login extends Component {
   render() {
@@ -13,9 +14,15 @@ export class Login extends Component {
               <CardGroup className="mb-0">
                 <Card className="p-4">
                   <CardBlock className="card-body">
-                    <h1>Вход</h1>
+                    <h1>
+                      <FormattedMessage
+                        id='auth.login.title'
+                      />
+                    </h1>
                     <p className="text-muted">
-                      Войдите в свой аккаунт
+                      <FormattedMessage
+                        id='auth.login.subtitle'
+                      />
                     </p>
                     <LoginForm/>
                   </CardBlock>

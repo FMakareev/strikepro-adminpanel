@@ -17,6 +17,7 @@ import {withRouter} from "react-router-dom";
 import {required} from "../../../../../../validation/required";
 import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
 import {createSubmitHandler} from "../../../../../../helpers/createSubmitHandler";
+import {FormattedMessage} from "react-intl";
 
 
 export class TileEditorForm extends Component {
@@ -49,7 +50,10 @@ export class TileEditorForm extends Component {
             <Field
               name="resource_id"
               component={TextField}
-              label="resource_id"
+              label={ <FormattedMessage
+                id='form.label.resource_id'
+                defaultMessage='form.label.resource_id'
+              />}
               type="text"
               validate={[required]}
             />
@@ -61,7 +65,10 @@ export class TileEditorForm extends Component {
                 name="resource_type"
                 component={FormSelect}
                 valueKey={'name'}
-                label="resource_type"
+                label={ <FormattedMessage
+                  id='form.label.resource_type'
+                  defaultMessage='form.label.resource_type'
+                />}
                 type="select"
                 data={tileTypes}
               />
@@ -71,7 +78,10 @@ export class TileEditorForm extends Component {
             <Field
               name="cols"
               component={TextField}
-              label="cols"
+              label={ <FormattedMessage
+                id='form.label.cols'
+                defaultMessage='form.label.cols'
+              />}
               type="text"
             />
           </Col>
@@ -79,14 +89,20 @@ export class TileEditorForm extends Component {
             <Field
               name="background_color"
               component={FormInputColor}
-              label="background_color"
+              label={ <FormattedMessage
+                id='form.label.background_color'
+                defaultMessage='form.label.background_color'
+              />}
               type="color"
             />
           </Col>
           <Col xs="12" md="6" lg="4">
             <Field
               name="public_at"
-              label="public_at"
+              label={ <FormattedMessage
+                id='form.label.public_at'
+                defaultMessage='form.label.public_at'
+              />}
               component={FormDateTimePicker}
             />
           </Col>
@@ -113,7 +129,13 @@ export class TileEditorForm extends Component {
                   type="submit"
                   className="px-4"
                   disabled={pristine || submitting}
-                >Сохранить</Button>
+                >
+                  <FormattedMessage
+                    id='button.save'
+                    defaultMessage='button.save'
+                  />
+
+                </Button>
               </FormGroup>
             </div>
           </Col>

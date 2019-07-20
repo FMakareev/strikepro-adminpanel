@@ -2,10 +2,11 @@ import React from 'react';
 import {Button} from "reactstrap";
 import {Link} from "react-router-dom";
 import DeleteButton from "../DeleteButton/DeleteButton";
+import {FormattedMessage} from "react-intl";
 
 const invertColor = (hexTripletColor) => {
   let color = hexTripletColor;
-  if(color){
+  if (color) {
     color = color.substring(1); // remove #
     color = parseInt(color, 16); // convert to integer
     color = 0xFFFFFF ^ color; // invert three bytes
@@ -47,11 +48,23 @@ export const TileItem = ({
         <Link
           to={`/tile-editor/${id}`}
         >
-          Изменить
+          <FormattedMessage
+            id='button.change'
+            defaultMessage='tile.table.cols'
+          />
         </Link>
       </Button>
       {' '}
-      <DeleteButton onDelete={()=>onDelete(id)}/>
+      <DeleteButton
+        label={<FormattedMessage
+          id="button.delete"
+          defaultMessage="Change"
+        />}
+        confirmMessage={<FormattedMessage
+          id="confirmMessage.delete"
+          defaultMessage="Are you sure you want to delete?"
+        />}
+        onDelete={() => onDelete(id)}/>
     </td>
   </tr>
 );

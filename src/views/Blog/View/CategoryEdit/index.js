@@ -7,6 +7,7 @@ import {
   GetCategoryById,
   isRetrievingGetCategory,
 } from "../../../../store/reduxRestEasy/Blog/BlogCategoryResource";
+import Preloader from "../../../../components/Preloader/Preloader";
 
 
 export class CategoryEditor extends Component {
@@ -30,7 +31,7 @@ export class CategoryEditor extends Component {
     const {category, match: {params}, isRetrievingGetCategory} = this.props;
     console.log(this.props);
     if (isRetrievingGetCategory) {
-      return <div>Loading....</div>
+      return (<Preloader/>)
     }
 
     let initialValues = {

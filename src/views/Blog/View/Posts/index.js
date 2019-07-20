@@ -13,6 +13,7 @@ import {
 } from "../../../../store/reduxRestEasy/Blog/BlogPostResource";
 import BlogItem from "../../../../components/BlogItem/BlogItem";
 import ItemListTemplate from "../../../../components/ItemListTemplate/ItemListTemplate";
+import { FormattedMessage } from 'react-intl';
 
 
 class PostList extends Component {
@@ -21,7 +22,10 @@ class PostList extends Component {
 
     return (
       <ItemListTemplate
-        header={'Список статических страниц'}
+        header={<FormattedMessage
+          id="blog.post.list.title"
+          defaultMessage="List of posts"
+        />}
         DeleteAction={DeletePostAction}
         GetAction={GetPostsAction}
         GetList={GetPosts}

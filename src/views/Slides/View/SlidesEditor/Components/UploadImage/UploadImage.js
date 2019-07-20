@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import UploadFileButton from "../UploadFileButton/UploadFileButton";
 import config from "../../../../../../config";
+import {FormattedMessage} from "react-intl";
 
 
 export class UploadImage extends Component {
@@ -69,7 +70,10 @@ export class UploadImage extends Component {
     const {isLoading, errorSubmit} = this.state;
 
     return (<UploadFileButton
-      label={'Загрузка изображений'}
+      label={<FormattedMessage
+        id='button.loadingImage'
+        defaultMessage='button.loadingImage'
+      />}
       isLoading={isLoading}
       errorSubmit={errorSubmit}
       uploadFile={this.uploadFile}

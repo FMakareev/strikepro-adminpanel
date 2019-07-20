@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
   Table,
 } from "reactstrap";
-import {connect as connectRestEasy} from "@brigad/redux-rest-easy";
 
 import {
   DeleteTileAction,
@@ -12,6 +11,7 @@ import {
 } from "../../../../store/reduxRestEasy/Tiles/TilesResource";
 import TileItem from "../../../../components/TileItem/TileItem";
 import ItemListTemplate from "../../../../components/ItemListTemplate/ItemListTemplate";
+import {FormattedMessage} from "react-intl";
 
 
 export class TileList extends Component {
@@ -22,7 +22,10 @@ export class TileList extends Component {
 
     return (
       <ItemListTemplate
-        header={'Список плиток на главной'}
+        header={<FormattedMessage
+          id='tile.list.title'
+          defaultMessage='tile.list.title'
+        />}
         DeleteAction={DeleteTileAction}
         GetAction={GetTilesAction}
         GetList={GetTiles}
@@ -31,14 +34,54 @@ export class TileList extends Component {
           return (<Table hover bordered striped responsive size="sm">
             <thead>
             <tr>
-              <th>id</th>
-              <th>resource_id</th>
-              <th>resource_type</th>
-              <th>created_at</th>
-              <th>updated_at</th>
-              <th>public_at</th>
-              <th>background_color</th>
-              <th>cols</th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.id'
+                  defaultMessage='tile.table.id'
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.resource_id'
+                  defaultMessage='tile.table.resource_id'
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.resource_type'
+                  defaultMessage='tile.table.resource_type'
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.create_at'
+                  defaultMessage='tile.table.create_at'
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.update_at'
+                  defaultMessage='tile.table.update_at'
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.public_at'
+                  defaultMessage='tile.table.public_at'
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.background_color'
+                  defaultMessage='tile.table.background_color'
+                />
+              </th>
+              <th>
+                <FormattedMessage
+                  id='tile.table.cols'
+                  defaultMessage='tile.table.cols'
+                />
+              </th>
               <th></th>
             </tr>
             </thead>
@@ -61,7 +104,6 @@ export class TileList extends Component {
     )
   }
 }
-
 
 
 export default TileList;

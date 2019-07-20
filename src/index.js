@@ -4,14 +4,22 @@ import './polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
+import { IntlProvider } from 'react-intl-redux';
 import Store from "./store/store";
 
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {initLocalesClient} from "./store/reducers/intl/actions";
+
+
+Store.dispatch(initLocalesClient());
+
 
 ReactDOM.render(<Provider store={Store}>
-  <App />
+  <IntlProvider>
+    <App />
+  </IntlProvider>
 </Provider>, document.getElementById('root'));
 
 

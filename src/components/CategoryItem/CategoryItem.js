@@ -2,6 +2,7 @@ import React from 'react';
 import {Button} from "reactstrap";
 import {Link} from "react-router-dom";
 import DeleteButton from "../DeleteButton/DeleteButton";
+import {FormattedMessage} from "react-intl";
 
 
 export const CategoryItem = ({
@@ -20,11 +21,24 @@ export const CategoryItem = ({
       <Link
         to={`/category-editor/${id}`
         }>
-        Изменить
+        <FormattedMessage
+          id="button.change"
+          defaultMessage="Change"
+        />
       </Link>
     </Button>
     {' '}
-    <DeleteButton onDelete={()=>onDelete(id)}/>
+    <DeleteButton
+      label={<FormattedMessage
+        id="button.delete"
+        defaultMessage="Change"
+      />}
+      confirmMessage={<FormattedMessage
+        id="confirmMessage.delete"
+        defaultMessage="Are you sure you want to delete?"
+      />}
+      onDelete={() => onDelete(id)}
+    />
   </td>
 </tr>);
 

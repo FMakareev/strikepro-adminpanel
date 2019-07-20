@@ -9,8 +9,9 @@ import UIKitNavigation from './views/UIKit/UIKitNavigation';
 
 import {AppRoutes} from "./views/AppRoutes";
 import {AppNavigation} from "./views/AppNavigation";
+import Preloader from "./components/Preloader/Preloader";
 
-const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
+const loading = () => <div className="animated fadeIn pt-3 text-center"><Preloader/></div>;
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));

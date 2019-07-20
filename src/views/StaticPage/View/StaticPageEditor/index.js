@@ -9,6 +9,8 @@ import {
   STATIC_PAGE_RESOURCE_NAME
 } from "../../../../store/reduxRestEasy/StaticPage/StaticPageResource";
 import FormStaticPage from "./Components/FormStaticPage/FormStaticPage";
+import {FormattedMessage} from "react-intl";
+import Preloader from "../../../../components/Preloader/Preloader";
 
 export class StaticPageEditor extends Component {
   componentWillMount() {
@@ -29,14 +31,16 @@ export class StaticPageEditor extends Component {
       isRetrieving,
     } = this.props;
     if (isRetrieving && !item) {
-      return <div>Loading....</div>
+      return (<Preloader/>)
     }
 
     let initialValues = {
       initialValues: item(params && params.id)
     };
     return (<PageContainer
-      header={'Редактор статических страниц'}
+      header={<FormattedMessage
+        id="staticPages.editor.title"
+      />}
     >
       <FormStaticPage
         {...initialValues}

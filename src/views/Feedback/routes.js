@@ -8,11 +8,17 @@ export const FeedbackRoutes = [
   {
     path: '/feedback',
     exact: true,
-    name: 'Список обращений',
+    name: 'module.name.feedback',
     component: FeedbackList,
   },
   {
-    path: '/create-feedback',
+    path: '/feedback/list',
+    exact: true,
+    name: 'feedback.list.title',
+    component: FeedbackList,
+  },
+  {
+    path: '/feedback/create',
     exact: true,
     name: 'Создать обращение',
     component: FeedbackEditor,

@@ -14,6 +14,7 @@ import {
 
 import ItemListTemplate from "../../../../components/ItemListTemplate/ItemListTemplate";
 import SlideItem from "../../../../components/SlideItem/SlideItem";
+import {FormattedMessage} from "react-intl";
 
 export class SlideList extends Component {
 
@@ -21,7 +22,10 @@ export class SlideList extends Component {
   render() {
 
     return (<ItemListTemplate
-      header={'Список Слайдов'}
+      header={<FormattedMessage
+        id='slides.list.title'
+        defaultMessage='slides.list.title'
+      />}
       DeleteAction={DeleteSlideAction}
       GetAction={GetSlidesAction}
       GetList={GetSlides}

@@ -8,19 +8,25 @@ export const SlidesRoutes = [
   {
     path: '/slides',
     exact: true,
-    name: 'Slides',
+    name: 'module.name.slides',
     component: Slides,
   },
   {
-    path: '/slides-editor/:id',
+    path: '/slides/list',
+    exact: true,
+    name: 'slides.list.title',
+    component: Slides,
+  },
+  {
+    path: '/slides/editor/:id',
     exact: false,
-    name: 'Slides',
+    name: 'slides.editor.title',
     component: SlidesEditor,
   },
   {
-    path: '/slides-editor',
+    path: '/slides/editor',
     exact: true,
-    name: 'Slides',
+    name: 'slides.editor.title',
     component: SlidesEditor,
   },
 ];

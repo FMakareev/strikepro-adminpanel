@@ -5,6 +5,7 @@ import SliderPreviewVideo from "../SlidePreviewVideo/SlidePreviewVideo";
 import SliderPreviewImage from "../SlidePreviewImage/SlidePreviewImage";
 import SlidePreviewContent from "../SlidePreviewContent/SlidePreviewContent";
 import {BG_SLIDER_TYPE_IMAGE, BG_SLIDER_TYPE_VIDEO} from "../../../../../../shared/constants";
+import {FormattedMessage} from "react-intl";
 
 
 export class SlidePreview extends Component {
@@ -15,9 +16,9 @@ export class SlidePreview extends Component {
       image: '',
     }
   };
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowequal(nextProps.values, this.props.values);
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return !shallowequal(nextProps.values, this.props.values)
+  // }
 
   render() {
     const {
@@ -26,7 +27,12 @@ export class SlidePreview extends Component {
     } = this.props.values;
     return (<Card>
       <CardHeader>
-        <strong>Превью</strong>
+        <strong>
+          <FormattedMessage
+            id='form.slides.label.preview'
+            defaultMessage='form.slides.label.preview'
+          />
+        </strong>
       </CardHeader>
       <CardBody>
         {

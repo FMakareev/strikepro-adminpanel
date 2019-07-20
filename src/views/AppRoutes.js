@@ -7,11 +7,18 @@ import {TileRoutes} from "./Tile/routes";
 import {StaticPageRoutes} from "./StaticPage/routes";
 import {UrlAliasRoutes} from "./URLAlias/routes";
 import {FeedbackRoutes} from "./Feedback/routes";
+import {Redirect} from "react-router-dom";
 
 const Page404 = React.lazy(() => import('./Pages/Page404'));
 const Page500 = React.lazy(() => import('./Pages/Page500'));
 
 export const AppRoutes = [
+  {
+    path: '/',
+    exact: true,
+    name: '/',
+    component: ()=>(<Redirect to={'/blog'}/>)
+  },
   ...BlogRoutes,
   // ...NomenclatureRoutes,
   ...SlidesRoutes,

@@ -12,6 +12,7 @@ import {
   GetTileTypesAction,
   isRetrievingGetTileTypes
 } from "../../../../store/reduxRestEasy/TileTypes/TileTypesResource";
+import Preloader from "../../../../components/Preloader/Preloader";
 
 export class TileEditor extends Component {
 
@@ -37,7 +38,7 @@ export class TileEditor extends Component {
       isRetrievingGetTileTypes
     } = this.props;
     if (isRetrievingGetTile || isRetrievingGetTileTypes) {
-      return <div>Loading....</div>
+      return (<Preloader/>)
     }
     if (!tileTypes.length) {
       return null;

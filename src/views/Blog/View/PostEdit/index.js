@@ -11,6 +11,7 @@ import {
   GetCategoriesAction,
   isRetrievingCategories
 } from "../../../../store/reduxRestEasy/Blog/BlogCategoryResource";
+import Preloader from "../../../../components/Preloader/Preloader";
 
 export class PostEditor extends Component {
 
@@ -44,7 +45,7 @@ export class PostEditor extends Component {
       isRetrievingCategories
     } = this.props;
     if ((isRetrievingGetPost || isRetrievingCategories) && !categories) {
-      return <div>Loading...</div>
+      return (<Preloader/>)
     }
     if (!categories.length) {
       return null;

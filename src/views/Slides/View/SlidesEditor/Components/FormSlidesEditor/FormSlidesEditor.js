@@ -24,6 +24,7 @@ import SlideBodyImage from "../SlideBodyImage/SlideBodyImage";
 import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
 import {createSubmitHandler} from "../../../../../../helpers/createSubmitHandler";
 import FormDateTimePicker from "../../../../../../components/FormDateTimePicker/FormDateTimePicker";
+import {FormattedMessage, injectIntl} from "react-intl";
 
 
 export class FormSlidesEditor extends Component {
@@ -69,7 +70,7 @@ export class FormSlidesEditor extends Component {
 
 
   render() {
-    const {handleSubmit, pristine, submitting, error, values} = this.props;
+    const {handleSubmit, pristine, submitting, error, values, intl} = this.props;
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Row>
@@ -99,15 +100,18 @@ export class FormSlidesEditor extends Component {
             <Field
               name="backgroundType"
               component={FormSelect}
-              label={"Тип фона"}
+              label={<FormattedMessage
+                id='form.slides.label.bgType'
+                defaultMessage='form.slides.label.bgType'
+              />}
               type="select"
               data={[
                 {
-                  name: 'Изображение',
+                  name: intl && intl.messages["form.slides.bgType.image"],
                   id: BG_SLIDER_TYPE_IMAGE,
                 },
                 {
-                  name: 'Видео',
+                  name: intl && intl.messages["form.slides.bgType.video"],
                   id: BG_SLIDER_TYPE_VIDEO,
                 },
               ]}
@@ -117,44 +121,47 @@ export class FormSlidesEditor extends Component {
             <Field
               name="position"
               component={FormSelect}
-              label={"Позиционирование контента"}
+              label={<FormattedMessage
+                id='form.slides.label.contentPosition'
+                defaultMessage='form.slides.label.contentPosition'
+              />}
               type="select"
               data={[
                 {
-                  name: 'Свурху слева',
+                  name: intl && intl.messages["form.slides.contentPosition.topLeft"],
                   id: 'top-left',
                 },
                 {
-                  name: 'Сверху по центру',
+                  name: intl && intl.messages["form.slides.contentPosition.topMiddle"],
                   id: 'top-middle',
                 },
                 {
-                  name: 'Сверху справа',
+                  name: intl && intl.messages["form.slides.contentPosition.topRight"],
                   id: 'top-right',
                 },
 
                 {
-                  name: 'Посередине слева',
+                  name: intl && intl.messages["form.slides.contentPosition.middleLeft"],
                   id: 'middle-left',
                 },
                 {
-                  name: 'Посередине',
+                  name: intl && intl.messages["form.slides.contentPosition.middleMiddle"],
                   id: 'middle-center',
                 },
                 {
-                  name: 'Посередине справа',
+                  name: intl && intl.messages["form.slides.contentPosition.middleRight"],
                   id: 'middle-right',
                 },
                 {
-                  name: 'Снизу слева',
+                  name: intl && intl.messages["form.slides.contentPosition.bottomLeft"],
                   id: 'bottom-left',
                 },
                 {
-                  name: 'Снизу по середине',
+                  name: intl && intl.messages["form.slides.contentPosition.bottomMiddle"],
                   id: 'bottom-center',
                 },
                 {
-                  name: 'Снизу справа',
+                  name: intl && intl.messages["form.slides.contentPosition.bottomRight"],
                   id: 'bottom-right',
                 },
               ]}
@@ -164,7 +171,10 @@ export class FormSlidesEditor extends Component {
             <Field
               name="backDrop"
               component={Checkbox}
-              label={"Включить фон для контента?"}
+              label={<FormattedMessage
+                id='form.slides.label.enableContentBG'
+                defaultMessage='form.slides.label.enableContentBG'
+              />}
               type="checkbox"
               value={true}
             />
@@ -173,7 +183,10 @@ export class FormSlidesEditor extends Component {
             <Field
               name="buttonLabel"
               component={TextField}
-              label={"Текст кнопки"}
+              label={<FormattedMessage
+                id='form.slides.label.buttonText'
+                defaultMessage='form.slides.label.buttonText'
+              />}
               type="text"
             />
           </Col>
@@ -181,7 +194,10 @@ export class FormSlidesEditor extends Component {
             <Field
               name="buttonLink"
               component={TextField}
-              label={"Ссылка кнопки"}
+              label={<FormattedMessage
+                id='form.slides.label.buttonLink'
+                defaultMessage='form.slides.label.buttonLink'
+              />}
               type="text"
             />
           </Col>
@@ -189,7 +205,10 @@ export class FormSlidesEditor extends Component {
             <Field
               name="public_at"
               component={FormDateTimePicker}
-              label="Время публикации"
+              label={<FormattedMessage
+                id='form.label.publishTime'
+                defaultMessage='form.label.publishTime'
+              />}
               type="text"
             />
           </Col>
@@ -197,7 +216,10 @@ export class FormSlidesEditor extends Component {
             <Field
               name={"body"}
               component={FormCKEditor}
-              label={"Контент"}
+              label={<FormattedMessage
+                id='form.label.content'
+                defaultMessage='form.label.content'
+              />}
               type={"text"}
               ref={"CKEDITOR"}
 
@@ -232,7 +254,10 @@ export class FormSlidesEditor extends Component {
               type="submit"
               disabled={pristine || submitting}
             >
-              Сохранить
+              <FormattedMessage
+                id='button.save'
+                defaultMessage='button.save'
+              />
             </Button>
           </Col>
         </Row>
@@ -260,5 +285,6 @@ FormSlidesEditor = connectRestEasy(
 )(FormSlidesEditor);
 
 FormSlidesEditor = withRouter(FormSlidesEditor);
+FormSlidesEditor = injectIntl(FormSlidesEditor);
 
 export default FormSlidesEditor;

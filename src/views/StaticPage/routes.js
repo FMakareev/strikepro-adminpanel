@@ -6,21 +6,27 @@ const StaticPageEditor = React.lazy(() => import('./View/StaticPageEditor'));
 
 export const StaticPageRoutes = [
   {
-    path: '/static-page-list',
+    path: '/static-page',
     exact: true,
-    name: 'Список статических страниц',
+    name: 'module.name.staticPage',
     component: StaticPageList,
   },
   {
-    path: '/static-page-editor/:id',
+    path: '/static-page/list',
+    exact: true,
+    name: "staticPages.list.title",
+    component: StaticPageList,
+  },
+  {
+    path: '/static-page/editor/:id',
     exact: false,
-    name: 'Редактировать статическую страницу',
+    name: "staticPages.editor.title",
     component: StaticPageEditor,
   },
   {
-    path: '/static-page-editor',
+    path: '/static-page/editor',
     exact: true,
-    name: 'Создать статическую страницу',
+    name: "staticPages.editor.title",
     component: StaticPageEditor,
   },
 ];

@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {reduxForm, Form, Field, SubmissionError} from "redux-form";
+import {reduxForm, Form, Field} from "redux-form";
 import {connect as connectRestEasy} from "@brigad/redux-rest-easy";
-import {withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {Alert, Button, Col, Row} from "reactstrap";
 import {TextField} from "../../../../../../components/TextField/TextField";
 import {required} from "../../../../../../validation/required";
-import {normalizeSubmissionError} from "../../../../../../helpers/normalizeSubmissionError";
 import {
   CreateUrlAliasAction,
   isRetrievingCreateUrlAlias,
@@ -16,6 +15,7 @@ import {URIValidation} from "../../../../../../validation/URIValidation";
 import PageContainer from "../../../../../../components/PageContainer/PageContainer";
 import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
 import {createSubmitHandler} from "../../../../../../helpers/createSubmitHandler";
+import {FormattedMessage} from "react-intl";
 
 
 export class FormURLAliasEditor extends Component {
@@ -49,7 +49,10 @@ export class FormURLAliasEditor extends Component {
               disabled={pristine || submitting}
             >
               <i className="fa fa-dot-circle-o"/>
-              Сохранить
+              <FormattedMessage
+                id="button.save"
+                defaultMessage="Save"
+              />
             </Button>
           </Col>
           <Col xs="auto">
@@ -58,7 +61,11 @@ export class FormURLAliasEditor extends Component {
               onClick={reset}
               color="danger"
             >
-              <i className="fa fa-ban"/> Сброс
+              <i className="fa fa-ban"/>
+              <FormattedMessage
+                id="button.reset"
+                defaultMessage="Reset"
+              />
             </Button>
           </Col>
         </Row>}
@@ -68,7 +75,9 @@ export class FormURLAliasEditor extends Component {
             <Field
               name="url"
               component={TextField}
-              label="url"
+              label={<FormattedMessage
+                id="urlAlias.table.url"
+              />}
               type="text"
               validate={[required]}
             />
@@ -77,7 +86,9 @@ export class FormURLAliasEditor extends Component {
             <Field
               name="alias_url"
               component={TextField}
-              label="alias_url"
+              label={<FormattedMessage
+                id="urlAlias.table.alias_url"
+              />}
               type="text"
               validate={[required, URIValidation]}
             />

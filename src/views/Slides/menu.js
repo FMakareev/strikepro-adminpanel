@@ -1,16 +1,25 @@
+import {FormattedMessage} from "react-intl";
+import React from "react";
+
 export const MenuSlides= [
   {
-    name: 'Слайдер',
+    name: (<FormattedMessage
+      id='module.name.slides'
+    />),
     icon: 'd-none',
     children: [
       {
-        name: 'Список слайдов',
-        url: '/slides',
+        name: (<FormattedMessage
+          id='slides.list.title'
+        />),
+        url: '/slides/list',
         icon: 'fa fa-list fa-lg'
       },
       {
-        name: 'Создать слайд',
-        url: '/slides-editor',
+        name: (<FormattedMessage
+          id='slides.editor.title'
+        />),
+        url: '/slides/editor',
         icon: 'fa fa-edit fa-lg'
       },
     ]

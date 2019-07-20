@@ -9,46 +9,46 @@ const CategoryEdit = React.lazy(() => import('./View/CategoryEdit'));
 
 export const BlogRoutes = [
   {
-    path: '/',
+    path: '/blog',
     exact: true,
-    name: 'Posts',
+    name: 'module.name.blog',
     component: Posts,
   },
   {
-    path: '/posts',
+    path: '/blog/posts',
     exact: true,
-    name: 'Posts',
+    name: 'blog.post.list.title',
     component: Posts,
   },
   {
-    path: '/post-editor/:id',
+    path: '/blog/post-editor/:id',
     exact: false,
-    name: 'Post editor',
+    name: 'blog.post.editor.title',
     component: PostEdit,
   },
   {
-    path: '/post-editor',
+    path: '/blog/post-editor',
     exact: true,
-    name: 'Post editor',
+    name: 'blog.post.editor.title',
     component: PostEdit,
   },
 
   {
-    path: '/categories',
+    path: '/blog/categories',
     exact: true,
-    name: 'Categories',
+    name: 'blog.category.list.title',
     component: Categories,
   },
   {
-    path: '/category-editor/:id',
+    path: '/blog/category-editor/:id',
     exact: false,
-    name: 'Category editor',
+    name: 'blog.category.editor.title',
     component: CategoryEdit,
   },
   {
-    path: '/category-editor',
+    path: '/blog/category-editor',
     exact: true,
-    name: 'Category editor',
+    name: 'blog.category.editor.title',
     component: CategoryEdit,
   },
 ];

@@ -1,16 +1,25 @@
+import {FormattedMessage} from "react-intl";
+import React from "react";
+
 export const StaticPageMenu = [
   {
-    name: 'Статические страницы',
+    name: (<FormattedMessage
+      id='module.name.staticPage'
+    />),
     icon: 'd-none',
     children: [
       {
-        name: 'Список страниц',
-        url: '/static-page-list',
+        name: (<FormattedMessage
+          id="staticPages.list.title"
+        />),
+        url: '/static-page/list',
         icon: 'fa fa-list fa-lg'
       },
       {
-        name: 'Создать страницу',
-        url: '/static-page-editor',
+        name: (<FormattedMessage
+          id="staticPages.editor.title"
+        />),
+        url: '/static-page/editor',
         icon: 'fa fa-edit fa-lg'
       },
     ]

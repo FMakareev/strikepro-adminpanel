@@ -11,10 +11,11 @@ import {
   AppSidebarForm,
   AppSidebarHeader,
   AppSidebarMinimizer,
-  AppBreadcrumb2 as AppBreadcrumb,
   AppSidebarNav2 as AppSidebarNav,
 } from '@coreui/react';
 import CustomReactRedirect from "../../components/CustomReactRedirect/CustomReactRedirect";
+import {injectIntl} from "react-intl";
+import Preloader from "../../components/Preloader/Preloader";
 
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
@@ -22,7 +23,7 @@ const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
 
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
+  loading = () => <div className="animated fadeIn pt-1 text-center"><Preloader/></div>;
 
   signOut(e) {
     e.preventDefault();
@@ -30,19 +31,37 @@ class DefaultLayout extends Component {
   }
 
   combineBaseRouteWithRoutes = (navigation, baseRoute) => {
-    return Array.from(navigation, i => Object.assign({}, i)).map((item) => {
-      if (item.url) {
-        item.url = `${baseRoute}${item.url}`;
-      }
-      if (item.children) {
-        item.children = this.combineBaseRouteWithRoutes(item.children, baseRoute)
-      }
-      return item;
-    })
+    return Array.from(navigation, i => Object.assign({}, i))
+      .map((item) => {
+        if (item.url) {
+          item.url = `${baseRoute}${item.url}`;
+        }
+        if (item.children) {
+          item.children = this.combineBaseRouteWithRoutes(item.children, baseRoute)
+        }
+        return item;
+      })
   };
+
+  translateRoutesName = (routes) => {
+
+    const {intl} = this.props;
+
+    if (Array.isArray(routes) && routes.length && intl && intl.messages) {
+      return Array.from(routes, (i) => Object.assign({}, i))
+        .map((item) => {
+          if(hasOwnProperty.call(intl.messages, item.name )){
+            item.name = intl.messages[item.name];
+          }
+          return item
+        })
+    }
+    return routes;
+  }
 
   render() {
     const {routes, baseRoute, navigation} = this.props;
+
     return (
       <div className="app">
         <AppHeader fixed>
@@ -68,8 +87,8 @@ class DefaultLayout extends Component {
             <AppSidebarMinimizer/>
           </AppSidebar>
           <main className="main">
-            <AppBreadcrumb appRoutes={routes} router={router}/>
-            <Container fluid>
+            {/*<AppBreadcrumb appRoutes={this.translateRoutesName(routes)} router={router}/>*/}
+            <Container style={{padding: '30px'}} fluid>
               <Suspense fallback={this.loading()}>
                 <Switch>
                   {routes.map((route, idx) => {
@@ -101,4 +120,4 @@ class DefaultLayout extends Component {
   }
 }
 
-export default DefaultLayout;
+export default injectIntl(DefaultLayout);

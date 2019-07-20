@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Field, reduxForm, SubmissionError} from "redux-form";
+import {Field, reduxForm} from "redux-form";
 import {withRouter} from "react-router-dom";
 
 import {Alert, Button, Card, CardBlock, CardFooter, CardHeader, Col, Row} from "reactstrap";
@@ -14,9 +14,9 @@ import {
   isRetrievingCreateCategory,
   isRetrievingUpdateCategory,
 } from "../../../../store/reduxRestEasy/Blog/BlogCategoryResource";
-import {normalizeSubmissionError} from "../../../../helpers/normalizeSubmissionError";
 import {createSubmitHandler} from "../../../../helpers/createSubmitHandler";
 import {hasOwnProperty} from "../../../../helpers/hasOwnProperty";
+import {FormattedMessage} from "react-intl";
 
 
 const required = value => (value ? undefined : 'Обязательно для заполнения');
@@ -52,14 +52,18 @@ export class CategoryEditForm extends Component {
 
   render() {
     const {error, handleSubmit, pristine, reset, submitting,isRetrievingCreateCategory} = this.props;
-    console.log('isRetrievingCreateCategory: ', isRetrievingCreateCategory);
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Row>
           <Col xs="12">
             <Card>
               <CardHeader>
-                <strong>Создать категорию</strong>
+                <strong>
+                  <FormattedMessage
+                    id="blog.category.editor.title"
+                    defaultMessage="blog.category.editor.title"
+                  />
+                </strong>
               </CardHeader>
               <CardBlock className="card-body">
                 <Row>
@@ -67,7 +71,10 @@ export class CategoryEditForm extends Component {
                     <Field
                       name="name"
                       component={TextField}
-                      label="Название"
+                      label={<FormattedMessage
+                        id="form.label.name"
+                        defaultMessage="form.label.name"
+                      />}
                       type="text"
                       validate={[required]}
                     />
@@ -90,14 +97,22 @@ export class CategoryEditForm extends Component {
                   color="primary"
                   disabled={pristine || submitting}
                 >
-                  <i className="fa fa-dot-circle-o"/> Сохранить
+                  <i className="fa fa-dot-circle-o"/>
+                  <FormattedMessage
+                    id="button.save"
+                    defaultMessage="button.save"
+                  />
                 </Button>
                 <Button
                   type="reset"
                   onClick={reset}
                   color="danger"
                 >
-                  <i className="fa fa-ban"/> Сброс
+                  <i className="fa fa-ban"/>
+                  <FormattedMessage
+                    id="button.reset"
+                    defaultMessage="button.reset"
+                  />
                 </Button>
               </CardFooter>
             </Card>

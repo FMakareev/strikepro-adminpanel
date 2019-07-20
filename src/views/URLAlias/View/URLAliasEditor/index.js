@@ -7,6 +7,7 @@ import {
   URL_ALIAS_RESOURCE_NAME
 } from "../../../../store/reduxRestEasy/UrlAlias/UrlAliasResource";
 import FormURLAliasEditor from "./Components/FormURLAliasEditor/FormURLAliasEditor";
+import Preloader from "../../../../components/Preloader/Preloader";
 
 
 export class URLAliasEditor extends Component {
@@ -26,7 +27,7 @@ export class URLAliasEditor extends Component {
     const {urlAlias, match: {params}, isRetrievingGetUrlAlias} = this.props;
 
     if (isRetrievingGetUrlAlias) {
-      return <div>Loading....</div>
+      return (<Preloader/>)
     }
 
     let initialValues = {

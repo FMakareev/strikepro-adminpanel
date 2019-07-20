@@ -10,11 +10,14 @@ import {
   isRetrievingGetUrlAliases,
 } from "../../../../store/reduxRestEasy/UrlAlias/UrlAliasResource";
 import DeleteButton from "../../../../components/DeleteButton/DeleteButton";
+import {FormattedMessage} from "react-intl";
 
 export class URLAliasList extends Component {
   render() {
     return (<ItemListTemplate
-      header={'Список URL псевдонимов'}
+      header={<FormattedMessage
+        id="urlAlias.list.title"
+      />}
       DeleteAction={DeleteUrlAliasAction}
       GetAction={GetUrlAliasesAction}
       GetList={GetUrlAliases}
@@ -23,11 +26,31 @@ export class URLAliasList extends Component {
         return (<Table hover bordered striped responsive size="sm">
           <thead>
           <tr>
-            <th>id</th>
-            <th>url</th>
-            <th>alias_url</th>
-            <th>created_at</th>
-            <th>updated_at</th>
+            <th>
+              <FormattedMessage
+                id="tile.table.id"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="urlAlias.table.url"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="urlAlias.table.alias_url"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="tile.table.create_at"
+              />
+            </th>
+            <th>
+              <FormattedMessage
+                id="tile.table.update_at"
+              />
+            </th>
             <th></th>
           </tr>
           </thead>
@@ -44,13 +67,26 @@ export class URLAliasList extends Component {
                   <td>
                     <Button color="warning">
                       <Link
-                        to={`/url-alias-editor/${item.id}`}
+                        to={`/url-alias/editor/${item.id}`}
                       >
-                        Изменить
+                        <FormattedMessage
+                          id="button.change"
+                          defaultMessage="Change"
+                        />
                       </Link>
                     </Button>
                     {' '}
-                    <DeleteButton onDelete={()=>onDelete(item.id)}/>
+                    <DeleteButton
+                      label={<FormattedMessage
+                        id="button.delete"
+                        defaultMessage="Change"
+                      />}
+                      confirmMessage={<FormattedMessage
+                        id="confirmMessage.delete"
+                        defaultMessage="Are you sure you want to delete?"
+                      />}
+                      onDelete={() => onDelete(item.id)}
+                    />
                   </td>
                 </tr>
               )

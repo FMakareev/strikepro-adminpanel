@@ -22,6 +22,7 @@ import {
 } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import Preloader from "../../../components/Preloader/Preloader";
 
 const Widget03 = lazy(() => import('../Widgets/Widget03'));
 
@@ -477,7 +478,8 @@ class Dashboard extends Component {
     });
   }
 
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
+
+  loading = () => <div className="animated fadeIn pt-1 text-center"><Preloader/></div>
 
   render() {
 
@@ -490,7 +492,7 @@ class Dashboard extends Component {
                 <ButtonGroup className="float-right">
                   <ButtonDropdown id='card1' isOpen={this.state.card1} toggle={() => { this.setState({ card1: !this.state.card1 }); }}>
                     <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
+                      <i className="icon-settings"/>
                     </DropdownToggle>
                     <DropdownMenu right>
                       <DropdownItem>Action</DropdownItem>

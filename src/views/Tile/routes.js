@@ -6,21 +6,27 @@ const TileEditor = React.lazy(() => import('./View/TileEditor'));
 
 export const TileRoutes = [
   {
-    path: '/tile-list',
+    path: '/tile',
     exact: true,
-    name: 'Tile List',
+    name: 'module.name.tile',
     component: TileList,
   },
   {
-    path: '/tile-editor/:id',
+    path: '/tile/list',
+    exact: true,
+    name: 'tile.list.title',
+    component: TileList,
+  },
+  {
+    path: '/tile/editor/:id',
     exact: false,
-    name: 'Редактировать тайл',
+    name: 'tile.editor.title',
     component: TileEditor,
   },
   {
-    path: '/tile-editor',
+    path: '/tile/editor',
     exact: true,
-    name: 'Создать тайл',
+    name: 'tile.editor.title',
     component: TileEditor,
   },
 ];

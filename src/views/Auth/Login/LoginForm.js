@@ -13,6 +13,7 @@ import {connect as connectRestEasy} from '@brigad/redux-rest-easy'
 import {TextField} from "../../../components/TextField/TextField";
 import {AuthGetResource, LoginAction, LoginGetResource, LogoutAction} from "../../../store/reduxRestEasy/Auth/Auth";
 import {required} from "../../../validation/required";
+import {FormattedMessage, injectIntl} from "react-intl";
 
 
 
@@ -66,7 +67,9 @@ export class LoginForm extends Component {
         <Field
           name="email"
           component={TextField}
-          label="Email"
+          label={ <FormattedMessage
+            id='form.label.email'
+          />}
           validate={[required]}
           type="text"
           icon="icon-user"
@@ -74,7 +77,9 @@ export class LoginForm extends Component {
         <Field
           name="password"
           component={TextField}
-          label="Пароль"
+          label={ <FormattedMessage
+            id='form.label.password'
+          />}
           validate={[required]}
           type="password"
           icon="icon-lock"
@@ -87,7 +92,9 @@ export class LoginForm extends Component {
               className="px-4"
               disabled={pristine || submitting}
             >
-              Войти
+              <FormattedMessage
+                id='button.login'
+              />
             </Button>
           </Col>
           <Col xs="4" className="text-right">
@@ -97,7 +104,9 @@ export class LoginForm extends Component {
               type="button"
               onClick={reset}
             >
-              Очистить форму
+              <FormattedMessage
+                id='button.reset'
+              />
             </Button>
           </Col>
         </Row>
@@ -130,4 +139,4 @@ LoginForm = connectRestEasy(
   })
 )(LoginForm);
 
-export default LoginForm;
+export default injectIntl(LoginForm);

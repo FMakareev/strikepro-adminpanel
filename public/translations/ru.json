@@ -1,0 +1,127 @@
+{
+  "module.name.blog": "Блог",
+  "module.name.slides": "Слайдера",
+  "module.name.tile": "Плитки",
+  "module.name.feedback": "Обратная связь",
+  "module.name.staticPage": "Статические страницы",
+  "module.name.urlAlias": "URL псевдонимы",
+  "module.name.auth": "URL alias",
+
+  "auth.login.title": "Вход",
+  "auth.login.subtitle": "Войдите в свой аккаунт",
+
+  "blog.post.list.title": "Список постов",
+  "blog.post.editor.title": "Редактирование поста",
+  "blog.category.list.title": "Список категорий постов",
+  "blog.category.editor.title": "Редактирование категории поста",
+  "blog.category.table.name": "Имя",
+
+  "slides.list.title": "Список слайдов",
+  "slides.editor.title": "Редактор слайдов",
+
+  "tile.list.title": "Список плиток",
+  "tile.editor.title": "Редактор плиток",
+
+  "tile.table.id": "ID",
+  "tile.table.resource_id": "ID ресурса",
+  "tile.table.resource_type": "Тип ресурса",
+  "tile.table.create_at": "Создан",
+  "tile.table.update_at": "Обновлен",
+  "tile.table.public_at": "Опубликован",
+  "tile.table.background_color": "Цвет фона",
+  "tile.table.cols": "Кол-во колонок",
+
+  "staticPages.list.title": "Список статическиз страниц",
+  "staticPages.editor.title": "редактор статических страниц",
+
+  "urlAlias.list.title": "URL alias list",
+  "urlAlias.editor.title": "URL alias editor",
+
+  "urlAlias.table.url": "URL оригинал",
+  "urlAlias.table.alias_url": "URL псевдоним",
+
+
+
+  "feedback.list.title": "Список обращений",
+
+  "feedback.table.username": "Имя пользователя",
+  "feedback.table.email": "Email",
+  "feedback.table.phone": "Телефон",
+  "feedback.table.message": "Сообщение",
+  "feedback.table.status": "Статус",
+
+  "button.delete": "Удалить",
+  "button.change": "Изменить",
+  "button.save": "Сохранить",
+  "button.reset": "Очистить форму",
+  "button.loadingImage": "Загрузить изображение",
+  "button.loadingVideo": "Загрузить видео",
+  "button.login": "Вход",
+  "button.logout": "Выход",
+
+
+  "confirmMessage.delete": "Вы уверены что хотите удалить?",
+  "publishStatus.DRAFT": "Черновик",
+  "publishStatus.PUBLISHED": "Опубликова",
+  "publishStatus.PENDING": "Отложен",
+  "publishStatus.INACTIVE": "Не активен",
+  "publishStatus.ACTIVE": "Активен",
+
+  "form.label.title": "Заголовок",
+  "form.label.introductory": "Вводный текст",
+  "form.label.urlAlias": "URL псевдоним",
+  "form.label.category": "Категория",
+  "form.label.publishStatus": "Статус публикации",
+  "form.label.publishTime": "Время публикации",
+  "form.label.content": "Контент",
+  "form.label.tags": "Теги",
+  "form.placeholder.tags": "Добавить тег через запятую",
+  "form.label.metaDescription": "Описание",
+  "form.label.metaKeywords": "Ключевые слова",
+  "form.label.metaTitle": "Заголовок",
+  "form.label.ogUrl": "URL",
+  "form.label.ogImage": "URL изображения",
+  "form.label.ogType": "OG тип",
+  "form.label.ogTitle": "Заголовок",
+  "form.title.meta": "META информация",
+  "form.title.ogMeta": "OG META информация (Open Graph)",
+  "form.label.name": "Имя",
+
+  "form.slides.label.bgType": "Тип фона",
+  "form.slides.bgType.image": "Изображение",
+  "form.slides.bgType.video": "Видео",
+  "form.slides.label.contentPosition": "Позиционирование контента",
+
+  "form.slides.contentPosition.topLeft": "Сверху слева",
+  "form.slides.contentPosition.topMiddle": "Сверху по центру",
+  "form.slides.contentPosition.topRight": "Сверху справа",
+
+  "form.slides.contentPosition.middleLeft": "Посередине слева",
+  "form.slides.contentPosition.middleMiddle": "Посередине",
+  "form.slides.contentPosition.middleRight": "Посередине справа",
+
+  "form.slides.contentPosition.bottomLeft": "Снизу слева",
+  "form.slides.contentPosition.bottomMiddle": "Снизу по середине",
+  "form.slides.contentPosition.bottomRight": "Снизу справа",
+  "form.slides.label.enableContentBG": "Включить фон для контента?",
+  "form.slides.label.buttonText": "Текст кнопки",
+  "form.slides.label.buttonLink": "Ссылка кнопки",
+  "form.slides.label.preview": "Превью",
+
+  "form.label.id": "ID",
+  "form.label.resource_id": "ID ресурса",
+  "form.label.resource_type": "Тип ресурса",
+  "form.label.create_at": "Создан",
+  "form.label.update_at": "Обновлен",
+  "form.label.public_at": "Опубликован",
+  "form.label.background_color": "Цвет фона",
+  "form.label.cols": "Кол-во колонок",
+
+  "form.label.email": "Email",
+  "form.label.password": "Пароль",
+
+  "form.label.linkPreviewImage": "Ссылка на превью страницы",
+  "form.description.linkPreviewImage": "используется в плитках",
+  "form.label.parentID": "ID страницы предка",
+  "form.label.HTMLContent": "HTML содержимое страницы"
+}
