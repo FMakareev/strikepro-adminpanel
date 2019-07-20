@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, Button, Col, FormGroup, Row} from "reactstrap";
+import {Alert, Button, Card, CardBlock, CardFooter, CardHeader, Col, FormGroup, Row} from "reactstrap";
 import {Field, getFormValues, reduxForm} from "redux-form";
 import PropTypes from 'prop-types';
 import FormSelect from "../../../../components/Form/FormSelect";
@@ -69,153 +69,160 @@ export class PostEditForm extends Component {
 
 
   render() {
-    const {error, handleSubmit, categories, values, pristine, intl, submitting} = this.props;
-
+    const {error, handleSubmit, categories, values, reset, pristine, intl, submitting} = this.props;
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Row>
           <Col xs="12">
-            <Field
-              name="title"
-              component={TextField}
-              placeholder={intl && intl.messages["form.label.title"]}
-              label={<FormattedMessage
-                id="form.label.title"
-                defaultMessage="form.label.title"
-              />}
-              validate={[required]}
-              type="text"
-            />
-          </Col>
-          <Col xs="12">
-            <Field
-              name="excerpt"
-              component={TextField}
-              placeholder={intl && intl.messages["form.label.introductory"]}
-              label={<FormattedMessage
-                id="form.label.introductory"
-                defaultMessage="form.label.description"
-              />}
-              type="textarea"
-            />
-          </Col>
-          <Col xs="12">
-            <Field
-              /** если есть id в состоянии формы значит мы редактируем статью, в таком случае автогенерация отключается */
-              isAutoGenTransliteration={!(values && values.id)}
-              name="alias_url"
-              component={URLAliasField}
-              placeholder={intl && intl.messages["form.label.urlAlias"]}
-              label={<FormattedMessage
-                id="form.label.urlAlias"
-                defaultMessage="form.label.urlAlias"
-              />}
-              type="text"
-              subscribeField={'title'}
-              formValues={values}
-              validate={[URIValidation]}
-            />
-          </Col>
-          <Col xs="12" md="6">
-            <Field
-              name="category_id"
-              component={FormSelect}
-              placeholder={intl && intl.messages["form.label.category"]}
-              label={<FormattedMessage
-                id="form.label.category"
-                defaultMessage="form.label.category"
-              />}
-              validate={[required]}
-              type="select"
-              defaultValue={''}
-              data={categories}
-            />
-          </Col>
-          <Col xs="12" md="6">
-            <Field
-              name="status"
-              component={FormSelect}
-              placeholder={intl && intl.messages["form.label.publishStatus"]}
-              label={<FormattedMessage
-                id="form.label.publishStatus"
-                defaultMessage="form.label.publishStatus"
-              />}
-              type="select"
-              defaultValue={'DRAFT'}
-              validate={[required]}
-              data={[
+            <Card>
+              <CardHeader>
+                <strong>
+                  <FormattedMessage
+                    id={values && values.id ? "blog.post.editor.title" : "blog.post.create.title"}
+                  />
+                </strong>
+              </CardHeader>
+              <CardBlock className="card-body">
+                <Row>
+                  <Col xs="12">
+                    <Field
+                      name="title"
+                      component={TextField}
+                      placeholder={intl && intl.messages["form.label.title"]}
+                      label={<FormattedMessage
+                        id="form.label.title"
+                        defaultMessage="form.label.title"
+                      />}
+                      validate={[required]}
+                      type="text"
+                    />
+                  </Col>
+                  <Col xs="12">
+                    <Field
+                      name="excerpt"
+                      component={TextField}
+                      placeholder={intl && intl.messages["form.label.introductory"]}
+                      label={<FormattedMessage
+                        id="form.label.introductory"
+                        defaultMessage="form.label.description"
+                      />}
+                      type="textarea"
+                    />
+                  </Col>
+                  <Col xs="12">
+                    <Field
+                      /** если есть id в состоянии формы значит мы редактируем статью, в таком случае автогенерация отключается */
+                      isAutoGenTransliteration={!(values && values.id)}
+                      name="alias_url"
+                      component={URLAliasField}
+                      placeholder={intl && intl.messages["form.label.urlAlias"]}
+                      label={<FormattedMessage
+                        id="form.label.urlAlias"
+                        defaultMessage="form.label.urlAlias"
+                      />}
+                      type="text"
+                      subscribeField={'title'}
+                      formValues={values}
+                      validate={[URIValidation]}
+                    />
+                  </Col>
+                  <Col xs="12" md="6">
+                    <Field
+                      name="category_id"
+                      component={FormSelect}
+                      placeholder={intl && intl.messages["form.label.category"]}
+                      label={<FormattedMessage
+                        id="form.label.category"
+                        defaultMessage="form.label.category"
+                      />}
+                      validate={[required]}
+                      type="select"
+                      defaultValue={''}
+                      data={categories}
+                    />
+                  </Col>
+                  <Col xs="12" md="6">
+                    <Field
+                      name="status"
+                      component={FormSelect}
+                      placeholder={intl && intl.messages["form.label.publishStatus"]}
+                      label={<FormattedMessage
+                        id="form.label.publishStatus"
+                        defaultMessage="form.label.publishStatus"
+                      />}
+                      type="select"
+                      defaultValue={'DRAFT'}
+                      validate={[required]}
+                      data={[
+                        {
+                          id: "PUBLISHED",
+                          name: intl && intl.messages[`publishStatus.PUBLISHED`]
+                        }, {
+                          id: "DRAFT",
+                          name: intl && intl.messages[`publishStatus.DRAFT`]
+                        }, {
+                          id: "PENDING",
+                          name: intl && intl.messages[`publishStatus.PENDING`]
+                        }
+                      ]}
+                    />
+                  </Col>
+                  <Col xs="12" md="6">
+                    <Field
+                      name="public_at"
+                      component={FormDateTimePicker}
+                      placeholder={intl && intl.messages["form.label.publishStatus"]}
+                      label={<FormattedMessage
+                        id="form.label.publishStatus"
+                        defaultMessage="form.label.publishTime"
+                      />}
+                    />
+                  </Col>
+                  <Col xs="12">
+                    <Field
+                      name="body"
+                      component={FormCKEditor}
+                      placeholder={intl && intl.messages["form.label.content"]}
+                      label={<FormattedMessage
+                        id="form.label.content"
+                        defaultMessage="form.label.content"
+                      />}
+                      validate={[required]}
+                      type="text"
+                      ref="CKEDITOR"
+                    />
+                  </Col>
+                  <Col xs="12">
+                    <Field
+                      name="tags"
+                      component={FormTagInput}
+                      placeholder={intl && intl.messages["form.placeholder.tags"]}
+                      label={<FormattedMessage
+                        id="form.label.tags"
+                        defaultMessage="form.label.tags"
+                      />}
+                    />
+                  </Col>
+
+                  <MetaFields/>
+
+                  <OGMetaFields/>
+
+                </Row>
+
                 {
-                  id: "PUBLISHED",
-                  name: intl && intl.messages[`publishStatus.PUBLISHED`]
-                }, {
-                  id: "DRAFT",
-                  name: intl && intl.messages[`publishStatus.DRAFT`]
-                }, {
-                  id: "PENDING",
-                  name: intl && intl.messages[`publishStatus.PENDING`]
+                  error &&
+                  <Row>
+                    <Col xs="12">
+                      <Alert color="danger">
+                        {error}
+                      </Alert>
+                    </Col>
+                  </Row>
+
                 }
-              ]}
-            />
-          </Col>
-          <Col xs="12" md="6">
-            <Field
-              name="public_at"
-              component={FormDateTimePicker}
-              placeholder={intl && intl.messages["form.label.publishStatus"]}
-              label={<FormattedMessage
-                id="form.label.publishStatus"
-                defaultMessage="form.label.publishTime"
-              />}
-            />
-          </Col>
-          <Col xs="12">
-            <Field
-              name="body"
-              component={FormCKEditor}
-              placeholder={intl && intl.messages["form.label.content"]}
-              label={<FormattedMessage
-                id="form.label.content"
-                defaultMessage="form.label.content"
-              />}
-              validate={[required]}
-              type="text"
-              ref="CKEDITOR"
-            />
-          </Col>
-          <Col xs="12">
-            <Field
-              name="tags"
-              component={FormTagInput}
-              placeholder={intl && intl.messages["form.placeholder.tags"]}
-              label={<FormattedMessage
-                id="form.label.tags"
-                defaultMessage="form.label.tags"
-              />}
-            />
-          </Col>
-
-          <MetaFields/>
-
-          <OGMetaFields/>
-
-        </Row>
-
-        {
-          error &&
-          <Row>
-            <Col xs="12">
-              <Alert color="danger">
-                {error}
-              </Alert>
-            </Col>
-          </Row>
-
-        }
-
-        <Row>
-          <Col xs="6">
-            <div className="controls">
-              <FormGroup>
+              </CardBlock>
+              <CardFooter>
                 <Button
                   color="primary"
                   type="submit"
@@ -227,8 +234,19 @@ export class PostEditForm extends Component {
                     defaultMessage="button.save"
                   />
                 </Button>
-              </FormGroup>
-            </div>
+                <Button
+                  type="reset"
+                  onClick={reset}
+                  color="danger"
+                >
+                  <i className="fa fa-ban"/>
+                  <FormattedMessage
+                    id="button.reset"
+                    defaultMessage="button.reset"
+                  />
+                </Button>
+              </CardFooter>
+            </Card>
           </Col>
         </Row>
 
@@ -237,12 +255,41 @@ export class PostEditForm extends Component {
   }
 }
 
+const validate = (values, {intl}) => {
+
+  console.log('validate: ', values, intl);
+  const errors = {};
+
+  if (!values.status) {
+    errors.status = intl.messages ? intl.messages['validation.required'] : "Обязательно для заполнения";
+  }
+
+  if (!values.body) {
+    errors.body = intl.messages ? intl.messages['validation.required'] : "Обязательно для заполнения";
+  }
+
+  if (!values.category_id) {
+    errors.category_id = intl.messages ? intl.messages['validation.required'] : "Обязательно для заполнения";
+  }
+  if (!values.title) {
+    errors.title = intl.messages ? intl.messages['validation.required'] : "Обязательно для заполнения";
+  }
+
+  if (values.alias_url) {
+    let res = URIValidation('validation.URIValidation')(values.alias_url);
+    errors.alias_url = res && intl.messages ? intl.messages[res] : res;
+  }
+
+  return errors
+};
+
 PostEditForm = connect(state => ({
   values: getFormValues('PostEditForm')(state),
 }))(PostEditForm);
 
 PostEditForm = reduxForm({
-  form: 'PostEditForm'
+  form: 'PostEditForm',
+  validate,
 })(PostEditForm);
 
 

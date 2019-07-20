@@ -44,6 +44,8 @@ export class PostEditor extends Component {
       isRetrievingGetPost,
       isRetrievingCategories
     } = this.props;
+    console.log(this.props);
+
     if ((isRetrievingGetPost || isRetrievingCategories) && !categories) {
       return (<Preloader/>)
     }

@@ -12,8 +12,11 @@
 
   "blog.post.list.title": "Post list",
   "blog.post.editor.title": "Post edit",
+  "blog.post.create.title": "Create post",
   "blog.category.list.title": "Category list",
   "blog.category.editor.title": "Category edit",
+  "blog.category.create.title": "Create category",
+
   "blog.category.table.name": "Name",
 
   "slides.list.title": "Slides list",
@@ -63,6 +66,9 @@
   "publishStatus.PENDING": "Pending",
   "publishStatus.INACTIVE": "Inactive",
   "publishStatus.ACTIVE": "Active",
+
+  "validation.required": "Обязательно для заполнения",
+  "validation.URIValidation": "Допутимы символы: английского алфавита, цифры, дифис.",
 
   "form.label.title": "Title",
   "form.label.introductory": "Introductory text",

@@ -1,3 +1,3 @@
-export const required = value => {
-  return (value ? undefined : 'Обязательно для заполнения');
+export const required = (message = 'Обязательно для заполнения') => (value) => {
+  return (value ? undefined : message);
 };

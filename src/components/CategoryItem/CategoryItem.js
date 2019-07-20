@@ -19,7 +19,7 @@ export const CategoryItem = ({
   <td>
     <Button color="warning">
       <Link
-        to={`/category-editor/${id}`
+        to={`/blog/category-editor/${id}`
         }>
         <FormattedMessage
           id="button.change"

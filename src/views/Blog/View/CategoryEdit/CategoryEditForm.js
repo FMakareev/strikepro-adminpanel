@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Field, reduxForm} from "redux-form";
+import {Field, getFormValues, reduxForm} from "redux-form";
 import {withRouter} from "react-router-dom";
 
 import {Alert, Button, Card, CardBlock, CardFooter, CardHeader, Col, Row} from "reactstrap";
@@ -17,6 +17,7 @@ import {
 import {createSubmitHandler} from "../../../../helpers/createSubmitHandler";
 import {hasOwnProperty} from "../../../../helpers/hasOwnProperty";
 import {FormattedMessage} from "react-intl";
+import {connect} from "react-redux";
 
 
 const required = value => (value ? undefined : 'Обязательно для заполнения');
@@ -51,7 +52,8 @@ export class CategoryEditForm extends Component {
 
 
   render() {
-    const {error, handleSubmit, pristine, reset, submitting,isRetrievingCreateCategory} = this.props;
+    const {error, handleSubmit, pristine, reset, submitting,values} = this.props;
+
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Row>
@@ -60,8 +62,7 @@ export class CategoryEditForm extends Component {
               <CardHeader>
                 <strong>
                   <FormattedMessage
-                    id="blog.category.editor.title"
-                    defaultMessage="blog.category.editor.title"
+                    id={values && values.id ?"blog.category.editor.title":"blog.category.create.title"}
                   />
                 </strong>
               </CardHeader>
@@ -123,6 +124,10 @@ export class CategoryEditForm extends Component {
   }
 }
 
+
+CategoryEditForm = connect(state => ({
+  values: getFormValues('CategoryEditForm')(state),
+}))(CategoryEditForm);
 CategoryEditForm = reduxForm({
   form: 'CategoryEditForm'
 })(CategoryEditForm);
@@ -139,4 +144,6 @@ CategoryEditForm = connectRestEasy(
 )(CategoryEditForm);
 
 CategoryEditForm = withRouter(CategoryEditForm);
+
+
 export default CategoryEditForm;

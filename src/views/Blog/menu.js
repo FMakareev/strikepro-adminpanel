@@ -17,7 +17,7 @@ export const MenuBlog = [
       },
       {
         name: (<FormattedMessage
-          id='blog.post.editor.title'
+          id='blog.post.create.title'
         />),
         url: '/blog/post-editor',
         icon: 'fa fa-edit fa-lg'
@@ -31,7 +31,7 @@ export const MenuBlog = [
       },
       {
         name: (<FormattedMessage
-          id='blog.category.editor.title'
+          id='blog.category.create.title'
         />),
         url: '/blog/category-editor',
         icon: 'fa fa-edit fa-lg'

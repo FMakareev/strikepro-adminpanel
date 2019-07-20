@@ -14,7 +14,7 @@ export const BlogItem = ({title, excerpt, id, status, onDelete}) => (<Card>
   </CardBody>
   <CardFooter className="text-muted">
     <Button color="warning">
-      <Link to={`/post-editor/${id}`}>
+      <Link to={`/blog/post-editor/${id}`}>
         <FormattedMessage
           id="button.change"
           defaultMessage="Change"
