@@ -21,9 +21,11 @@
 
   "slides.list.title": "Slides list",
   "slides.editor.title": "Edit slides",
+  "slides.create.title": "Create slides",
 
   "tile.list.title": "Tile list",
   "tile.editor.title": "Tile editor",
+  "tile.create.title": "Create tile",
 
   "tile.table.id": "ID",
   "tile.table.resource_id": "Resource ID",
@@ -36,12 +38,14 @@
 
   "staticPages.list.title": "Static pages list",
   "staticPages.editor.title": "Static pages editor",
+  "staticPages.create.title": "Create static page",
 
   "urlAlias.list.title": "URL alias list",
   "urlAlias.editor.title": "URL alias editor",
 
   "urlAlias.table.url": "URL original",
   "urlAlias.table.alias_url": "URL alias",
+  "urlAlias.create.title": "Create URL alias",
 
   "feedback.list.title": "Feedback list",
 
@@ -67,8 +71,20 @@
   "publishStatus.INACTIVE": "Inactive",
   "publishStatus.ACTIVE": "Active",
 
-  "validation.required": "Обязательно для заполнения",
-  "validation.URIValidation": "Допутимы символы: английского алфавита, цифры, дифис.",
+  "validation.required": "The field is required.",
+  "validation.maxLength": "Maximum number of characters {count}",
+
+  "validation.URIValidation": "Characters are allowed: English alphabet, numbers, hyphen.",
+
+  "The email field is required.": "The email field is required.",
+  "The password field is required.": "The password field is required.",
+  "The given data was invalid.": "The given data was invalid.",
+  "The body field is required.": "The content field is required.",
+  "The category id field is required.": "The category id field is required.",
+  "The excerpt field is required.":  "The excerpt field is required.",
+  "The title field is required.": "The title field is required.",
+  "The name field is required.": "The name field is required.",
+  "Undefined index: resource_type": "Undefined index: resource_type",
 
   "form.label.title": "Title",
   "form.label.introductory": "Introductory text",
@@ -77,6 +93,7 @@
   "form.label.publishStatus": "Publish status",
   "form.label.publishTime": "Publish time",
   "form.label.content": "Content",
+  "form.label.body": "Content",
   "form.label.tags": "Tags",
   "form.placeholder.tags": "Add tag separated by commas",
   "form.label.metaDescription": "Description",
@@ -88,7 +105,10 @@
   "form.label.ogTitle": "Title",
   "form.title.meta": "META information",
   "form.title.ogMeta": "OG META information (Open Graph)",
-  "form.label.name": "Имя",
+  "form.label.name": "Name",
+
+  "form.select.placeholder": "select category...",
+  "form.tags.placeholder": "Added tags...",
 
   "form.slides.label.bgType": "Background type",
   "form.slides.bgType.image": "Image",

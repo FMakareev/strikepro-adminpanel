@@ -20,9 +20,11 @@
 
   "slides.list.title": "Список слайдов",
   "slides.editor.title": "Редактор слайдов",
+  "slides.create.title": "Создать слайдов",
 
-  "tile.list.title": "Список плиток",
-  "tile.editor.title": "Редактор плиток",
+  "tile.list.title": "Плитки на главной",
+  "tile.editor.title": "Редактор плитки на главной",
+  "tile.create.title": "Создание плитки на главной",
 
   "tile.table.id": "ID",
   "tile.table.resource_id": "ID ресурса",
@@ -33,11 +35,13 @@
   "tile.table.background_color": "Цвет фона",
   "tile.table.cols": "Кол-во колонок",
 
-  "staticPages.list.title": "Список статическиз страниц",
-  "staticPages.editor.title": "редактор статических страниц",
+  "staticPages.list.title": "Список статических страниц",
+  "staticPages.editor.title": "Редактор статических страниц",
+  "staticPages.create.title": "Создать статическую страницу",
 
-  "urlAlias.list.title": "URL alias list",
-  "urlAlias.editor.title": "URL alias editor",
+  "urlAlias.list.title": "Список URL псевдонимов",
+  "urlAlias.editor.title": "РедактироватьURL псевдоним",
+  "urlAlias.create.title": "Создать URL псевдоним",
 
   "urlAlias.table.url": "URL оригинал",
   "urlAlias.table.alias_url": "URL псевдоним",
@@ -71,8 +75,18 @@
 
 
   "validation.required": "Обязательно для заполнения",
-  "validation.URIValidation": "",
+  "validation.maxLength": "Максимальное количество символов {count}",
+  "validation.URIValidation": "Допустимы символы: английского алфавита, цифры, дефис.",
 
+  "The email field is required.": "Поле электронной почты обязательно для заполнения.",
+  "The password field is required.": "Поле пароля обязательно для заполнения.",
+  "The given data was invalid.": "Указанные данные были неверными.",
+  "The body field is required.": "Поле контент обязательно для заполнения.",
+  "The category id field is required.": "Поле категория обязательно для заполнения.",
+  "The excerpt field is required.":  "Поле вводный текст обязательно для заполнения.",
+  "The title field is required.": "Поле заголовка обязательно для заполнения.",
+  "The name field is required.": "Поле имя обязательно для заполнения.",
+  "Undefined index: resource_type": "Неопределенный индекс: тип ресурса",
   "form.label.title": "Заголовок",
   "form.label.introductory": "Вводный текст",
   "form.label.urlAlias": "URL псевдоним",
@@ -80,6 +94,7 @@
   "form.label.publishStatus": "Статус публикации",
   "form.label.publishTime": "Время публикации",
   "form.label.content": "Контент",
+  "form.label.body": "Контент",
   "form.label.tags": "Теги",
   "form.placeholder.tags": "Добавить тег через запятую",
   "form.label.metaDescription": "Описание",
@@ -92,6 +107,9 @@
   "form.title.meta": "META информация",
   "form.title.ogMeta": "OG META информация (Open Graph)",
   "form.label.name": "Имя",
+
+  "form.select.placeholder": "выберите категорию...",
+  "form.tags.placeholder": "добавьте тег...",
 
   "form.slides.label.bgType": "Тип фона",
   "form.slides.bgType.image": "Изображение",
