@@ -66,15 +66,15 @@ export class SlideEditor extends Component {
       return (<Preloader/>)
     }
 
+    const initialValues = this.createInitialValues();
     return (
       <PageContainer
         header={<FormattedMessage
-          id='slides.editor.title'
-          defaultMessage='slides.editor.title'
+          id={initialValues && initialValues.id ? 'slides.editor.title' : 'slides.create.title'}
         />}
       >
         <FormSlidesEditor
-          initialValues={this.createInitialValues()}
+          initialValues={initialValues}
         />
       </PageContainer>)
   }

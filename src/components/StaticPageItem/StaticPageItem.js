@@ -14,7 +14,7 @@ export const StaticPageItem = ({title, excerpt, id, status, onDelete}) => (<Card
   </CardBody>
   <CardFooter className="text-muted">
     <Button color="warning">
-      <Link to={`/static-page-editor/${id}`}>
+      <Link to={`/static-page/editor/${id}`}>
         <FormattedMessage
           id='button.change'
           defaultMessage='button.change'

@@ -17,9 +17,13 @@ export const BlogCategoryResource = createResource(RESOURCE_NAME)({
     method: 'POST',
     url: `${config.base}${config.api.category}`,
     normalizer: (payload, resources) => {
-      if (!payload && payload.error) {
-        return null;
+      if (!payload ) {
+        return null
       }
+      if (payload.errors || payload.message) {
+        return Normalizer.normalizeError(payload);
+      }
+
       if (hasOwnProperty(resources,RESOURCE_NAME)) {
         return Normalizer.mergeResourceAndPayload(resources, [payload])
       } else {

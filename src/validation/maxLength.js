@@ -1,1 +1,1 @@
-export const maxLength = (maxLen) => (value) => value && value.length > maxLen ? `Максимальное количество символов ${maxLen}`:null;
+export const maxLength = (message) => (maxLen) => (value) => value && value.length > maxLen ? message : null;

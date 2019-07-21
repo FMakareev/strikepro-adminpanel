@@ -1,11 +1,9 @@
 import React, {Fragment} from 'react';
-import {Col, Row} from "reactstrap";
+import {Col} from "reactstrap";
 import {Field} from "redux-form";
 import {TextField} from "../../../../../../components/TextField/TextField";
-import {maxLength} from "../../../../../../validation/maxLength";
 import {FormattedMessage} from "react-intl";
 
-const maxLength255 = maxLength(255);
 
 export const OGMetaFields = () => (<Fragment>
   <Col xs="12">
@@ -23,7 +21,6 @@ export const OGMetaFields = () => (<Fragment>
         id="form.label.ogUrl"
       />}
       type="text"
-      validate={[maxLength255]}
     />
   </Col>
   <Col xs="12" md="6" lg="4">
@@ -34,7 +31,6 @@ export const OGMetaFields = () => (<Fragment>
         id="form.label.ogImage"
       />}
       type="text"
-      validate={[maxLength255]}
     />
   </Col>
   <Col xs="12" md="6" lg="4">
@@ -45,7 +41,6 @@ export const OGMetaFields = () => (<Fragment>
         id="form.label.ogType"
       />}
       type="text"
-      validate={[maxLength255]}
     />
   </Col>
   <Col xs="12" md="6" lg="4">
@@ -56,7 +51,6 @@ export const OGMetaFields = () => (<Fragment>
         id="form.label.ogTitle"
       />}
       type="text"
-      validate={[maxLength255]}
     />
   </Col>
 </Fragment>);

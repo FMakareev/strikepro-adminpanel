@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Alert, FormGroup, Input, Label} from "reactstrap";
+import {FormattedMessage, injectIntl} from "react-intl";
+import {GetMessageFromIntl} from "../../helpers/GetMessageFromIntl";
 
 
 export class FormSelect extends Component {
@@ -15,7 +17,7 @@ export class FormSelect extends Component {
       defaultValue,
     } = this.props;
 
-    if(!input.value && defaultValue){
+    if (!input.value && defaultValue) {
       input.onChange(defaultValue);
     }
 
@@ -30,12 +32,15 @@ export class FormSelect extends Component {
       meta: {touched, error},
       valueKey,
       labelKey,
+      intl,
     } = this.props;
     return (
       <FormGroup>
         <Label>{label}</Label>
         <Input type={type} {...input} >
-          <option>выберите категорию...</option>
+          <option>
+            {GetMessageFromIntl(intl, "form.select.placeholder")}
+          </option>
           {
             Array.isArray(data) && data.map((item, index) => (<option
               key={index}
@@ -48,7 +53,12 @@ export class FormSelect extends Component {
         {
           touched && error &&
           <Alert color="danger">
-            {error}
+            {
+              error &&
+              <FormattedMessage
+                id={error}
+              />
+            }
           </Alert>
 
         }
@@ -58,4 +68,4 @@ export class FormSelect extends Component {
 }
 
 
-export default FormSelect;
+export default injectIntl(FormSelect);

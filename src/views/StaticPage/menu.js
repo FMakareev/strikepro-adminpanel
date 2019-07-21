@@ -17,7 +17,7 @@ export const StaticPageMenu = [
       },
       {
         name: (<FormattedMessage
-          id="staticPages.editor.title"
+          id="staticPages.create.title"
         />),
         url: '/static-page/editor',
         icon: 'fa fa-edit fa-lg'

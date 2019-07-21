@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import FormSelect from "../../../../components/Form/FormSelect";
 import FormDateTimePicker from "../../../../components/FormDateTimePicker/FormDateTimePicker";
 import FormCKEditor from "../../../../components/Form/form_ckeditor";
-import {FormTagInput} from "../../../../components/Form/FormTagInput";
+import FormTagInput from "../../../../components/Form/FormTagInput";
 import {TextField} from "../../../../components/TextField/TextField";
 import {connect as connectRestEasy} from "@brigad/redux-rest-easy";
 import {
@@ -15,7 +15,6 @@ import {
   UpdatePostAction,
 } from "../../../../store/reduxRestEasy/Blog/BlogPostResource";
 import {withRouter} from "react-router-dom";
-import {required} from "../../../../validation/required";
 import MetaFields from "./Components/MetaFields/MetaFields";
 import OGMetaFields from "./Components/OGMetaFields/OGMetaFields";
 import {URLAliasField} from "../../../../components/URLAliaseField/URLAliaseField";
@@ -24,7 +23,9 @@ import {URIValidation} from "../../../../validation/URIValidation";
 import {CreateUrlAliasAction, UpdateUrlAliasAction} from "../../../../store/reduxRestEasy/UrlAlias/UrlAliasResource";
 import {createSubmitHandler} from "../../../../helpers/createSubmitHandler";
 import {hasOwnProperty} from "../../../../helpers/hasOwnProperty";
-import {FormattedMessage, injectIntl} from "react-intl";
+import {defineMessages, FormattedMessage, injectIntl} from "react-intl";
+import {GetMessageFromIntl} from "../../../../helpers/GetMessageFromIntl";
+import {maxLength} from "../../../../validation/maxLength";
 
 
 export class PostEditForm extends Component {
@@ -64,7 +65,7 @@ export class PostEditForm extends Component {
     } else {
       await createSubmitHandler(CreatePostAction)({body: values})
     }
-    history.push('/posts');
+    history.push('/blog/posts');
   };
 
 
@@ -88,12 +89,9 @@ export class PostEditForm extends Component {
                     <Field
                       name="title"
                       component={TextField}
-                      placeholder={intl && intl.messages["form.label.title"]}
                       label={<FormattedMessage
                         id="form.label.title"
-                        defaultMessage="form.label.title"
                       />}
-                      validate={[required]}
                       type="text"
                     />
                   </Col>
@@ -101,10 +99,8 @@ export class PostEditForm extends Component {
                     <Field
                       name="excerpt"
                       component={TextField}
-                      placeholder={intl && intl.messages["form.label.introductory"]}
                       label={<FormattedMessage
                         id="form.label.introductory"
-                        defaultMessage="form.label.description"
                       />}
                       type="textarea"
                     />
@@ -115,27 +111,21 @@ export class PostEditForm extends Component {
                       isAutoGenTransliteration={!(values && values.id)}
                       name="alias_url"
                       component={URLAliasField}
-                      placeholder={intl && intl.messages["form.label.urlAlias"]}
                       label={<FormattedMessage
                         id="form.label.urlAlias"
-                        defaultMessage="form.label.urlAlias"
                       />}
                       type="text"
                       subscribeField={'title'}
                       formValues={values}
-                      validate={[URIValidation]}
                     />
                   </Col>
                   <Col xs="12" md="6">
                     <Field
                       name="category_id"
                       component={FormSelect}
-                      placeholder={intl && intl.messages["form.label.category"]}
                       label={<FormattedMessage
                         id="form.label.category"
-                        defaultMessage="form.label.category"
                       />}
-                      validate={[required]}
                       type="select"
                       defaultValue={''}
                       data={categories}
@@ -145,24 +135,21 @@ export class PostEditForm extends Component {
                     <Field
                       name="status"
                       component={FormSelect}
-                      placeholder={intl && intl.messages["form.label.publishStatus"]}
                       label={<FormattedMessage
                         id="form.label.publishStatus"
-                        defaultMessage="form.label.publishStatus"
                       />}
                       type="select"
                       defaultValue={'DRAFT'}
-                      validate={[required]}
                       data={[
                         {
                           id: "PUBLISHED",
-                          name: intl && intl.messages[`publishStatus.PUBLISHED`]
+                          name: GetMessageFromIntl(intl, `publishStatus.PUBLISHED`)
                         }, {
                           id: "DRAFT",
-                          name: intl && intl.messages[`publishStatus.DRAFT`]
+                          name: GetMessageFromIntl(intl, `publishStatus.DRAFT`)
                         }, {
                           id: "PENDING",
-                          name: intl && intl.messages[`publishStatus.PENDING`]
+                          name: GetMessageFromIntl(intl, `publishStatus.PENDING`)
                         }
                       ]}
                     />
@@ -171,10 +158,8 @@ export class PostEditForm extends Component {
                     <Field
                       name="public_at"
                       component={FormDateTimePicker}
-                      placeholder={intl && intl.messages["form.label.publishStatus"]}
                       label={<FormattedMessage
                         id="form.label.publishStatus"
-                        defaultMessage="form.label.publishTime"
                       />}
                     />
                   </Col>
@@ -182,12 +167,9 @@ export class PostEditForm extends Component {
                     <Field
                       name="body"
                       component={FormCKEditor}
-                      placeholder={intl && intl.messages["form.label.content"]}
                       label={<FormattedMessage
-                        id="form.label.content"
-                        defaultMessage="form.label.content"
+                        id="form.label.body"
                       />}
-                      validate={[required]}
                       type="text"
                       ref="CKEDITOR"
                     />
@@ -196,10 +178,8 @@ export class PostEditForm extends Component {
                     <Field
                       name="tags"
                       component={FormTagInput}
-                      placeholder={intl && intl.messages["form.placeholder.tags"]}
                       label={<FormattedMessage
                         id="form.label.tags"
-                        defaultMessage="form.label.tags"
                       />}
                     />
                   </Col>
@@ -215,7 +195,9 @@ export class PostEditForm extends Component {
                   <Row>
                     <Col xs="12">
                       <Alert color="danger">
-                        {error}
+                        <FormattedMessage
+                          id={error}
+                        />
                       </Alert>
                     </Col>
                   </Row>
@@ -255,29 +237,82 @@ export class PostEditForm extends Component {
   }
 }
 
+const maxLength255 = (value) => {
+  let result = maxLength('validation.maxLength')(255)(value);
+  if (result) {
+    return defineMessages({
+      maxLength: {
+        id: "validation.maxLength",
+        defaultMessage: "validation.maxLength",
+      },
+    })
+  }
+  return null;
+};
 const validate = (values, {intl}) => {
-
-  console.log('validate: ', values, intl);
   const errors = {};
 
   if (!values.status) {
-    errors.status = intl.messages ? intl.messages['validation.required'] : "Обязательно для заполнения";
+    errors.status = GetMessageFromIntl(intl, 'validation.required');
   }
 
   if (!values.body) {
-    errors.body = intl.messages ? intl.messages['validation.required'] : "Обязательно для заполнения";
+    errors.body = GetMessageFromIntl(intl, 'validation.required');
   }
 
   if (!values.category_id) {
-    errors.category_id = intl.messages ? intl.messages['validation.required'] : "Обязательно для заполнения";
+    errors.category_id = GetMessageFromIntl(intl, 'validation.required');
   }
+
   if (!values.title) {
-    errors.title = intl.messages ? intl.messages['validation.required'] : "Обязательно для заполнения";
+    errors.title = GetMessageFromIntl(intl, 'validation.required');
   }
 
   if (values.alias_url) {
     let res = URIValidation('validation.URIValidation')(values.alias_url);
-    errors.alias_url = res && intl.messages ? intl.messages[res] : res;
+    if (res) {
+      errors.alias_url = GetMessageFromIntl(intl, res);
+    }
+  }
+
+  if (values.meta_description) {
+    let res = maxLength255(values.meta_description);
+    if (res) {
+      errors.meta_description = GetMessageFromIntl(intl, res.maxLength, {count: 255});
+    }
+  }
+
+  if (values.meta_keywords) {
+    let res = maxLength255(values.meta_keywords);
+    if (res) {
+      errors.meta_keywords = GetMessageFromIntl(intl, res.maxLength, {count: 255});
+    }
+  }
+
+  if (values.og_type) {
+    let res = maxLength255(values.og_type);
+    if (res) {
+      errors.og_type = GetMessageFromIntl(intl, res.maxLength, {count: 255});
+    }
+  }
+
+  if (values.og_title) {
+    let res = maxLength255(values.og_title);
+    if (res) {
+      errors.og_title = GetMessageFromIntl(intl, res.maxLength, {count: 255});
+    }
+  }
+  if (values.og_image) {
+    let res = maxLength255(values.og_image);
+    if (res) {
+      errors.og_image = GetMessageFromIntl(intl, res.maxLength, {count: 255});
+    }
+  }
+  if (values.og_url) {
+    let res = maxLength255(values.og_url);
+    if (res) {
+      errors.og_url = GetMessageFromIntl(intl, res.maxLength, {count: 255});
+    }
   }
 
   return errors

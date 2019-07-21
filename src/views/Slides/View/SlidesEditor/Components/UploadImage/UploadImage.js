@@ -68,14 +68,14 @@ export class UploadImage extends Component {
 
   render() {
     const {isLoading, errorSubmit} = this.state;
-
+    const {meta} = this.props;
     return (<UploadFileButton
       label={<FormattedMessage
         id='button.loadingImage'
         defaultMessage='button.loadingImage'
       />}
       isLoading={isLoading}
-      errorSubmit={errorSubmit}
+      errorSubmit={errorSubmit || meta && meta.touched && meta.error}
       uploadFile={this.uploadFile}
       accept={"image/jpeg, image/pjpeg, image/png"}
     />)

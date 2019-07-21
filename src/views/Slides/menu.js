@@ -17,7 +17,7 @@ export const MenuSlides= [
       },
       {
         name: (<FormattedMessage
-          id='slides.editor.title'
+          id='slides.create.title'
         />),
         url: '/slides/editor',
         icon: 'fa fa-edit fa-lg'

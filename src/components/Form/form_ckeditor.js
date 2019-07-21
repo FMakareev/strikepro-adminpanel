@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CKEditor from "react-ckeditor-component";
 import {Alert, FormGroup, Label} from "reactstrap";
+import {FormattedMessage} from "react-intl";
 
 class FormCKEditor extends Component {
 
@@ -82,7 +83,12 @@ class FormCKEditor extends Component {
         {
           touched && error &&
           <Alert color="danger">
-            {error}
+            {
+              error &&
+              <FormattedMessage
+                id={error}
+              />
+            }
           </Alert>
 
         }

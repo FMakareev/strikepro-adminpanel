@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, CardBody, CardHeader, Col, Row, CardFooter} from "reactstrap";
-export const PageContainer =({header, children, footer})=>(<div className="animated fadeIn">
+
+export const PageContainer = ({header, children, footer}) => (<div className="animated fadeIn">
   <Row>
     <Col xs="12">
       <Card>

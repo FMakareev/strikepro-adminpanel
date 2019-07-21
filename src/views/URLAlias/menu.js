@@ -17,7 +17,7 @@ export const URLAliasMenu = [
       },
       {
         name: (<FormattedMessage
-          id='urlAlias.editor.title'
+          id="urlAlias.create.title"
         />),
         url: '/url-alias/editor',
         icon: 'fa fa-edit fa-lg'

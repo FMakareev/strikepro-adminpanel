@@ -160,9 +160,9 @@ const updateLocaleMessages = (messages) => {
 };
 
 const updateLocales = (messages) => {
-  console.log('updateLocales: ',messages);
+  console.log('updateLocales: ', messages);
   return {
     type: LocaleAction.UPDATE_LOCALES,
-    messages,
+    messages: messages,
   };
 };

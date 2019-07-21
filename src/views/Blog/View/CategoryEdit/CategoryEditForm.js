@@ -18,9 +18,8 @@ import {createSubmitHandler} from "../../../../helpers/createSubmitHandler";
 import {hasOwnProperty} from "../../../../helpers/hasOwnProperty";
 import {FormattedMessage} from "react-intl";
 import {connect} from "react-redux";
+import {GetMessageFromIntl} from "../../../../helpers/GetMessageFromIntl";
 
-
-const required = value => (value ? undefined : 'Обязательно для заполнения');
 
 
 export class CategoryEditForm extends Component {
@@ -47,7 +46,7 @@ export class CategoryEditForm extends Component {
     } else {
       await createSubmitHandler(CreateCategoryAction)({body: values})
     }
-    history.push('/categories');
+    history.push('/blog/categories');
   };
 
 
@@ -77,7 +76,6 @@ export class CategoryEditForm extends Component {
                         defaultMessage="form.label.name"
                       />}
                       type="text"
-                      validate={[required]}
                     />
                   </Col>
                 </Row>
@@ -86,7 +84,9 @@ export class CategoryEditForm extends Component {
                   <Row>
                     <Col xs="12">
                       <Alert color="danger">
-                        {error}
+                        <FormattedMessage
+                          id={error}
+                        />
                       </Alert>
                     </Col>
                   </Row>
@@ -124,9 +124,17 @@ export class CategoryEditForm extends Component {
   }
 }
 
+const validate = (values, {intl}) => {
+  const errors = {};
+  if (!values.name) {
+    errors.name = GetMessageFromIntl(intl, 'validation.required');
+  }
+  return errors;
+}
 
 CategoryEditForm = connect(state => ({
   values: getFormValues('CategoryEditForm')(state),
+  validate
 }))(CategoryEditForm);
 CategoryEditForm = reduxForm({
   form: 'CategoryEditForm'

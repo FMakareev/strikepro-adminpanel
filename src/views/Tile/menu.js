@@ -17,7 +17,7 @@ export const MenuTile = [
       },
       {
         name: (<FormattedMessage
-          id='tile.editor.title'
+          id='tile.create.title'
         />),
         url: '/tile/editor',
         icon: 'fa fa-edit fa-lg'

@@ -1,13 +1,14 @@
 import React from 'react'
 import {Button, FormFeedback, FormGroup} from "reactstrap";
+import {FormattedMessage} from "react-intl";
 
 export const UploadFileButton = ({
-                             isLoading,
-                             uploadFile,
-                             accept,
-                             label,
-                             errorSubmit
-                           }) => (<FormGroup>
+                                   isLoading,
+                                   uploadFile,
+                                   accept,
+                                   label,
+                                   errorSubmit
+                                 }) => (<FormGroup>
   <Button
     style={{
       position: 'relative',
@@ -46,7 +47,9 @@ export const UploadFileButton = ({
     <FormFeedback
       className={errorSubmit ? 'btn-block' : ''}
     >
-      {errorSubmit}
+      <FormattedMessage
+        id={errorSubmit}
+      />
     </FormFeedback>
   }
 </FormGroup>);

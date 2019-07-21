@@ -12,10 +12,9 @@ import {connect as connectRestEasy} from '@brigad/redux-rest-easy'
 
 import {TextField} from "../../../components/TextField/TextField";
 import {AuthGetResource, LoginAction, LoginGetResource, LogoutAction} from "../../../store/reduxRestEasy/Auth/Auth";
-import {required} from "../../../validation/required";
 import {FormattedMessage, injectIntl} from "react-intl";
-
-
+import {hasOwnProperty} from "../../../helpers/hasOwnProperty";
+import {GetMessageFromIntl} from "../../../helpers/GetMessageFromIntl";
 
 
 export class LoginForm extends Component {
@@ -67,20 +66,18 @@ export class LoginForm extends Component {
         <Field
           name="email"
           component={TextField}
-          label={ <FormattedMessage
+          label={<FormattedMessage
             id='form.label.email'
           />}
-          validate={[required]}
           type="text"
           icon="icon-user"
         />
         <Field
           name="password"
           component={TextField}
-          label={ <FormattedMessage
+          label={<FormattedMessage
             id='form.label.password'
           />}
-          validate={[required]}
           type="password"
           icon="icon-lock"
         />
@@ -113,7 +110,9 @@ export class LoginForm extends Component {
         {
           error &&
           <Alert color="danger">
-            {error}
+            <FormattedMessage
+              id={error}
+            />
           </Alert>
         }
       </form>
@@ -122,10 +121,22 @@ export class LoginForm extends Component {
 }
 
 
-LoginForm = reduxForm({
-  form: 'LoginForm'
-})(LoginForm);
 
+const validate = (values, {intl}) => {
+  const errors = {};
+  if (values.email) {
+    errors.email = GetMessageFromIntl(intl, 'The email field is required.');
+  }
+  if (values.password) {
+    errors.password = GetMessageFromIntl(intl, 'The password field is required.');
+  }
+  return errors
+};
+
+LoginForm = reduxForm({
+  form: 'LoginForm',
+  validate,
+})(LoginForm);
 
 
 LoginForm = connectRestEasy(

@@ -25,6 +25,7 @@ import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
 import {createSubmitHandler} from "../../../../../../helpers/createSubmitHandler";
 import FormDateTimePicker from "../../../../../../components/FormDateTimePicker/FormDateTimePicker";
 import {FormattedMessage, injectIntl} from "react-intl";
+import {GetMessageFromIntl} from "../../../../../../helpers/GetMessageFromIntl";
 
 
 export class FormSlidesEditor extends Component {
@@ -102,7 +103,6 @@ export class FormSlidesEditor extends Component {
               component={FormSelect}
               label={<FormattedMessage
                 id='form.slides.label.bgType'
-                defaultMessage='form.slides.label.bgType'
               />}
               type="select"
               data={[
@@ -123,45 +123,46 @@ export class FormSlidesEditor extends Component {
               component={FormSelect}
               label={<FormattedMessage
                 id='form.slides.label.contentPosition'
-                defaultMessage='form.slides.label.contentPosition'
               />}
               type="select"
               data={[
                 {
-                  name: intl && intl.messages["form.slides.contentPosition.topLeft"],
+                  name: GetMessageFromIntl(intl,"form.slides.contentPosition.topLeft"),
                   id: 'top-left',
                 },
                 {
-                  name: intl && intl.messages["form.slides.contentPosition.topMiddle"],
+                  name: GetMessageFromIntl(intl,"form.slides.contentPosition.topMiddle"),
                   id: 'top-middle',
                 },
                 {
-                  name: intl && intl.messages["form.slides.contentPosition.topRight"],
+                  name: GetMessageFromIntl(intl,"form.slides.contentPosition.topRight"),
+
                   id: 'top-right',
                 },
 
                 {
-                  name: intl && intl.messages["form.slides.contentPosition.middleLeft"],
+                  name: GetMessageFromIntl(intl,"form.slides.contentPosition.middleLeft"),
                   id: 'middle-left',
                 },
                 {
-                  name: intl && intl.messages["form.slides.contentPosition.middleMiddle"],
+                  name: GetMessageFromIntl(intl,"form.slides.contentPosition.middleMiddle"),
                   id: 'middle-center',
                 },
                 {
-                  name: intl && intl.messages["form.slides.contentPosition.middleRight"],
+                  name: GetMessageFromIntl(intl,"form.slides.contentPosition.middleRight"),
                   id: 'middle-right',
                 },
                 {
-                  name: intl && intl.messages["form.slides.contentPosition.bottomLeft"],
+                  name: GetMessageFromIntl(intl,"form.slides.contentPosition.bottomLeft"),
+
                   id: 'bottom-left',
                 },
                 {
-                  name: intl && intl.messages["form.slides.contentPosition.bottomMiddle"],
+                  name: GetMessageFromIntl(intl,"form.slides.contentPosition.bottomMiddle"),
                   id: 'bottom-center',
                 },
                 {
-                  name: intl && intl.messages["form.slides.contentPosition.bottomRight"],
+                  name: GetMessageFromIntl(intl,"form.slides.contentPosition.bottomRight"),
                   id: 'bottom-right',
                 },
               ]}
@@ -173,7 +174,6 @@ export class FormSlidesEditor extends Component {
               component={Checkbox}
               label={<FormattedMessage
                 id='form.slides.label.enableContentBG'
-                defaultMessage='form.slides.label.enableContentBG'
               />}
               type="checkbox"
               value={true}
@@ -185,7 +185,6 @@ export class FormSlidesEditor extends Component {
               component={TextField}
               label={<FormattedMessage
                 id='form.slides.label.buttonText'
-                defaultMessage='form.slides.label.buttonText'
               />}
               type="text"
             />
@@ -196,7 +195,6 @@ export class FormSlidesEditor extends Component {
               component={TextField}
               label={<FormattedMessage
                 id='form.slides.label.buttonLink'
-                defaultMessage='form.slides.label.buttonLink'
               />}
               type="text"
             />
@@ -207,7 +205,6 @@ export class FormSlidesEditor extends Component {
               component={FormDateTimePicker}
               label={<FormattedMessage
                 id='form.label.publishTime'
-                defaultMessage='form.label.publishTime'
               />}
               type="text"
             />
@@ -264,13 +261,20 @@ export class FormSlidesEditor extends Component {
       </form>)
   }
 }
-
+const validate = (values, {intl}) => {
+  const errors = {};
+  if (!values.image) {
+    errors.image = GetMessageFromIntl(intl, 'validation.required');
+  }
+  return errors;
+};
 FormSlidesEditor = connect(state => ({
   values: getFormValues('FormSlidesEditor')(state),
 }))(FormSlidesEditor);
 
 FormSlidesEditor = reduxForm({
-  form: 'FormSlidesEditor'
+  form: 'FormSlidesEditor',
+  validate
 })(FormSlidesEditor);
 
 FormSlidesEditor = connectRestEasy(

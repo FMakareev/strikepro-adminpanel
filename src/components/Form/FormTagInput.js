@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 
-import {FormFeedback, FormGroup, InputGroup, Label} from "reactstrap";
+import {Alert, FormFeedback, FormGroup, InputGroup, Label} from "reactstrap";
 import TagsInput from 'react-tagsinput';
 
 import 'react-tagsinput/react-tagsinput.css';
+import {FormattedMessage, injectIntl} from "react-intl";
+import {GetMessageFromIntl} from "../../helpers/GetMessageFromIntl";
 
 export class FormTagInput extends Component {
 
@@ -33,7 +35,8 @@ export class FormTagInput extends Component {
   }
 
   render() {
-    const {input: {value}, label, meta: {touched, error}} = this.props;
+    const {input: {value}, label, meta: {touched, error}, intl} = this.props;
+    console.log(GetMessageFromIntl(intl, "form.tags.placeholder"));
     return (<FormGroup className={touched ? error ? '' : 'was-validated' : ''}>
       <Label>{label}</Label>
       <InputGroup className="mb-3">
@@ -42,16 +45,27 @@ export class FormTagInput extends Component {
           className={`react-tagsinput form-control ${touched && error ? 'form-control-warning is-invalid' : ''}`}
           value={value ? value.split(', ') : []}
           onChange={this.handleChange}
+
+          inputProps={{
+            placeholder: GetMessageFromIntl(intl, "form.tags.placeholder"),
+          }}
         />
         {
           touched && error &&
           <FormFeedback
             valid={touched ? !error : false}
             className="help-block">
-            {error}
+            {
+              error &&
+              <FormattedMessage
+                id={error}
+              />
+            }
           </FormFeedback>
         }
       </InputGroup>
     </FormGroup>)
   }
 }
+
+export default injectIntl(FormTagInput);

@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {reduxForm, Form, Field} from "redux-form";
+import {reduxForm, Form, Field, getFormValues} from "redux-form";
 import {connect as connectRestEasy} from "@brigad/redux-rest-easy";
-import {Link, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {Alert, Button, Col, Row} from "reactstrap";
 import {TextField} from "../../../../../../components/TextField/TextField";
-import {required} from "../../../../../../validation/required";
 import {
   CreateUrlAliasAction,
   isRetrievingCreateUrlAlias,
@@ -16,6 +15,8 @@ import PageContainer from "../../../../../../components/PageContainer/PageContai
 import {hasOwnProperty} from "../../../../../../helpers/hasOwnProperty";
 import {createSubmitHandler} from "../../../../../../helpers/createSubmitHandler";
 import {FormattedMessage} from "react-intl";
+import {GetMessageFromIntl} from "../../../../../../helpers/GetMessageFromIntl";
+import {connect} from "react-redux";
 
 
 export class FormURLAliasEditor extends Component {
@@ -37,10 +38,12 @@ export class FormURLAliasEditor extends Component {
   };
 
   render() {
-    const {error, handleSubmit, pristine, reset, submitting} = this.props;
+    const {error, handleSubmit, pristine, reset,values, submitting} = this.props;
     return (<Form onSubmit={handleSubmit(this.onSubmit)}>
       <PageContainer
-        header={'Редактор URL псевдонима'}
+        header={ <FormattedMessage
+          id={values && values.id ? "urlAlias.editor.title" : "urlAlias.create.title"}
+        />}
         footer={<Row>
           <Col xs="auto">
             <Button
@@ -79,7 +82,6 @@ export class FormURLAliasEditor extends Component {
                 id="urlAlias.table.url"
               />}
               type="text"
-              validate={[required]}
             />
           </Col>
           <Col xs="12">
@@ -90,7 +92,6 @@ export class FormURLAliasEditor extends Component {
                 id="urlAlias.table.alias_url"
               />}
               type="text"
-              validate={[required, URIValidation]}
             />
           </Col>
         </Row>
@@ -99,7 +100,9 @@ export class FormURLAliasEditor extends Component {
           <Row>
             <Col xs="12">
               <Alert color="danger">
-                {error}
+                <FormattedMessage
+                  id={error}
+                />
               </Alert>
             </Col>
           </Row>
@@ -109,8 +112,42 @@ export class FormURLAliasEditor extends Component {
   }
 }
 
+const validate = (values, {intl}) => {
+  const errors = {};
+
+  if (!values.alias_url) {
+    errors.alias_url = GetMessageFromIntl(intl, 'validation.required');
+  }
+
+  if (values && values.alias_url) {
+    let res = URIValidation('validation.URIValidation')(values.alias_url);
+    if (res) {
+      errors.alias_url = GetMessageFromIntl(intl, res);
+    }
+  }
+
+  if (!values.url) {
+    errors.url = GetMessageFromIntl(intl, 'validation.required');
+  }
+
+  if (values && values.url) {
+    let res = URIValidation('validation.URIValidation')(values.url);
+    if (res) {
+      errors.url = GetMessageFromIntl(intl, res);
+    }
+  }
+
+
+  return errors
+};
+
+FormURLAliasEditor = connect(state => ({
+  values: getFormValues('FormURLAliasEditor')(state),
+}))(FormURLAliasEditor);
+
 FormURLAliasEditor = reduxForm({
-  form: 'FormURLAliasEditor'
+  form: 'FormURLAliasEditor',
+  validate
 })(FormURLAliasEditor);
 
 FormURLAliasEditor = connectRestEasy(

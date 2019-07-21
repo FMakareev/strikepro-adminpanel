@@ -9,8 +9,8 @@ import {
   STATIC_PAGE_RESOURCE_NAME
 } from "../../../../store/reduxRestEasy/StaticPage/StaticPageResource";
 import FormStaticPage from "./Components/FormStaticPage/FormStaticPage";
-import {FormattedMessage} from "react-intl";
 import Preloader from "../../../../components/Preloader/Preloader";
+import {injectIntl} from "react-intl";
 
 export class StaticPageEditor extends Component {
   componentWillMount() {
@@ -29,30 +29,24 @@ export class StaticPageEditor extends Component {
       item,
       match: {params},
       isRetrieving,
+      intl
     } = this.props;
-    if (isRetrieving && !item) {
+    if (isRetrieving && !item && intl && !intl.messages) {
       return (<Preloader/>)
     }
 
-    let initialValues = {
-      initialValues: item(params && params.id)
-    };
-    return (<PageContainer
-      header={<FormattedMessage
-        id="staticPages.editor.title"
-      />}
-    >
+    let initialValues = item(params && params.id);
+    return (
       <FormStaticPage
-        {...initialValues}
-      />
-    </PageContainer>)
+        initialValues={initialValues}
+      />)
   }
 }
 
 StaticPageEditor = connectRestEasy(
   (state, ownProps) => ({
     item: (id) => {
-      if(!id) return null;
+      if (!id) return null;
       const data = GetStaticPageById(state, STATIC_PAGE_RESOURCE_NAME, id);
       if (data) {
         return data[id];
@@ -66,4 +60,4 @@ StaticPageEditor = connectRestEasy(
   })
 )(StaticPageEditor);
 
-export default StaticPageEditor;
+export default injectIntl(StaticPageEditor);
